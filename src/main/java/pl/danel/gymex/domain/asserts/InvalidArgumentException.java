@@ -1,6 +1,6 @@
 package pl.danel.gymex.domain.asserts;
 
-public class InvalidArgumentException extends Exception {
+public class InvalidArgumentException extends RuntimeException {
 
     private static final long serialVersionUID = -39974261548767577L;
 
