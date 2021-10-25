@@ -1,4 +1,4 @@
-package pl.danel.gymex.domain.user;
+package pl.danel.gymex.domain.person.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

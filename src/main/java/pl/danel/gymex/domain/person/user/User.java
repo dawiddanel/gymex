@@ -1,4 +1,4 @@
-package pl.danel.gymex.domain.user;
+package pl.danel.gymex.domain.person.user;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,7 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.danel.gymex.domain.asserts.InvalidArgumentException;
-import pl.danel.gymex.domain.user.command.CreateUserCommand;
+import pl.danel.gymex.domain.person.Person;
+import pl.danel.gymex.domain.person.user.command.CreateUserCommand;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,11 +27,8 @@ public class User {
     @SequenceGenerator(name = "user_sequence", sequenceName = "SEQ_USER", allocationSize = 1)
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
-
-    private LocalDate birthDate;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Person person;
 
     @CreationTimestamp
     private LocalDateTime createdDate;
@@ -49,14 +47,12 @@ public class User {
     private Role role;
 
     private User(CreateUserCommand command) {
-        this.firstName = command.getFirstName();
-        this.lastName = command.getLastName();
-        this.birthDate = command.getBirthDate();
         this.username = command.getUsername();
         this.email = command.getEmail();
         this.role = mapRole(command.getRole());
         //TODO Activate based on activation email
         this.active = true;
+        this.person = Person.createEmpty();
     }
 
     public static User create(CreateUserCommand command) {

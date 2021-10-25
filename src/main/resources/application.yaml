@@ -20,7 +20,7 @@ spring:
     url: "jdbc:h2:mem:testdb"
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
   config:
     activate:
       on-profile: integration

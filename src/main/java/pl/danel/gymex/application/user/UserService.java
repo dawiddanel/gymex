@@ -7,9 +7,9 @@ import pl.danel.gymex.adapters.rest.resource.command.RegisterCommand;
 import pl.danel.gymex.application.user.dto.UserDto;
 import pl.danel.gymex.application.user.mapper.UserCommandMapper;
 import pl.danel.gymex.application.user.mapper.UserMapper;
-import pl.danel.gymex.domain.user.User;
-import pl.danel.gymex.domain.user.UserRepository;
-import pl.danel.gymex.domain.user.command.CreateUserCommand;
+import pl.danel.gymex.domain.person.user.User;
+import pl.danel.gymex.domain.person.user.UserRepository;
+import pl.danel.gymex.domain.person.user.command.CreateUserCommand;
 
 import javax.transaction.Transactional;
 
