@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateGymCommand {
+public class UpdateGymCommand {
     private String name;
     private Integer squareMeters;
     private CreateAddressCommand address;

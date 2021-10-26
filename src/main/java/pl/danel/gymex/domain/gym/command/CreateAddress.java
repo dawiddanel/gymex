@@ -1,4 +1,4 @@
-package pl.danel.gymex.domain.common.command;
+package pl.danel.gymex.domain.gym.command;
 
 import lombok.Builder;
 import lombok.Getter;

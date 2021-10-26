@@ -9,6 +9,7 @@ import pl.danel.gymex.domain.common.BodyPart;
 import pl.danel.gymex.domain.common.EquipmentType;
 import pl.danel.gymex.domain.common.Purpose;
 import pl.danel.gymex.domain.gym.assortment.command.CreateEquipmentDefinition;
+import pl.danel.gymex.domain.gym.assortment.command.UpdateEquipmentDefinition;
 import pl.danel.gymex.infrastructure.converters.BodyPartListConverter;
 
 import javax.persistence.*;
@@ -55,5 +56,14 @@ public class EquipmentDefinition {
 
     public static EquipmentDefinition create(CreateEquipmentDefinition command) {
         return new EquipmentDefinition(command);
+    }
+
+    public void update(UpdateEquipmentDefinition command) {
+        this.name = command.getName();
+        this.description = command.getDescription();
+        this.type = command.getType();
+        this.purpose = command.getPurpose();
+        this.weight = command.getWeight();
+        this.aimedBodyParts = command.getAimedBodyParts();
     }
 }

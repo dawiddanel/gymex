@@ -4,8 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
+import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
 import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 

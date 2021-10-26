@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
+import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
 import pl.danel.gymex.application.gym.dto.GymDto;
 import pl.danel.gymex.application.gym.mapper.GymCommandMapper;
 import pl.danel.gymex.application.gym.mapper.GymMapper;
+import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.Gym;
 import pl.danel.gymex.domain.gym.GymRepository;
 import pl.danel.gymex.domain.gym.command.CreateGym;
+import pl.danel.gymex.domain.gym.command.UpdateGym;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -31,6 +34,32 @@ public class GymService {
         Gym gym = Gym.create(createGym);
         gym = gymRepository.save(gym);
         return gymMapper.map(gym);
+    }
+
+    @Transactional
+    public GymDto updateGym(Long id, UpdateGymCommand command) {
+        Gym gym = gymRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("no such GYM present"));
+
+        UpdateGym updateGym = gymCommandMapper.updateGymCommand(command);
+        gym.update(updateGym);
+
+        gym = gymRepository.save(gym);
+        return gymMapper.map(gym);
+    }
+
+    @Transactional
+    public void deleteGym(Long id) {
+        Gym gym = gymRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("no such GYM present"));
+
+        gymRepository.delete(gym);
+    }
+
+    public GymDto gymById(Long id) {
+        return gymRepository.findById(id)
+                .map(gymMapper::map)
+                .orElseThrow(() -> new NotFoundException("no such GYM present"));
     }
 
     public List<GymDto> allGyms() {

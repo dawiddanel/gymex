@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class CreateGym {
+public class UpdateGym {
     private String name;
     private Integer squareMeters;
     private CreateAddress address;

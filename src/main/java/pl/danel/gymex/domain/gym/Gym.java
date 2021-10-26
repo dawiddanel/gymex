@@ -8,6 +8,7 @@ import org.springframework.data.domain.AbstractAggregateRoot;
 import pl.danel.gymex.domain.gym.address.Address;
 import pl.danel.gymex.domain.gym.assortment.Assortment;
 import pl.danel.gymex.domain.gym.command.CreateGym;
+import pl.danel.gymex.domain.gym.command.UpdateGym;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
 
 import javax.persistence.*;
@@ -49,11 +50,17 @@ public class Gym extends AbstractAggregateRoot<Gym> {
         this.squareMeters = command.getSquareMeters();
         this.assortment = Assortment.emptyAssortment(this);
         this.timetable = Timetable.emptyTimetable(this);
-        this.address = Address.create(command.getAddressCommand());
+        this.address = Address.create(command.getAddress());
     }
 
     public static Gym create(CreateGym command) {
         return new Gym(command);
+    }
+
+    public void update(UpdateGym command) {
+        this.name = command.getName();
+        this.squareMeters = command.getSquareMeters();
+        this.address = Address.create(command.getAddress());
     }
 
 }

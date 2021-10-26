@@ -2,7 +2,7 @@ package pl.danel.gymex.domain.gym.address;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.danel.gymex.domain.common.command.CreateAddress;
+import pl.danel.gymex.domain.gym.command.CreateAddress;
 
 import javax.persistence.Embeddable;
 

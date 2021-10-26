@@ -1,15 +1,17 @@
 package pl.danel.gymex.domain.gym.assortment;
 
-import liquibase.pro.packaged.A;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
+import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.Gym;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +33,7 @@ public class Assortment {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Equipment> equipments;
+    private List<Equipment> equipments = new ArrayList<>();
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
@@ -52,5 +54,12 @@ public class Assortment {
     public void removeEquipment(Equipment equipment) {
         equipments.remove(equipment);
         equipment.setAssortment(null);
+    }
+
+    public Equipment equipmentById(Long id) {
+        DomainAsserts.assertState(id != null, "EQUIPMENT id cannot be null");
+        return equipments.stream()
+                .filter(equipment -> equipment.getId().equals(id))
+                .findAny().orElseThrow(() -> new NotFoundException("no such EQUIPMENT present in ASSORTMENT"));
     }
 }

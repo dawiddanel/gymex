@@ -1,4 +1,4 @@
-package pl.danel.gymex.adapters.rest.resource.common.command;
+package pl.danel.gymex.adapters.rest.resource.gym.command;
 
 import lombok.Getter;
 import lombok.Setter;

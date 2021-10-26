@@ -8,7 +8,6 @@ import pl.danel.gymex.domain.person.user.User;
 import pl.danel.gymex.domain.person.user.command.CreatePerson;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity

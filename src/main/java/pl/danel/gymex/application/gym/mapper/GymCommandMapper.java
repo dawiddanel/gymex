@@ -1,10 +1,12 @@
 package pl.danel.gymex.application.gym.mapper;
 
 import org.springframework.stereotype.Component;
-import pl.danel.gymex.adapters.rest.resource.common.command.CreateAddressCommand;
+import pl.danel.gymex.adapters.rest.resource.gym.command.CreateAddressCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
-import pl.danel.gymex.domain.common.command.CreateAddress;
+import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
+import pl.danel.gymex.domain.gym.command.CreateAddress;
 import pl.danel.gymex.domain.gym.command.CreateGym;
+import pl.danel.gymex.domain.gym.command.UpdateGym;
 
 @Component
 public class GymCommandMapper {
@@ -13,7 +15,15 @@ public class GymCommandMapper {
         return CreateGym.builder()
                 .name(command.getName())
                 .squareMeters(command.getSquareMeters())
-                .addressCommand(createAddress(command.getAddress()))
+                .address(createAddress(command.getAddress()))
+                .build();
+    }
+
+    public UpdateGym updateGymCommand(UpdateGymCommand command) {
+        return UpdateGym.builder()
+                .name(command.getName())
+                .squareMeters(command.getSquareMeters())
+                .address(createAddress(command.getAddress()))
                 .build();
     }
 
