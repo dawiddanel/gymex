@@ -1,4 +1,4 @@
-package pl.danel.gymex.adapters.rest.resource;
+package pl.danel.gymex.adapters.rest.resource.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.danel.gymex.adapters.rest.resource.command.RegisterCommand;
-import pl.danel.gymex.adapters.rest.resource.command.SignInCommand;
-import pl.danel.gymex.adapters.rest.resource.response.AuthenticationResponse;
+import pl.danel.gymex.adapters.rest.resource.security.command.RegisterCommand;
+import pl.danel.gymex.adapters.rest.resource.security.command.SignInCommand;
+import pl.danel.gymex.adapters.rest.resource.security.response.AuthenticationResponse;
 import pl.danel.gymex.application.security.SecurityService;
 import pl.danel.gymex.application.user.UserService;
 import pl.danel.gymex.application.user.dto.UserDto;

@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class CreateUserCommand {
+public class CreateUser {
     private String username;
     private String password;
     private String email;
-    private String role;
+    private CreatePerson person;
 }

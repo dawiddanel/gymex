@@ -35,4 +35,12 @@ public class Timetable {
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    private Timetable(Gym gym) {
+        this.gym = gym;
+    }
+
+    public static Timetable emptyTimetable(Gym gym) {
+        return new Timetable(gym);
+    }
 }

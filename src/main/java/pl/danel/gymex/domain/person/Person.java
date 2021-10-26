@@ -1,8 +1,11 @@
 package pl.danel.gymex.domain.person;
 
+import lombok.NoArgsConstructor;
 import pl.danel.gymex.domain.common.PersonType;
+import pl.danel.gymex.domain.person.member.Member;
+import pl.danel.gymex.domain.person.trainer.Trainer;
 import pl.danel.gymex.domain.person.user.User;
-import pl.danel.gymex.domain.person.user.command.CreateUserCommand;
+import pl.danel.gymex.domain.person.user.command.CreatePerson;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +15,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "person_type",
         discriminatorType = DiscriminatorType.STRING)
+@NoArgsConstructor
 public class Person {
 
     @Id
@@ -30,12 +34,28 @@ public class Person {
     private String pesel;
     private LocalDate birthDate;
 
-    public Person() {
-        this.personType = PersonType.MEMBER;
+    public Person(User user, CreatePerson person) {
+        this.user = user;
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.pesel = person.getPesel();
+        this.birthDate = person.getBirthDate();
     }
 
-    public static Person createEmpty() {
-        return new Person();
+    public static Person createMember(User user, CreatePerson person) {
+        return new Member(user, person);
+    }
+
+    public static Person createTrainer(User user, CreatePerson person) {
+        return new Trainer(user, person);
+    }
+
+    public static Person createOwner(User user, CreatePerson person) {
+        return new Owner(user, person);
+    }
+
+    public static Person createEmployee(User user, CreatePerson person) {
+        return new Employee(user, person);
     }
 
 }

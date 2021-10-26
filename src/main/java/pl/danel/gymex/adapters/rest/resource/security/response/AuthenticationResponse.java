@@ -1,4 +1,4 @@
-package pl.danel.gymex.adapters.rest.resource.response;
+package pl.danel.gymex.adapters.rest.resource.security.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

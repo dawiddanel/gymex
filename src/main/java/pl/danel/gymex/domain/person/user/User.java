@@ -8,12 +8,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.danel.gymex.domain.asserts.InvalidArgumentException;
 import pl.danel.gymex.domain.person.Person;
-import pl.danel.gymex.domain.person.user.command.CreateUserCommand;
+import pl.danel.gymex.domain.person.user.command.CreateTechnicalUser;
+import pl.danel.gymex.domain.person.user.command.CreateUser;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "USER")
@@ -46,28 +45,46 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    private User(CreateUserCommand command) {
-        this.username = command.getUsername();
-        this.email = command.getEmail();
-        this.role = mapRole(command.getRole());
+    private User(String username, String email, Role role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
         //TODO Activate based on activation email
         this.active = true;
-        this.person = Person.createEmpty();
     }
 
-    public static User create(CreateUserCommand command) {
+    private User(CreateUser command) {
+        this(command.getUsername(), command.getEmail(), Role.MEMBER);
+        this.person = Person.createMember(this, command.getPerson());
+    }
+
+    private User(CreateTechnicalUser command) {
+        this(command.getUsername(), command.getEmail(), command.getRole());
+        switch (command.getRole()) {
+            case OWNER:
+                this.person = Person.createOwner(this, command.getPerson());
+                break;
+            case EMPLOYEE:
+                this.person = Person.createEmployee(this, command.getPerson());
+                break;
+            case MEMBER:
+                throw new InvalidArgumentException("Cannot create technical account for MEMBER");
+            case TRAINER:
+                this.person = Person.createTrainer(this, command.getPerson());
+                break;
+        }
+    }
+
+    public static User createMember(CreateUser command) {
         return new User(command);
+    }
+
+    public static User createTechnical(CreateTechnicalUser createTechnicalUser) {
+        return new User(createTechnicalUser);
     }
 
     public void createPassword(String value, PasswordEncoder encoder) {
         this.password = Password.of(value, encoder);
-    }
-
-    private Role mapRole(String role) {
-        return Arrays.stream(Role.values())
-                .filter(r -> r.name().equals(role))
-                .findAny()
-                .orElseThrow(() -> new InvalidArgumentException("No such ROLE parameter"));
     }
 
 }

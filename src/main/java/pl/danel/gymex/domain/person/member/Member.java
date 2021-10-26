@@ -1,16 +1,18 @@
 package pl.danel.gymex.domain.person.member;
 
+import lombok.NoArgsConstructor;
 import pl.danel.gymex.domain.gym.pass.Pass;
-import pl.danel.gymex.domain.gym.timetable.activities.Activity;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.person.Person;
+import pl.danel.gymex.domain.person.user.User;
+import pl.danel.gymex.domain.person.user.command.CreatePerson;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Entity
+@NoArgsConstructor
 @DiscriminatorValue("MEMBER")
 public class Member extends Person {
 
@@ -28,4 +30,8 @@ public class Member extends Person {
             orphanRemoval = true
     )
     private List<Attendance> attendances;
+
+    public Member(User user, CreatePerson person) {
+        super(user, person);
+    }
 }

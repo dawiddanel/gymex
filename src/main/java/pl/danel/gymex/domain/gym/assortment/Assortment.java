@@ -1,5 +1,6 @@
 package pl.danel.gymex.domain.gym.assortment;
 
+import liquibase.pro.packaged.A;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,14 @@ public class Assortment {
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    private Assortment(Gym gym) {
+        this.gym = gym;
+    }
+
+    public static Assortment emptyAssortment(Gym gym) {
+        return new Assortment(gym);
+    }
 
     public void addEquipment(Equipment equipment) {
         equipments.add(equipment);
