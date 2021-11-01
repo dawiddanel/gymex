@@ -1,4 +1,4 @@
-package pl.danel.gymex.application.common.dto;
+package pl.danel.gymex.application.gym.dto;
 
 import lombok.Builder;
 import lombok.Getter;

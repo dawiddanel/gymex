@@ -2,7 +2,6 @@ package pl.danel.gymex.application.gym.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import pl.danel.gymex.application.common.dto.AddressDto;
 
 @Builder
 @Getter

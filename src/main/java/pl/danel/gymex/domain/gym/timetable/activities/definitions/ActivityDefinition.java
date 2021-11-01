@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.danel.gymex.domain.common.Level;
+import pl.danel.gymex.domain.gym.timetable.command.CreateActivityDefinition;
+import pl.danel.gymex.domain.gym.timetable.command.UpdateActivityDefinition;
 
 import javax.persistence.*;
 
@@ -26,5 +28,21 @@ public class ActivityDefinition {
 
     @Enumerated(EnumType.STRING)
     private Level level;
+
+    private ActivityDefinition(CreateActivityDefinition command) {
+        this.name = command.getName();
+        this.description = command.getDescription();
+        this.level = command.getLevel();
+    }
+
+    public static ActivityDefinition create(CreateActivityDefinition command) {
+        return new ActivityDefinition(command);
+    }
+
+    public void update(UpdateActivityDefinition command) {
+        this.name = command.getName();
+        this.description = command.getDescription();
+        this.level = command.getLevel();
+    }
 
 }

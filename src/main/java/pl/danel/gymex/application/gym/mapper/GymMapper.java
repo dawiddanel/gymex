@@ -1,7 +1,7 @@
 package pl.danel.gymex.application.gym.mapper;
 
 import org.springframework.stereotype.Component;
-import pl.danel.gymex.application.common.dto.AddressDto;
+import pl.danel.gymex.application.gym.dto.AddressDto;
 import pl.danel.gymex.application.gym.dto.GymDto;
 import pl.danel.gymex.domain.gym.Gym;
 import pl.danel.gymex.domain.gym.address.Address;

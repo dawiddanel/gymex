@@ -31,7 +31,6 @@ public class Equipment {
     private Integer quantity;
 
     private Equipment(CreateEquipment command) {
-        this.assortment = command.getAssortment();
         this.definition = command.getDefinition();
         this.quantity = command.getQuantity();
     }

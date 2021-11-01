@@ -1,10 +1,10 @@
-package pl.danel.gymex.application.dto;
+package pl.danel.gymex.application.gym.timetable.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
+@Builder
 @Getter
-@Setter
 public class ActivityDefinitionDto {
     private Long id;
     private String name;

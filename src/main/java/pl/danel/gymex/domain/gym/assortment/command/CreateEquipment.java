@@ -9,6 +9,5 @@ import pl.danel.gymex.domain.gym.assortment.definitions.EquipmentDefinition;
 @Getter
 public class CreateEquipment {
     private Integer quantity;
-    private Assortment assortment;
     private EquipmentDefinition definition;
 }

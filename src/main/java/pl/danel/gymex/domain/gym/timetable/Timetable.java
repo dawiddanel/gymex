@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
+import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.Gym;
-import pl.danel.gymex.domain.gym.timetable.activities.Activity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -42,5 +43,24 @@ public class Timetable {
 
     public static Timetable emptyTimetable(Gym gym) {
         return new Timetable(gym);
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+        activity.setTimetable(this);
+        activity.getTrainer().addActivity(activity);
+    }
+
+    public void removeActivity(Activity activity) {
+        activities.remove(activity);
+        activity.setTimetable(null);
+        activity.getTrainer().removeActivity(activity);
+    }
+
+    public Activity activityById(Long id) {
+        DomainAsserts.assertState(id != null, "ACTIVITY id cannot be null");
+        return activities.stream()
+                .filter(activity -> activity.getId().equals(id))
+                .findAny().orElseThrow(() -> new NotFoundException("no such ACTIVITY present in TIMETABLE"));
     }
 }

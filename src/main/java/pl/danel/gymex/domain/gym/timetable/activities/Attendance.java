@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.danel.gymex.domain.gym.timetable.Activity;
 import pl.danel.gymex.domain.person.member.Member;
 
 import javax.persistence.*;

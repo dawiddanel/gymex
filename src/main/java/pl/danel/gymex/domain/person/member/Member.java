@@ -1,5 +1,6 @@
 package pl.danel.gymex.domain.person.member;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.danel.gymex.domain.gym.pass.Pass;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @DiscriminatorValue("MEMBER")
 public class Member extends Person {

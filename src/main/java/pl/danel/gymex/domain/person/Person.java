@@ -1,5 +1,6 @@
 package pl.danel.gymex.domain.person;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.danel.gymex.domain.common.PersonType;
 import pl.danel.gymex.domain.person.member.Member;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @DiscriminatorColumn(name = "person_type",
         discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
+@Getter
 public class Person {
 
     @Id

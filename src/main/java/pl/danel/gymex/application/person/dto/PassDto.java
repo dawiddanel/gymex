@@ -1,12 +1,12 @@
-package pl.danel.gymex.application.dto;
+package pl.danel.gymex.application.person.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
-@Setter
+@Builder
 public class PassDto {
     private LocalDate startDate;
     private LocalDate activeStartDate;

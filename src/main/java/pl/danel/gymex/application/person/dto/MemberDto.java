@@ -1,4 +1,4 @@
-package pl.danel.gymex.application.dto;
+package pl.danel.gymex.application.person.dto;
 
 import lombok.Getter;
 import lombok.Setter;
