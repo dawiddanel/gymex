@@ -8,10 +8,8 @@ import pl.danel.gymex.adapters.rest.resource.gym.timetable.command.UpdateActivit
 import pl.danel.gymex.domain.asserts.InvalidArgumentException;
 import pl.danel.gymex.domain.common.Level;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
-import pl.danel.gymex.domain.gym.timetable.command.CreateActivity;
-import pl.danel.gymex.domain.gym.timetable.command.CreateActivityDefinition;
-import pl.danel.gymex.domain.gym.timetable.command.UpdateActivity;
-import pl.danel.gymex.domain.gym.timetable.command.UpdateActivityDefinition;
+import pl.danel.gymex.domain.gym.timetable.command.*;
+import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 
 import java.util.Arrays;
@@ -52,6 +50,30 @@ public class TimetableCommandMapper {
                 .name(command.getName())
                 .description(command.getDescription())
                 .level(mapLevel(command.getLevel()))
+                .build();
+    }
+
+    public AddParticipant addParticipant(Member member) {
+        return AddParticipant.builder()
+                .member(member)
+                .build();
+    }
+
+    public RemoveParticipant removeParticipant(Member member) {
+        return RemoveParticipant.builder()
+                .member(member)
+                .build();
+    }
+
+    public ConfirmAttendance confirmAttendance(Member member) {
+        return ConfirmAttendance.builder()
+                .member(member)
+                .build();
+    }
+
+    public ResignAttendance resignAttendance(Member member) {
+        return ResignAttendance.builder()
+                .member(member)
                 .build();
     }
 

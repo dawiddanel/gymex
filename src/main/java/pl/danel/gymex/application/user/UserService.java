@@ -1,6 +1,8 @@
 package pl.danel.gymex.application.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.security.command.RegisterCommand;
@@ -14,6 +16,7 @@ import pl.danel.gymex.domain.person.user.command.CreateTechnicalUser;
 import pl.danel.gymex.domain.person.user.command.CreateUser;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +43,14 @@ public class UserService {
         user.createPassword(createTechnicalUser.getPassword(), encoder);
         user = userRepository.save(user);
         return mapper.map(user);
+    }
+
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
+        String username = user.getUsername();
+        return userRepository.findByUsername(username)
+                .orElseThrow(NoSuchElementException::new);
     }
 
 }

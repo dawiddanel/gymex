@@ -4,13 +4,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.danel.gymex.domain.gym.assortment.Equipment;
-import pl.danel.gymex.domain.gym.assortment.command.CreateEquipment;
-import pl.danel.gymex.domain.gym.timetable.Timetable;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
+import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
-import pl.danel.gymex.domain.gym.timetable.command.CreateActivity;
-import pl.danel.gymex.domain.gym.timetable.command.UpdateActivity;
+import pl.danel.gymex.domain.gym.timetable.command.*;
 import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 
@@ -83,12 +81,68 @@ public class Activity {
         this.capacity = command.getCapacity();
     }
 
+    public void addParticipant(AddParticipant command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
+        DomainAsserts.assertState(capacity >= participants.size() + 1, "to many PARTICIPANTS");
+        DomainAsserts.assertState(startTime.isAfter(LocalDateTime.now()), "activity already happened");
+
+        Attendance attendance = Attendance.create(command.getMember(), this);
+        this.participants.add(command.getMember());
+        this.attendance.add(attendance);
+        command.getMember().addAttendance(attendance);
+    }
+
+    public void removeParticipant(RemoveParticipant command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
+        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
+
+        Attendance attendance = attendanceByMember(command.getMember());
+        this.participants.remove(command.getMember());
+        this.attendance.remove(attendance);
+        attendance.setActivity(null);
+        command.getMember().removeAttendance(attendance);
+    }
+
+    public void confirmAttendance(ConfirmAttendance command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
+        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
+
+        Attendance attendance = attendanceByMember(command.getMember());
+        attendance.confirmAttendance();
+    }
+
+    public void resignAttendance(ResignAttendance command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
+        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
+
+        Attendance attendance = attendanceByMember(command.getMember());
+        attendance.resignAttendance();
+    }
+
     public void setTimetable(Timetable timetable) {
         this.timetable = timetable;
     }
 
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
+    }
+
+    public Attendance attendanceById(Long id) {
+        DomainAsserts.assertArgumentNotNull(id, "ATTENDANCE id cannot be null");
+        return attendance.stream()
+                .filter(attendance -> attendance.getId().equals(id))
+                .findAny().orElseThrow(() -> new NotFoundException("no such ATTENDANCE present in ACTIVITY"));
+    }
+
+    public Attendance attendanceByMember(Member member) {
+        DomainAsserts.assertArgumentNotNull(member, "MEMBER cannot be null");
+        return attendance.stream()
+                .filter(attendance -> attendance.getMember().equals(member))
+                .findAny().orElseThrow(() -> new NotFoundException("no such ATTENDANCE present in ACTIVITY"));
     }
 
 }

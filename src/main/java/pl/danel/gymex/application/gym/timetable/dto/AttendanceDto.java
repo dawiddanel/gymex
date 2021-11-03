@@ -8,5 +8,5 @@ import pl.danel.gymex.application.person.dto.MemberDto;
 @Getter
 public class AttendanceDto {
     private MemberDto member;
-    private boolean attended;
+    private Boolean attended;
 }

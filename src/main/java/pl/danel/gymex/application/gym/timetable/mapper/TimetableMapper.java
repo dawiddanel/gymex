@@ -14,6 +14,7 @@ import pl.danel.gymex.domain.gym.timetable.Activity;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public class TimetableMapper {
 
     public List<ActivityDto> activities(List<Activity> activities) {
         if (CollectionUtils.isEmpty(activities)) {
-            return null;
+            return Collections.emptyList();
         }
         return activities.stream()
                 .map(this::activity)
@@ -64,7 +65,7 @@ public class TimetableMapper {
 
     public List<AttendanceDto> attendances(List<Attendance> attendances) {
         if (CollectionUtils.isEmpty(attendances)) {
-            return null;
+            return Collections.emptyList();
         }
         return attendances.stream()
                 .map(this::attendance)
@@ -74,7 +75,7 @@ public class TimetableMapper {
     public AttendanceDto attendance(Attendance attendance) {
         return AttendanceDto.builder()
                 .member(personMapper.member(attendance.getMember()))
-                .attended(attendance.isAttended())
+                .attended(attendance.getAttended())
                 .build();
     }
 

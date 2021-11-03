@@ -64,6 +64,15 @@ public class PersonMapper {
                 .build();
     }
 
+    public List<OwnerDto> owners(List<Owner> owners) {
+        if (CollectionUtils.isEmpty(owners)) {
+            return null;
+        }
+        return owners.stream()
+                .map(this::owner)
+                .collect(Collectors.toList());
+    }
+
     public OwnerDto owner(Owner owner) {
         if (owner == null) {
             return null;
