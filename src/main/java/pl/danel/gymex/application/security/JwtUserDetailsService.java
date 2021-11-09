@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.danel.gymex.domain.user.User;
-import pl.danel.gymex.domain.user.UserRepository;
+import pl.danel.gymex.domain.person.user.User;
+import pl.danel.gymex.domain.person.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

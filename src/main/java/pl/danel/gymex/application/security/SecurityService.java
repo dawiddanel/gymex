@@ -7,7 +7,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import pl.danel.gymex.adapters.rest.resource.command.SignInCommand;
+import pl.danel.gymex.adapters.rest.resource.security.command.SignInCommand;
 import pl.danel.gymex.config.security.JwtTokenUtil;
 
 @Service
