@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class UpdateGymCommand {
     private String name;
-    private Integer squareMeters;
+    private Integer capacity;
     private CreateAddressCommand address;
 }

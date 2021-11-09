@@ -2,14 +2,10 @@ package pl.danel.gymex.adapters.rest.resource.person;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.danel.gymex.adapters.rest.resource.person.command.CreatePassCommand;
 import pl.danel.gymex.application.person.PersonService;
-import pl.danel.gymex.application.person.dto.EmployeeDto;
-import pl.danel.gymex.application.person.dto.MemberDto;
-import pl.danel.gymex.application.person.dto.OwnerDto;
-import pl.danel.gymex.application.person.dto.TrainerDto;
+import pl.danel.gymex.application.person.dto.*;
 
 import java.util.List;
 
@@ -40,5 +36,9 @@ public class PersonResource {
         return personService.allTrainers();
     }
 
+    @PostMapping("/member/pass")
+    public PassDto createPass(@RequestBody CreatePassCommand command) {
+        return personService.createPass(command);
+    }
 
 }

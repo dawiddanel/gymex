@@ -2,15 +2,14 @@ package pl.danel.gymex.application.person;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.danel.gymex.application.person.dto.EmployeeDto;
-import pl.danel.gymex.application.person.dto.MemberDto;
-import pl.danel.gymex.application.person.dto.OwnerDto;
-import pl.danel.gymex.application.person.dto.TrainerDto;
+import pl.danel.gymex.adapters.rest.resource.person.command.CreatePassCommand;
+import pl.danel.gymex.application.person.dto.*;
 import pl.danel.gymex.application.person.mapper.PersonCommandMapper;
 import pl.danel.gymex.application.person.mapper.PersonMapper;
 import pl.danel.gymex.application.user.UserService;
 import pl.danel.gymex.domain.asserts.InvalidArgumentException;
 import pl.danel.gymex.domain.asserts.NotFoundException;
+import pl.danel.gymex.domain.gym.command.CreatePass;
 import pl.danel.gymex.domain.person.EmployeeRepository;
 import pl.danel.gymex.domain.person.MemberRepository;
 import pl.danel.gymex.domain.person.OwnerRepository;
@@ -62,6 +61,16 @@ public class PersonService {
             return (Member) user.getPerson();
         }
         throw new InvalidArgumentException("currently logged person is not a MEMBER");
+    }
+
+    public PassDto createPass(CreatePassCommand command) {
+        Member member = currentlyLoggedMember();
+
+        CreatePass createPass = personCommandMapper.createPass(command);
+
+        member.addPass(createPass);
+        member = memberRepository.save(member);
+        return personMapper.pass(member.actualPass().orElse(null));
     }
 
 

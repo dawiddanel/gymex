@@ -49,17 +49,16 @@ public class PersonMapper {
         }
         MemberDto result = new MemberDto();
         mapBasicPersonData(member, result);
-        result.setPass(pass(member.getPass()));
+        result.setPass(pass(member.actualPass().orElse(null)));
         return result;
     }
 
-    private PassDto pass(Pass pass) {
+    public PassDto pass(Pass pass) {
         if (pass == null) {
             return null;
         }
         return PassDto.builder()
                 .startDate(pass.getStartDate())
-                .activeStartDate(pass.getActiveStartDate())
                 .endDate(pass.getEndDate())
                 .build();
     }

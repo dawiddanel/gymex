@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class UpdateGym {
     private String name;
-    private Integer squareMeters;
+    private Integer capacity;
     private CreateAddress address;
 }

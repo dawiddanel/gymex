@@ -8,8 +8,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import pl.danel.gymex.domain.asserts.DomainAsserts;
 import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.Gym;
+import pl.danel.gymex.domain.gym.command.CreateTimetable;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,10 +24,11 @@ import java.util.List;
 public class Timetable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timetable_sequence")
+    @SequenceGenerator(name = "timetable_sequence", sequenceName = "SEQ_TIMETABLE", allocationSize = 1)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY)
     private Gym gym;
 
     @OneToMany(
@@ -34,15 +38,24 @@ public class Timetable {
     )
     private List<Activity> activities;
 
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
+    private boolean active;
+
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    private Timetable(Gym gym) {
+    private Timetable(Gym gym, LocalDate startDate) {
         this.gym = gym;
+        this.startDate = startDate;
+        this.endDate = startDate.plusDays(14);
+        this.active = true;
     }
 
-    public static Timetable emptyTimetable(Gym gym) {
-        return new Timetable(gym);
+    public static Timetable emptyTimetable(Gym gym, LocalDate startDate) {
+        return new Timetable(gym, startDate);
     }
 
     public void addActivity(Activity activity) {
@@ -63,4 +76,15 @@ public class Timetable {
                 .filter(activity -> activity.getId().equals(id))
                 .findAny().orElseThrow(() -> new NotFoundException("no such ACTIVITY present in TIMETABLE"));
     }
+
+    public boolean actual() {
+        LocalDate now = LocalDate.now();
+        return (now.isAfter(this.startDate) || now.isEqual(now))
+                && (this.endDate.isAfter(now) || this.endDate.isEqual(now));
+    }
+
+    public void markInactive() {
+        this.active = false;
+    }
+
 }

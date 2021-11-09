@@ -6,7 +6,10 @@ import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
 import pl.danel.gymex.domain.gym.command.CreateAddress;
 import pl.danel.gymex.domain.gym.command.CreateGym;
+import pl.danel.gymex.domain.gym.command.CreateTimetable;
 import pl.danel.gymex.domain.gym.command.UpdateGym;
+
+import java.time.LocalDate;
 
 @Component
 public class GymCommandMapper {
@@ -14,15 +17,16 @@ public class GymCommandMapper {
     public CreateGym createGymCommand(CreateGymCommand command) {
         return CreateGym.builder()
                 .name(command.getName())
-                .squareMeters(command.getSquareMeters())
+                .capacity(command.getCapacity())
                 .address(createAddress(command.getAddress()))
+                .createTimetable(createTimetable(command.getTimetableStartDate()))
                 .build();
     }
 
     public UpdateGym updateGymCommand(UpdateGymCommand command) {
         return UpdateGym.builder()
                 .name(command.getName())
-                .squareMeters(command.getSquareMeters())
+                .capacity(command.getCapacity())
                 .address(createAddress(command.getAddress()))
                 .build();
     }
@@ -34,6 +38,12 @@ public class GymCommandMapper {
                 .postalCode(command.getPostalCode())
                 .street(command.getStreet())
                 .buildingNumber(command.getBuildingNumber())
+                .build();
+    }
+
+    public CreateTimetable createTimetable(LocalDate timetableStartDate) {
+        return CreateTimetable.builder()
+                .startDate(timetableStartDate)
                 .build();
     }
 

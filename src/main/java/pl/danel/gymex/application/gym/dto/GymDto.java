@@ -8,6 +8,6 @@ import lombok.Getter;
 public class GymDto {
     private Long id;
     private String name;
-    private Integer squareMeters;
+    private Integer capacity;
     private AddressDto address;
 }

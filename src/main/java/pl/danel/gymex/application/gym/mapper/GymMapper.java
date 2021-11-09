@@ -13,7 +13,7 @@ public class GymMapper {
         return GymDto.builder()
                 .id(gym.getId())
                 .name(gym.getName())
-                .squareMeters(gym.getSquareMeters())
+                .capacity(gym.getCapacity())
                 .address(address(gym.getAddress()))
                 .build();
     }

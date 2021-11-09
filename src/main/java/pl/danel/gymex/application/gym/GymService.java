@@ -2,6 +2,7 @@ package pl.danel.gymex.application.gym;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
@@ -66,6 +67,19 @@ public class GymService {
         return gymRepository.findAll().stream()
                 .map(gymMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 1 * * *")
+    public void createNewTimetable() {
+        List<Gym> gyms = gymRepository.findAll();
+
+        gyms.forEach(gym -> {
+            if (gym.timetableOverdue()) {
+                gym.addEmptyTimetable();
+                gymRepository.save(gym);
+            }
+        });
     }
 
 }

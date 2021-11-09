@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class CreateGym {
     private String name;
-    private Integer squareMeters;
+    private Integer capacity;
     private CreateAddress address;
+    private CreateTimetable createTimetable;
 }

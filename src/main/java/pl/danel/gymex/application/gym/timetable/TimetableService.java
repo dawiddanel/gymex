@@ -11,6 +11,8 @@ import pl.danel.gymex.application.gym.timetable.mapper.TimetableCommandMapper;
 import pl.danel.gymex.application.gym.timetable.mapper.TimetableMapper;
 import pl.danel.gymex.application.person.PersonService;
 import pl.danel.gymex.domain.asserts.NotFoundException;
+import pl.danel.gymex.domain.gym.Gym;
+import pl.danel.gymex.domain.gym.GymRepository;
 import pl.danel.gymex.domain.gym.timetable.Activity;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
 import pl.danel.gymex.domain.gym.timetable.TimetableRepository;
@@ -30,6 +32,7 @@ public class TimetableService {
 
     private final PersonService personService;
 
+    private final GymRepository gymRepository;
     private final TimetableRepository timetableRepository;
     private final ActivityDefinitionRepository activityDefinitionRepository;
     private final TrainerRepository trainerRepository;
@@ -37,16 +40,14 @@ public class TimetableService {
     private final TimetableMapper timetableMapper;
     private final TimetableCommandMapper timetableCommandMapper;
 
-    public TimetableDto getTimetable(Long timetableId) {
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+    public TimetableDto getTimetable(Long gymId) {
+        Timetable timetable = actualGymTimetable(gymId);
         return timetableMapper.timetable(timetable);
     }
 
     @Transactional
-    public TimetableDto createActivity(Long timetableId, CreateActivityCommand command) {
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+    public TimetableDto createActivity(Long gymId, CreateActivityCommand command) {
+        Timetable timetable = actualGymTimetable(gymId);
 
         ActivityDefinition definition = activityDefinitionRepository.findById(command.getDefinitionId())
                 .orElseThrow(() -> new NotFoundException("No such ACTIVITY_DEFINITION found"));
@@ -63,9 +64,8 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto updateActivity(Long timetableId, Long activityId, UpdateActivityCommand command) {
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+    public TimetableDto updateActivity(Long gymId, Long activityId, UpdateActivityCommand command) {
+        Timetable timetable = actualGymTimetable(gymId);
 
         ActivityDefinition definition = activityDefinitionRepository.findById(command.getDefinitionId())
                 .orElseThrow(() -> new NotFoundException("No such ACTIVITY_DEFINITION found"));
@@ -82,9 +82,8 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto deleteActivity(Long timetableId, Long activityId) {
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+    public TimetableDto deleteActivity(Long gymId, Long activityId) {
+        Timetable timetable = actualGymTimetable(gymId);
 
         Activity activity = timetable.activityById(activityId);
         timetable.removeActivity(activity);
@@ -94,11 +93,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto joinActivity(Long timetableId, Long activityId) {
+    public ActivityDto joinActivity(Long gymId, Long activityId) {
         Member member = personService.currentlyLoggedMember();
 
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+        Timetable timetable = actualGymTimetable(gymId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -110,11 +108,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto resignFromActivity(Long timetableId, Long activityId) {
+    public ActivityDto resignFromActivity(Long gymId, Long activityId) {
         Member member = personService.currentlyLoggedMember();
 
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+        Timetable timetable = actualGymTimetable(gymId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -126,11 +123,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto confirmAttendance(Long timetableId, Long activityId, Long userId) {
+    public ActivityDto confirmAttendance(Long gymId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+        Timetable timetable = actualGymTimetable(gymId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -142,11 +138,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto resignAttendance(Long timetableId, Long activityId, Long userId) {
+    public ActivityDto resignAttendance(Long gymId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 
-        Timetable timetable = timetableRepository.findById(timetableId)
-                .orElseThrow(() -> new NotFoundException("No such TIMETABLE found"));
+        Timetable timetable = actualGymTimetable(gymId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -155,6 +150,13 @@ public class TimetableService {
 
         timetable = timetableRepository.save(timetable);
         return timetableMapper.activity(timetable.activityById(activityId));
+    }
+
+    private Timetable actualGymTimetable(Long gymId) {
+        Gym gym = gymRepository.findById(gymId)
+                .orElseThrow(() -> new NotFoundException("No such GYM found"));
+
+        return gym.actualTimetable();
     }
 
 }
