@@ -28,7 +28,7 @@ public class GymResource {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEquipmentDefinition(@PathVariable Long id) {
+    public void deleteGym(@PathVariable Long id) {
         gymService.deleteGym(id);
     }
 
