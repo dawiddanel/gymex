@@ -1,0 +1,15 @@
+<div>
+  <div>
+    <div class="text-center">
+      <h4 class="bd-highlight">Dostępne siłownie</h4>
+    </div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"
+      *ngFor="let gym of gyms; let i = index"
+    >
+      <app-gym [gym]="gym"></app-gym>
+    </li>
+  </ul>
+  <a class="btn btn-success" routerLink="/gyms/create">Dodaj</a>
+</div>

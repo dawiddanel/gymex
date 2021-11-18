@@ -1,0 +1,127 @@
+<div class="container">
+  <h4>Dodawanie nowej siłowni</h4>
+  <form (ngSubmit)="saveGym()" #gymAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="name">Nazwa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="gymCommand.name"
+          name="name" #name="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="name.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="capacity">Maksymalna liczba ćwiczących</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          [(ngModel)]="gymCommand.capacity"
+          name="capacity" #capacity="ngModel"
+          required
+          min="1"
+        />
+        <p [hidden]="capacity.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="timetableStartDate">Data startu grafiku zajęć</label>
+        <input
+          type="date"
+          class="form-control"
+          id="timetableStartDate"
+          [(ngModel)]="gymCommand.timetableStartDate"
+          name="timetableStartDate" #timetableStartDate="ngModel"
+          required
+        />
+        <p [hidden]="timetableStartDate.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <br/>
+    <h4>Adres: </h4>
+    <div class="row">
+      <div class="col">
+        <label for="country">Kraj</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          [(ngModel)]="gymCommand.address.country"
+          name="country" #country="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="country.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="city">Miasto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          [(ngModel)]="gymCommand.address.city"
+          name="city" #city="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="city.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="postalCode">Kod pocztowy</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postalCode"
+          [(ngModel)]="gymCommand.address.postalCode"
+          name="postalCode" #postalCode="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="postalCode.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="street">Ulica</label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          [(ngModel)]="gymCommand.address.street"
+          name="street" #street="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="street.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="buildingNumber">Numer budynku</label>
+        <input
+          type="text"
+          class="form-control"
+          id="buildingNumber"
+          [(ngModel)]="gymCommand.address.buildingNumber"
+          name="buildingNumber" #buildingNumber="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="buildingNumber.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!gymAddForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!gymAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>
