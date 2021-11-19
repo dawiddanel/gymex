@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ToastsService} from "../../../default/toasts.service";
 import {ActivityDefinitionService} from "../activity-definition.service";
-import {ActivityDefinition} from "../../../models/activity.model";
+import {ActivityDefinition} from "../../../default/models/activity.model";
 
 @Component({
   selector: 'app-activity-definition-list',

@@ -8,8 +8,8 @@ import {
   EquipmentDefinition,
   UpdateEquipment,
   UpdateEquipmentDefinition
-} from "../models/equipment.model";
-import {Assortment} from "../models/assortment.model";
+} from "../default/models/equipment.model";
+import {Assortment} from "../default/models/assortment.model";
 
 const baseUrl = 'http://localhost:8085/gymex/assortment';
 

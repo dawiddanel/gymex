@@ -5,7 +5,7 @@ import {
   emptyCreateEquipmentDefinition,
   EquipmentType,
   Purpose
-} from "../../../models/equipment.model";
+} from "../../../default/models/equipment.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {Router} from "@angular/router";
 import {enumSelector} from "../../../default/utilities";

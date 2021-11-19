@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CreateEquipmentDefinition, EquipmentDefinition, UpdateEquipmentDefinition} from "../../models/equipment.model";
+import {CreateEquipmentDefinition, EquipmentDefinition, UpdateEquipmentDefinition} from "../../default/models/equipment.model";
 
 const baseUrl = 'http://localhost:8085/gymex/assortment/equipment/definition';
 

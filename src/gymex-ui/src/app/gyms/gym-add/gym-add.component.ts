@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GymService} from "../gym.service";
-import {CreateGym, emptyCreateGym} from "../../models/gym.command.model";
+import {CreateGym, emptyCreateGym} from "../../default/models/gym.command.model";
 import {ToastsService} from "../../default/toasts.service";
 import {Router} from "@angular/router";
 

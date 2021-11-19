@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GymService} from "../gym.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {emptyGym, Gym} from "../../models/gym.model";
-import {UpdateGym} from "../../models/gym.command.model";
+import {emptyGym, Gym} from "../../default/models/gym.model";
+import {UpdateGym} from "../../default/models/gym.command.model";
 import {ToastsService} from "../../default/toasts.service";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 

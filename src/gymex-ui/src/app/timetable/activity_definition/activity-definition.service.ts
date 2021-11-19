@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ActivityDefinition} from "../../models/activity.model";
-import {CreateActivityDefinition, UpdateActivityDefinition} from "../../models/activity.command.model";
+import {ActivityDefinition} from "../../default/models/activity.model";
+import {CreateActivityDefinition, UpdateActivityDefinition} from "../../default/models/activity.command.model";
 
 const baseUrl = 'http://localhost:8085/gymex/activity/definition';
 

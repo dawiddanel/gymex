@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EquipmentDefinition} from "../../../models/equipment.model";
+import {EquipmentDefinition} from "../../../default/models/equipment.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {EquipmentDefinitionService} from "../equipment.definition.service";
 

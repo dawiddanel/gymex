@@ -3,8 +3,8 @@ import {ToastsService} from "../../../default/toasts.service";
 import {Router} from "@angular/router";
 import {ActivityDefinitionService} from "../activity-definition.service";
 import {enumSelector} from "../../../default/utilities";
-import {CreateActivityDefinition, emptyCreateActivityDefinition} from "../../../models/activity.command.model";
-import {Level} from "../../../models/activity.model";
+import {CreateActivityDefinition, emptyCreateActivityDefinition} from "../../../default/models/activity.command.model";
+import {Level} from "../../../default/models/activity.model";
 
 @Component({
   selector: 'app-activity-definition-add',

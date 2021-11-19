@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EquipmentDefinition} from "../../../models/equipment.model";
+import {EquipmentDefinition} from "../../../default/models/equipment.model";
 
 @Component({
   selector: 'app-equipment-definition',

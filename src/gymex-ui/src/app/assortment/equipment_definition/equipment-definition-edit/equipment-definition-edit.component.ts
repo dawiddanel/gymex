@@ -6,7 +6,7 @@ import {
   EquipmentType,
   Purpose,
   UpdateEquipmentDefinition
-} from "../../../models/equipment.model";
+} from "../../../default/models/equipment.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import Swal from 'sweetalert2/dist/sweetalert2.js';

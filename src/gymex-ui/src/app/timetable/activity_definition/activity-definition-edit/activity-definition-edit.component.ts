@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {enumSelector} from "../../../default/utilities";
-import {ActivityDefinition, emptyActivityDefinition, Level} from "../../../models/activity.model";
+import {ActivityDefinition, emptyActivityDefinition, Level} from "../../../default/models/activity.model";
 import {ActivityDefinitionService} from "../activity-definition.service";
 import {ToastsService} from "../../../default/toasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import {UpdateActivityDefinition} from "../../../models/activity.command.model";
+import {UpdateActivityDefinition} from "../../../default/models/activity.command.model";
 
 @Component({
   selector: 'app-activity-definition-edit',

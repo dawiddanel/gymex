@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Gym} from "../models/gym.model";
-import {CreateGym, UpdateGym} from "../models/gym.command.model";
+import {Gym} from "../default/models/gym.model";
+import {CreateGym, UpdateGym} from "../default/models/gym.command.model";
 
 const baseUrl = 'http://localhost:8085/gymex/gym';
 

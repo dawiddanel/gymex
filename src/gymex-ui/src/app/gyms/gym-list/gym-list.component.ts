@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {emptyGym, Gym} from "../../models/gym.model";
+import {emptyGym, Gym} from "../../default/models/gym.model";
 import {GymService} from "../gym.service";
 import {ToastsService} from "../../default/toasts.service";
 

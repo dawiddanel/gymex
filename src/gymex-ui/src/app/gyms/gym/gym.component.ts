@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Gym} from "../../models/gym.model";
+import {Gym} from "../../default/models/gym.model";
 
 @Component({
   selector: 'app-gym',
