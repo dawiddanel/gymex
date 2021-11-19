@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EquipmentDefinition} from "../../../models/equipment.model";
-import {AssortmentService} from "../../assortment.service";
 import {ToastsService} from "../../../default/toasts.service";
+import {EquipmentDefinitionService} from "../equipment.definition.service";
 
 @Component({
   selector: 'app-equipment-definition-list',
@@ -13,7 +13,7 @@ export class EquipmentDefinitionListComponent implements OnInit {
   definitions?: EquipmentDefinition[];
 
   constructor(
-    private assortmentService: AssortmentService,
+    private equipmentDefinitionService: EquipmentDefinitionService,
     private toasts: ToastsService
   ) {
   }
@@ -23,7 +23,7 @@ export class EquipmentDefinitionListComponent implements OnInit {
   }
 
   retrieveDefinitions(): void {
-    this.assortmentService.getAllEquipmentDefinition()
+    this.equipmentDefinitionService.getAllEquipmentDefinition()
       .subscribe({
         next: value => {
           this.definitions = value

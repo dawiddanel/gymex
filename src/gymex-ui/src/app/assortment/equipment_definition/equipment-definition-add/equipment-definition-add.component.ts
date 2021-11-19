@@ -3,12 +3,13 @@ import {
   BodyPart,
   CreateEquipmentDefinition,
   emptyCreateEquipmentDefinition,
-  EquipmentType, Purpose
+  EquipmentType,
+  Purpose
 } from "../../../models/equipment.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {Router} from "@angular/router";
-import {AssortmentService} from "../../assortment.service";
 import {enumSelector} from "../../../default/utilities";
+import {EquipmentDefinitionService} from "../equipment.definition.service";
 
 @Component({
   selector: 'app-equipment-definition-add',
@@ -22,7 +23,7 @@ export class EquipmentDefinitionAddComponent implements OnInit {
   purposes = enumSelector(Purpose)
   bodyParts = enumSelector(BodyPart)
 
-  constructor(private assortmentService: AssortmentService,
+  constructor(private equipmentDefinitionService: EquipmentDefinitionService,
               private toasts: ToastsService,
               private router: Router) {
   }
@@ -40,14 +41,14 @@ export class EquipmentDefinitionAddComponent implements OnInit {
       aimedBodyParts: this.definitionCommand.aimedBodyParts,
     };
 
-    this.assortmentService.createEquipmentDefinition(data)
+    this.equipmentDefinitionService.createEquipmentDefinition(data)
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Definicja poprawnie dodana`)
           this.router.navigate(['/equipmentDefinitions']);
         },
         error: err => {
-          this.toasts.showErrorToast(`Błąd przy pobieraniu listy`)
+          this.toasts.showErrorToast(`Błąd przy dodawaniu definicji`)
         }
       })
   }

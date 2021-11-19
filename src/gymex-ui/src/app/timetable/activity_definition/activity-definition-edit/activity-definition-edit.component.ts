@@ -1,31 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  BodyPart,
-  emptyEquipmentDefinition,
-  EquipmentDefinition,
-  EquipmentType,
-  Purpose,
-  UpdateEquipmentDefinition
-} from "../../../models/equipment.model";
+import {enumSelector} from "../../../default/utilities";
+import {ActivityDefinition, emptyActivityDefinition, Level} from "../../../models/activity.model";
+import {ActivityDefinitionService} from "../activity-definition.service";
 import {ToastsService} from "../../../default/toasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import {enumSelector} from "../../../default/utilities";
-import {EquipmentDefinitionService} from "../equipment.definition.service";
+import {UpdateActivityDefinition} from "../../../models/activity.command.model";
 
 @Component({
-  selector: 'app-equipment-definition-edit',
-  templateUrl: './equipment-definition-edit.component.html',
-  styleUrls: ['./equipment-definition-edit.component.css']
+  selector: 'app-activity-definition-edit',
+  templateUrl: './activity-definition-edit.component.html',
+  styleUrls: ['./activity-definition-edit.component.css']
 })
-export class EquipmentDefinitionEditComponent implements OnInit {
+export class ActivityDefinitionEditComponent implements OnInit {
 
-  definition: EquipmentDefinition = emptyEquipmentDefinition()
-  equipmentTypes = enumSelector(EquipmentType)
-  purposes = enumSelector(Purpose)
-  bodyParts = enumSelector(BodyPart)
+  definition: ActivityDefinition = emptyActivityDefinition()
+  levels = enumSelector(Level)
 
-  constructor(private equipmentDefinitionService: EquipmentDefinitionService,
+  constructor(private activityDefinitionService: ActivityDefinitionService,
               private toasts: ToastsService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -36,7 +28,7 @@ export class EquipmentDefinitionEditComponent implements OnInit {
   }
 
   getDefinition(id: string): void {
-    this.equipmentDefinitionService.getEquipmentDefinition(id)
+    this.activityDefinitionService.getActivityDefinition(id)
       .subscribe({
         next: value => {
           this.definition = value
@@ -48,16 +40,13 @@ export class EquipmentDefinitionEditComponent implements OnInit {
   }
 
   updateDefinition(): void {
-    const data: UpdateEquipmentDefinition = {
+    const data: UpdateActivityDefinition = {
       name: this.definition.name,
       description: this.definition.description,
-      purpose: this.definition.purpose,
-      type: this.definition.type,
-      weight: this.definition.weight,
-      aimedBodyParts: this.definition.aimedBodyParts,
+      level: this.definition.level
     };
 
-    this.equipmentDefinitionService.updateEquipmentDefinition(this.definition.id, data)
+    this.activityDefinitionService.updateActivityDefinition(this.definition.id, data)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast(`Zaktualizowano definicję`)
@@ -86,11 +75,11 @@ export class EquipmentDefinitionEditComponent implements OnInit {
   }
 
   deleteDefinition(): void {
-    this.equipmentDefinitionService.deleteEquipmentDefinition(this.definition.id)
+    this.activityDefinitionService.deleteActivityDefinition(this.definition.id)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast("Pomyślnie usunięto definicję")
-          this.router.navigate(['/equipmentDefinitions']);
+          this.router.navigate(['/activityDefinitions']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy usuwaniu definicji`)

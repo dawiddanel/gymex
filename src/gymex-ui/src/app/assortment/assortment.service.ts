@@ -4,10 +4,12 @@ import {Observable} from 'rxjs';
 import {
   CreateEquipment,
   CreateEquipmentDefinition,
+  Equipment,
   EquipmentDefinition,
   UpdateEquipment,
   UpdateEquipmentDefinition
 } from "../models/equipment.model";
+import {Assortment} from "../models/assortment.model";
 
 const baseUrl = 'http://localhost:8085/gymex/assortment';
 
@@ -19,16 +21,16 @@ export class AssortmentService {
   constructor(private http: HttpClient) {
   }
 
-  getAssortment(gymId: any): Observable<EquipmentDefinition> {
-    return this.http.get<EquipmentDefinition>(`${baseUrl}/${gymId}`);
+  getAssortment(gymId: any): Observable<Assortment> {
+    return this.http.get<Assortment>(`${baseUrl}/${gymId}`);
   }
 
-  createEquipment(gymId: any, data: CreateEquipment): Observable<EquipmentDefinition> {
-    return this.http.post<EquipmentDefinition>(`${baseUrl}/${gymId}/equipment`, data);
+  createEquipment(gymId: any, data: CreateEquipment): Observable<Equipment> {
+    return this.http.post<Equipment>(`${baseUrl}/${gymId}/equipment`, data);
   }
 
-  updateEquipment(gymId: any, id: any, data: UpdateEquipment): Observable<EquipmentDefinition> {
-    return this.http.put<EquipmentDefinition>(`${baseUrl}/${gymId}/equipment/${id}`, data);
+  updateEquipment(gymId: any, id: any, data: UpdateEquipment): Observable<Equipment> {
+    return this.http.put<Equipment>(`${baseUrl}/${gymId}/equipment/${id}`, data);
   }
 
   deleteEquipment(gymId: any, id: any): Observable<any> {
