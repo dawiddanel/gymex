@@ -13,7 +13,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class GymEditComponent implements OnInit {
 
-  currentGym: Gym = emptyGym()
+  gym: Gym = emptyGym()
 
   constructor(
     private gymService: GymService,
@@ -30,7 +30,7 @@ export class GymEditComponent implements OnInit {
     this.gymService.get(id)
       .subscribe({
         next: value => {
-          this.currentGym = value
+          this.gym = value
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy pobieraniu siłowni`)
@@ -40,18 +40,18 @@ export class GymEditComponent implements OnInit {
 
   updateGym(): void {
     const data: UpdateGym = {
-      name: this.currentGym.name,
-      capacity: this.currentGym.capacity,
+      name: this.gym.name,
+      capacity: this.gym.capacity,
       address: {
-        country: this.currentGym.address.country,
-        city: this.currentGym.address.city,
-        postalCode: this.currentGym.address.postalCode,
-        street: this.currentGym.address.street,
-        buildingNumber: this.currentGym.address.buildingNumber
+        country: this.gym.address.country,
+        city: this.gym.address.city,
+        postalCode: this.gym.address.postalCode,
+        street: this.gym.address.street,
+        buildingNumber: this.gym.address.buildingNumber
       }
     };
 
-    this.gymService.update(this.currentGym.id, data)
+    this.gymService.update(this.gym.id, data)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast(`Zaktualizowano siłownię`)
@@ -68,7 +68,7 @@ export class GymEditComponent implements OnInit {
       text: "Czy napewno chcesz usunąć siłownię?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Tak!',
+      confirmButtonText: 'Tak',
       cancelButtonText: 'Nie'
     }).then((result) => {
       if (result.value) {
@@ -80,7 +80,7 @@ export class GymEditComponent implements OnInit {
   }
 
   deleteGym(): void {
-    this.gymService.delete(this.currentGym.id)
+    this.gymService.delete(this.gym.id)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast("Pomyślnie usunięto siłownię")
@@ -90,7 +90,6 @@ export class GymEditComponent implements OnInit {
           this.toasts.showErrorToast(`Błąd przy usuwaniu siłowni`)
         }
       })
-
   }
 
 }

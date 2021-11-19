@@ -1,5 +1,5 @@
 <div class="container">
-  <h4>{{ currentGym.name }}</h4>
+  <h4>{{ gym.name }}</h4>
   <form (ngSubmit)="updateGym()" #gymEditForm="ngForm">
     <div class="row">
       <div class="col">
@@ -8,7 +8,7 @@
           type="text"
           class="form-control"
           id="name"
-          [(ngModel)]="currentGym.name"
+          [(ngModel)]="gym.name"
           name="name" #name="ngModel"
           required
           maxlength="50"
@@ -21,7 +21,7 @@
           type="number"
           class="form-control"
           id="capacity"
-          [(ngModel)]="currentGym.capacity"
+          [(ngModel)]="gym.capacity"
           name="capacity" #capacity="ngModel"
           required
           min="1"
@@ -38,7 +38,7 @@
           type="text"
           class="form-control"
           id="country"
-          [(ngModel)]="currentGym.address.country"
+          [(ngModel)]="gym.address.country"
           name="country" #country="ngModel"
           required
           maxlength="50"
@@ -51,7 +51,7 @@
           type="text"
           class="form-control"
           id="city"
-          [(ngModel)]="currentGym.address.city"
+          [(ngModel)]="gym.address.city"
           name="city" #city="ngModel"
           required
           maxlength="50"
@@ -64,7 +64,7 @@
           type="text"
           class="form-control"
           id="postalCode"
-          [(ngModel)]="currentGym.address.postalCode"
+          [(ngModel)]="gym.address.postalCode"
           name="postalCode" #postalCode="ngModel"
           required
           maxlength="50"
@@ -79,7 +79,7 @@
           type="text"
           class="form-control"
           id="street"
-          [(ngModel)]="currentGym.address.street"
+          [(ngModel)]="gym.address.street"
           name="street" #street="ngModel"
           required
           maxlength="50"
@@ -92,7 +92,7 @@
           type="text"
           class="form-control"
           id="buildingNumber"
-          [(ngModel)]="currentGym.address.buildingNumber"
+          [(ngModel)]="gym.address.buildingNumber"
           name="buildingNumber" #buildingNumber="ngModel"
           required
           maxlength="50"

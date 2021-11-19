@@ -1,0 +1,100 @@
+<div class="container">
+  <h4>Dodawanie nowej definicji sprzętu</h4>
+  <form (ngSubmit)="saveDefinition()" #definitionAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="name">Nazwa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="definitionCommand.name"
+          name="name" #name="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="name.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+      <div class="col">
+        <label for="description">Opis</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="definitionCommand.description"
+          name="description" #description="ngModel"
+          required
+          min="1"
+        />
+        <p [hidden]="description.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="type">Typ</label>
+        <select class="form-control"
+                id="type"
+                [(ngModel)]="definitionCommand.type"
+                name="type"
+                #type="ngModel"
+                required
+        >
+          <option *ngFor="let type of equipmentTypes" [value]="type.value">{{ type.value | equipmentTypePipe }}</option>
+        </select>
+        <p [hidden]="type.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+      <div class="col">
+        <label for="purpose">Cel</label>
+        <select class="form-control"
+                id="purpose"
+                [(ngModel)]="definitionCommand.purpose"
+                name="purpose"
+                #purpose="ngModel"
+                required
+        >
+          <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.value | purposePipe }}</option>
+        </select>
+        <p [hidden]="purpose.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="weight">Waga (kg)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="weight"
+          [(ngModel)]="definitionCommand.weight"
+          name="weight" #weight="ngModel"
+          min="0.25"
+        />
+        <p [hidden]="weight.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="aimedBodyParts">Trenowane części ciała</label>
+        <select class="form-control"
+                id="aimedBodyParts"
+                [(ngModel)]="definitionCommand.aimedBodyParts"
+                name="aimedBodyParts"
+                #aimedBodyParts="ngModel"
+                required
+                multiple
+        >
+          <option *ngFor="let bodyPart of bodyParts" [value]="bodyPart.value">{{ bodyPart.value | bodyPartPipe }}</option>
+        </select>
+        <p [hidden]="aimedBodyParts.valid" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!definitionAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!definitionAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

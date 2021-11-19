@@ -13,6 +13,13 @@ import {GymComponent} from './gyms/gym/gym.component';
 import {CountryPipe} from "./pipes/country.pipe";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { EquipmentDefinitionAddComponent } from './assortment/equipment_definition/equipment-definition-add/equipment-definition-add.component';
+import { EquipmentDefinitionComponent } from './assortment/equipment_definition/equipment-definition/equipment-definition.component';
+import { EquipmentDefinitionEditComponent } from './assortment/equipment_definition/equipment-definition-edit/equipment-definition-edit.component';
+import { EquipmentDefinitionListComponent } from './assortment/equipment_definition/equipment-definition-list/equipment-definition-list.component';
+import {EquipmentTypePipe} from "./pipes/equipmentType.pipe";
+import {PurposePipe} from "./pipes/purpose.pipe";
+import {BodyPartPipe} from "./pipes/bodyPart.pipe";
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     GymListComponent,
     ContactComponent,
     GymComponent,
-    CountryPipe
+    CountryPipe,
+    EquipmentTypePipe,
+    PurposePipe,
+    BodyPartPipe,
+    EquipmentDefinitionAddComponent,
+    EquipmentDefinitionComponent,
+    EquipmentDefinitionEditComponent,
+    EquipmentDefinitionListComponent
   ],
   imports: [
     BrowserModule,

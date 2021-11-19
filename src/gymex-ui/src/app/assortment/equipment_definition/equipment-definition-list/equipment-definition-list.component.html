@@ -1,0 +1,12 @@
+<div class="text-center">
+  <h4 class="bd-highlight">Definicje sprzętu</h4>
+</div>
+<div class="app flex-row align-items-center">
+    <div class="card-deck row">
+      <div class="card col-md-4" *ngFor="let definition of definitions; let i = index">
+        <div class="card-block">
+          <app-equipment-definition [definition]="definition"></app-equipment-definition>
+        </div>
+      </div>
+    </div>
+</div>
