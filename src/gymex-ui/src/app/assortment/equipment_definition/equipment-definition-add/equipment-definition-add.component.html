@@ -13,7 +13,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="name.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(name.untouched) || (name.touched && name.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="description">Opis</label>
@@ -26,7 +26,7 @@
           required
           min="1"
         />
-        <p [hidden]="description.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(description.untouched) || (description.touched && description.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -41,7 +41,7 @@
         >
           <option *ngFor="let type of equipmentTypes" [value]="type.value">{{ type.value | equipmentTypePipe }}</option>
         </select>
-        <p [hidden]="type.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(type.untouched) || (type.touched && type.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="purpose">Cel</label>
@@ -54,7 +54,7 @@
         >
           <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.value | purposePipe }}</option>
         </select>
-        <p [hidden]="purpose.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(purpose.untouched) || (purpose.touched && purpose.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -68,7 +68,7 @@
           name="weight" #weight="ngModel"
           min="0.25"
         />
-        <p [hidden]="weight.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(weight.untouched) || (weight.touched && weight.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -84,7 +84,7 @@
         >
           <option *ngFor="let bodyPart of bodyParts" [value]="bodyPart.value">{{ bodyPart.value | bodyPartPipe }}</option>
         </select>
-        <p [hidden]="aimedBodyParts.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(aimedBodyParts.untouched) || (aimedBodyParts.touched && aimedBodyParts.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>

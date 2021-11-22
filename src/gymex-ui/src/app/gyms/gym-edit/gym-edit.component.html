@@ -13,7 +13,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="name.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(name.untouched) || (name.touched && name.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="capacity">Maksymalna liczba ćwiczących</label>
@@ -26,7 +26,7 @@
           required
           min="1"
         />
-        <p [hidden]="capacity.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(capacity.untouched) || (capacity.touched && capacity.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>
@@ -43,7 +43,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="country.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(country.untouched) || (country.touched && country.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="city">Miasto</label>
@@ -56,7 +56,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="city.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(city.untouched) || (city.touched && city.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="postalCode">Kod pocztowy</label>
@@ -69,7 +69,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="postalCode.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(postalCode.untouched) || (postalCode.touched && postalCode.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -84,7 +84,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="street.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(street.untouched) || (street.touched && street.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="buildingNumber">Numer budynku</label>
@@ -97,7 +97,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="buildingNumber.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(buildingNumber.untouched) || (buildingNumber.touched && buildingNumber.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>
@@ -111,4 +111,5 @@
     </button>
   </form>
   <button class="btn btn-danger" (click)="delete()">Usuń</button>
+  <a class="btn btn-primary" routerLink="/gyms">Wróć do listy</a>
 </div>

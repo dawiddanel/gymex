@@ -13,7 +13,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="name.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(name.untouched) || (name.touched && name.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="description">Opis</label>
@@ -26,7 +26,7 @@
           required
           min="1"
         />
-        <p [hidden]="description.valid" class="alert alert-danger">Błąd danych</p>
+        <div [hidden]="(description.untouched) || (description.touched && description.valid)" class="alert alert-danger">Błąd danych</div>
       </div>
     </div>
     <div class="row">
@@ -41,12 +41,12 @@
         >
           <option *ngFor="let level of levels" [value]="level.value">{{ level.value | levelPipe }}</option>
         </select>
-        <p [hidden]="level.valid" class="alert alert-danger">Błąd danych</p>
+        <p [hidden]="(level.untouched) || (level.touched && level.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>
     <div class="alert alert-danger" *ngIf="!definitionAddForm.form.valid">
-      Popraw błędne pola formularza
+      Wypełnij wszystkie wymagane dane
     </div>
     <button class="btn btn-success"
             type="submit"
