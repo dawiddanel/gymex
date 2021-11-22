@@ -1,0 +1,105 @@
+<div class="container">
+  <h4>Rejestracja</h4>
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="username">Nazwa użytkownika</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          [(ngModel)]="registerCommand.username"
+          name="username" #username="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="username.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="password">Hasło</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="registerCommand.password"
+          name="password" #password="ngModel"
+          required
+        />
+        <p [hidden]="password.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="email">Adres email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [(ngModel)]="registerCommand.email"
+          name="email" #email="ngModel"
+          required
+        />
+        <p [hidden]="email.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="firstName">Imię</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          [(ngModel)]="registerCommand.firstName"
+          name="firstName" #firstName="ngModel"
+          required
+        />
+        <p [hidden]="firstName.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="lastName">Nazwisko</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          [(ngModel)]="registerCommand.lastName"
+          name="lastName" #lastName="ngModel"
+          required
+        />
+        <p [hidden]="lastName.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="pesel">Pesel</label>
+        <input
+          type="text"
+          class="form-control"
+          id="pesel"
+          [(ngModel)]="registerCommand.pesel"
+          name="pesel" #pesel="ngModel"
+          required
+        />
+        <p [hidden]="pesel.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="birthDate">Data urodzenia</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birthDate"
+          [(ngModel)]="registerCommand.birthDate"
+          name="birthDate" #birthDate="ngModel"
+          required
+        />
+        <p [hidden]="birthDate.valid" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!registerForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!registerForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

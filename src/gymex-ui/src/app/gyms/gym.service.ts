@@ -1,36 +1,34 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Gym} from "../default/models/gym.model";
 import {CreateGym, UpdateGym} from "../default/models/gym.command.model";
-
-const baseUrl = 'http://localhost:8085/gymex/gym';
+import {ApiService} from "../default/api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GymService {
 
-  constructor(private http: HttpClient) {
+  constructor(private api: ApiService) {
   }
 
   getAll(): Observable<Gym[]> {
-    return this.http.get<Gym[]>(`${baseUrl}/all`);
+    return this.api.get('gym/all')
   }
 
   get(id: any): Observable<Gym> {
-    return this.http.get<Gym>(`${baseUrl}/${id}`);
+    return this.api.get(`gym/${id}`)
   }
 
   create(data: CreateGym): Observable<Gym> {
-    return this.http.post<Gym>(baseUrl, data);
+    return this.api.post(`gym`, data)
   }
 
   update(id: any, data: UpdateGym): Observable<Gym> {
-    return this.http.put<Gym>(`${baseUrl}/${id}`, data);
+    return this.api.put(`gym/${id}`, data)
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.api.delete(`gym/${id}`)
   }
 }

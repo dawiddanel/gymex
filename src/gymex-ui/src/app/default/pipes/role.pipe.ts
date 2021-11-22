@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Role} from "../models/person.model";
+import {Role} from "../models/security.model";
 
 @Pipe({name: 'rolePipe'})
 export class RolePipe implements PipeTransform {

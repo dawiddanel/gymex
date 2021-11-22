@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {GymEditComponent} from './gyms/gym-edit/gym-edit.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {GymListComponent} from './gyms/gym-list/gym-list.component';
 import {GymAddComponent} from "./gyms/gym-add/gym-add.component";
 import {ContactComponent} from './default/contact/contact.component';
@@ -26,6 +26,11 @@ import {ActivityDefinitionEditComponent} from './timetable/activity_definition/a
 import {ActivityDefinitionListComponent} from './timetable/activity_definition/activity-definition-list/activity-definition-list.component';
 import {LevelPipe} from "./default/pipes/level.pipe";
 import {RolePipe} from "./default/pipes/role.pipe";
+import { RegisterComponent } from './security/register/register.component';
+import { LoginComponent } from './security/login/login.component';
+import { MainNavbarComponent } from './default/main-navbar/main-navbar.component';
+import {JwtInterceptor} from "./security/jwt.interceptor";
+import { MainComponent } from './default/main/main.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,11 @@ import {RolePipe} from "./default/pipes/role.pipe";
     ActivityDefinitionComponent,
     ActivityDefinitionAddComponent,
     ActivityDefinitionEditComponent,
-    ActivityDefinitionListComponent
+    ActivityDefinitionListComponent,
+    RegisterComponent,
+    LoginComponent,
+    MainNavbarComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,13 @@ import {RolePipe} from "./default/pipes/role.pipe";
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

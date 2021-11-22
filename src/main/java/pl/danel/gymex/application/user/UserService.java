@@ -53,4 +53,8 @@ public class UserService {
                 .orElseThrow(NoSuchElementException::new);
     }
 
+    public UserDto getCurrent() {
+        return mapper.map(getCurrentUser());
+    }
+
 }

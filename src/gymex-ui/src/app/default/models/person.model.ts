@@ -48,10 +48,3 @@ export interface Employee extends Person {
 
 export interface Owner extends Person {
 }
-
-export enum Role {
-  OWNER = "OWNER",
-  EMPLOYEE = "EMPLOYEE",
-  TRAINER = "TRAINER",
-  MEMBER = "MEMBER"
-}
