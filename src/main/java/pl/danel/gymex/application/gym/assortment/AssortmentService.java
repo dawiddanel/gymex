@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.gym.assortment.command.CreateEquipmentCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.assortment.command.UpdateEquipmentCommand;
 import pl.danel.gymex.application.gym.assortment.dto.AssortmentDto;
+import pl.danel.gymex.application.gym.assortment.dto.EquipmentDto;
 import pl.danel.gymex.application.gym.assortment.mapper.AssortmentCommandMapper;
 import pl.danel.gymex.application.gym.assortment.mapper.AssortmentMapper;
 import pl.danel.gymex.domain.asserts.NotFoundException;
@@ -34,6 +35,15 @@ public class AssortmentService {
                 .orElseThrow(() -> new NotFoundException("No such ASSORTMENT found"));
 
         return assortmentMapper.assortment(assortment);
+    }
+
+    public EquipmentDto getEquipment(Long assortmentId, Long equipmentId) {
+        Assortment assortment = assortmentRepository.findById(assortmentId)
+                .orElseThrow(() -> new NotFoundException("No such ASSORTMENT found"));
+
+        Equipment equipment = assortment.equipmentById(equipmentId);
+
+        return assortmentMapper.equipment(equipment);
     }
 
     @Transactional

@@ -44,4 +44,8 @@ export class UserService {
   public isEmployee(): boolean {
     return this.getUser().role === Role.EMPLOYEE
   }
+
+  public isOwnerOrEmployee(): boolean {
+    return this.isEmployee() || this.isOwner()
+  }
 }

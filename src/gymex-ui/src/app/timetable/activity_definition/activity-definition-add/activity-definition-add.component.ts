@@ -35,7 +35,7 @@ export class ActivityDefinitionAddComponent implements OnInit {
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Definicja poprawnie dodana`)
-          this.router.navigate(['/activityDefinitions']);
+          this.router.navigate(['/timetable/activityDefinitions']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy dodawaniu definicji`)

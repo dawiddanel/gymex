@@ -9,6 +9,7 @@ import {EquipmentDefinition} from "../../../default/models/equipment.model";
 export class EquipmentDefinitionComponent implements OnInit {
 
   @Input() definition: EquipmentDefinition;
+  @Input() viewOnly: boolean
 
   constructor() { }
 

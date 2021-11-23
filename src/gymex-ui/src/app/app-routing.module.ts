@@ -14,6 +14,10 @@ import {AuthGuard} from "./security/auth.guard";
 import {RegisterComponent} from "./security/register/register.component";
 import {LoginComponent} from "./security/login/login.component";
 import {MainComponent} from "./default/main/main.component";
+import {EquipmentComponent} from "./assortment/equipment/equipment/equipment.component";
+import {EquipmentAddComponent} from "./assortment/equipment/equipment-add/equipment-add.component";
+import {EquipmentEditComponent} from "./assortment/equipment/equipment-edit/equipment-edit.component";
+import {EquipmentListComponent} from "./assortment/equipment/equipment-list/equipment-list.component";
 
 const routes: Routes = [
   {
@@ -24,12 +28,15 @@ const routes: Routes = [
       {path: 'gyms', component: GymListComponent},
       {path: 'gyms/create', component: GymAddComponent},
       {path: 'gyms/:id', component: GymEditComponent},
-      {path: 'equipmentDefinitions', component: EquipmentDefinitionListComponent},
-      {path: 'equipmentDefinitions/create', component: EquipmentDefinitionAddComponent},
-      {path: 'equipmentDefinitions/:id', component: EquipmentDefinitionEditComponent},
-      {path: 'activityDefinitions', component: ActivityDefinitionListComponent},
-      {path: 'activityDefinitions/create', component: ActivityDefinitionAddComponent},
-      {path: 'activityDefinitions/:id', component: ActivityDefinitionEditComponent},
+      {path: 'assortment/equipmentDefinitions', component: EquipmentDefinitionListComponent},
+      {path: 'assortment/equipmentDefinitions/create', component: EquipmentDefinitionAddComponent},
+      {path: 'assortment/equipmentDefinitions/:id', component: EquipmentDefinitionEditComponent},
+      {path: 'assortment/equipment/:gymId', component: EquipmentListComponent},
+      {path: 'assortment/equipment/:gymId/create', component: EquipmentAddComponent},
+      {path: 'assortment/equipment/:gymId/:id', component: EquipmentEditComponent},
+      {path: 'timetable/activityDefinitions', component: ActivityDefinitionListComponent},
+      {path: 'timetable/activityDefinitions/create', component: ActivityDefinitionAddComponent},
+      {path: 'timetable/activityDefinitions/:id', component: ActivityDefinitionEditComponent},
       {path: 'contact', component: ContactComponent}
     ]
   },

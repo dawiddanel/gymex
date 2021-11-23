@@ -16,6 +16,10 @@ export class AssortmentService {
     return this.api.get(`assortment/${gymId}`)
   }
 
+  getEquipment(gymId: any, equipmentId: any): Observable<Equipment> {
+    return this.api.get(`assortment/${gymId}/equipment/${gymId}`)
+  }
+
   createEquipment(gymId: any, data: CreateEquipment): Observable<Equipment> {
     return this.api.post(`assortment/${gymId}/equipment`, data)
   }

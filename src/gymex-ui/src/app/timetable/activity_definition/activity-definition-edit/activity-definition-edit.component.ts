@@ -79,7 +79,7 @@ export class ActivityDefinitionEditComponent implements OnInit {
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast("Pomyślnie usunięto definicję")
-          this.router.navigate(['/activityDefinitions']);
+          this.router.navigate(['/timetable/activityDefinitions']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy usuwaniu definicji`)

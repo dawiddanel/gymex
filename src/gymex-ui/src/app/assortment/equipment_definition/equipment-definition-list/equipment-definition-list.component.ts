@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EquipmentDefinition} from "../../../default/models/equipment.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {EquipmentDefinitionService} from "../equipment.definition.service";
+import {UserService} from "../../../security/user.service";
 
 @Component({
   selector: 'app-equipment-definition-list',
@@ -14,7 +15,8 @@ export class EquipmentDefinitionListComponent implements OnInit {
 
   constructor(
     private equipmentDefinitionService: EquipmentDefinitionService,
-    private toasts: ToastsService
+    private toasts: ToastsService,
+    readonly userService: UserService
   ) {
   }
 

@@ -2,12 +2,15 @@
   <h4 class="bd-highlight">Definicje sprzętu</h4>
 </div>
 <div class="app flex-row align-items-center">
-    <div class="card-deck row">
-      <div class="card col-md-4" *ngFor="let definition of definitions; let i = index">
-        <div class="card-block">
-          <app-equipment-definition [definition]="definition"></app-equipment-definition>
-        </div>
+  <div class="card-deck row">
+    <div class="card col-md-4 border-0" *ngFor="let definition of definitions; let i = index">
+      <div class="card-block ">
+        <app-equipment-definition
+          [definition]="definition"
+          [viewOnly]="false"
+        ></app-equipment-definition>
       </div>
     </div>
+  </div>
 </div>
-<a class="btn btn-success" routerLink="/equipmentDefinitions/create">Dodaj</a>
+<a *ngIf="userService.isOwnerOrEmployee()" class="btn btn-success" routerLink="/assortment/equipmentDefinitions/create">Dodaj</a>

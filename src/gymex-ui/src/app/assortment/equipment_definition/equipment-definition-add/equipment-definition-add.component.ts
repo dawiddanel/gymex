@@ -45,7 +45,7 @@ export class EquipmentDefinitionAddComponent implements OnInit {
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Definicja poprawnie dodana`)
-          this.router.navigate(['/equipmentDefinitions']);
+          this.router.navigate(['/assortment/equipmentDefinitions']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy dodawaniu definicji`)

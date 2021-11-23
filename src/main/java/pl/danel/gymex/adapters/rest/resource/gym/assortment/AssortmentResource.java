@@ -7,6 +7,7 @@ import pl.danel.gymex.adapters.rest.resource.gym.assortment.command.CreateEquipm
 import pl.danel.gymex.adapters.rest.resource.gym.assortment.command.UpdateEquipmentCommand;
 import pl.danel.gymex.application.gym.assortment.AssortmentService;
 import pl.danel.gymex.application.gym.assortment.dto.AssortmentDto;
+import pl.danel.gymex.application.gym.assortment.dto.EquipmentDto;
 
 @RestController
 @RequestMapping(value = "assortment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +34,11 @@ public class AssortmentResource {
     @GetMapping("/{gymId}")
     public AssortmentDto getAssortment(@PathVariable Long gymId) {
         return assortmentService.getAssortment(gymId);
+    }
+
+    @GetMapping("/{gymId}/equipment/{equipmentId}")
+    public EquipmentDto getEquipment(@PathVariable Long gymId, @PathVariable Long equipmentId) {
+        return assortmentService.getEquipment(gymId, equipmentId);
     }
 
 }

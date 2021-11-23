@@ -11,12 +11,12 @@ export const emptyEquipment = (): Equipment => ({
 })
 
 export interface CreateEquipment {
-  definition: EquipmentDefinition,
+  definitionId: number,
   quantity: number
 }
 
 export const emptyCreateEquipment = (): CreateEquipment => ({
-  definition: null,
+  definitionId: null,
   quantity: null
 })
 

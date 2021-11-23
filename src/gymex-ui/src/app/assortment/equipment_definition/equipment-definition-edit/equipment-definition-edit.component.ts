@@ -90,7 +90,7 @@ export class EquipmentDefinitionEditComponent implements OnInit {
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast("Pomyślnie usunięto definicję")
-          this.router.navigate(['/equipmentDefinitions']);
+          this.router.navigate(['/assortment/equipmentDefinitions']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy usuwaniu definicji`)

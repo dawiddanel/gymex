@@ -31,6 +31,10 @@ import { LoginComponent } from './security/login/login.component';
 import { MainNavbarComponent } from './default/main-navbar/main-navbar.component';
 import {JwtInterceptor} from "./security/jwt.interceptor";
 import { MainComponent } from './default/main/main.component';
+import { EquipmentComponent } from './assortment/equipment/equipment/equipment.component';
+import { EquipmentAddComponent } from './assortment/equipment/equipment-add/equipment-add.component';
+import { EquipmentEditComponent } from './assortment/equipment/equipment-edit/equipment-edit.component';
+import { EquipmentListComponent } from './assortment/equipment/equipment-list/equipment-list.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,11 @@ import { MainComponent } from './default/main/main.component';
     RegisterComponent,
     LoginComponent,
     MainNavbarComponent,
-    MainComponent
+    MainComponent,
+    EquipmentComponent,
+    EquipmentAddComponent,
+    EquipmentEditComponent,
+    EquipmentListComponent
   ],
   imports: [
     BrowserModule,

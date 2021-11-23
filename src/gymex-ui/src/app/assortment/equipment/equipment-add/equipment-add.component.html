@@ -1,0 +1,44 @@
+<div class="container">
+  <h4>Dodawanie wyposażenia</h4>
+  <form (ngSubmit)="saveEquipment()" #equipmentAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="definition">Definicja</label>
+        <select class="form-control"
+                id="definition"
+                [(ngModel)]="equipmentCommand.definitionId"
+                name="definition"
+                #definition="ngModel"
+                required
+        >
+          <option *ngFor="let definition of definitions" [value]="definition.id">{{ definition.name }}</option>
+        </select>
+        <p [hidden]="(definition.untouched) || (definition.touched && definition.valid)" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="quantity">Ilość</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          [(ngModel)]="equipmentCommand.quantity"
+          name="quantity" #quantity="ngModel"
+          required
+          min="1"
+        />
+        <p [hidden]="(quantity.untouched) || (quantity.touched && quantity.valid)" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!equipmentAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!equipmentAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>
