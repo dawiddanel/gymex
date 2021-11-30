@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="col-md-8">
+    <div class="card-body">
+      <h5 class="card-title">Dane konta</h5>
+      <span><strong>Nazwa użytkownika</strong>: {{ user.username }}</span><br/>
+      <span><strong>Email</strong>: {{ user.email }}</span><br/>
+      <span><strong>Rola</strong>: {{ user.role | rolePipe}}</span><br/>
+      <span><strong>Data dołączenia</strong>: {{ user.createdDate | date: 'dd/MM/yyyy'}}</span><br/>
+    </div>
+  </div>
+</div>

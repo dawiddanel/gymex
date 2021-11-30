@@ -45,3 +45,10 @@ export interface User {
   role: Role,
   createdDate: Date
 }
+
+export const emptyUser = (): User => ({
+  username: null,
+  email: null,
+  role: null,
+  createdDate: null
+})

@@ -36,6 +36,11 @@ public class PersonResource {
         return personService.allTrainers();
     }
 
+    @GetMapping
+    public PersonDto getCurrentPerson() {
+        return personService.getCurrentPerson();
+    }
+
     @PostMapping("/member/pass")
     public PassDto createPass(@RequestBody CreatePassCommand command) {
         return personService.createPass(command);

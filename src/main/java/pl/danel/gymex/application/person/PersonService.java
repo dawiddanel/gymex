@@ -8,13 +8,12 @@ import pl.danel.gymex.application.person.mapper.PersonCommandMapper;
 import pl.danel.gymex.application.person.mapper.PersonMapper;
 import pl.danel.gymex.application.user.UserService;
 import pl.danel.gymex.domain.asserts.InvalidArgumentException;
+import pl.danel.gymex.domain.asserts.InvalidStateException;
 import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.command.CreatePass;
-import pl.danel.gymex.domain.person.EmployeeRepository;
-import pl.danel.gymex.domain.person.MemberRepository;
-import pl.danel.gymex.domain.person.OwnerRepository;
-import pl.danel.gymex.domain.person.TrainerRepository;
+import pl.danel.gymex.domain.person.*;
 import pl.danel.gymex.domain.person.member.Member;
+import pl.danel.gymex.domain.person.trainer.Trainer;
 import pl.danel.gymex.domain.person.user.Role;
 import pl.danel.gymex.domain.person.user.User;
 
@@ -48,6 +47,25 @@ public class PersonService {
 
     public List<OwnerDto> allOwners() {
         return personMapper.owners(ownerRepository.findAll());
+    }
+
+    public PersonDto getCurrentPerson() {
+        User user = userService.getCurrentUser();
+        switch (user.getRole()) {
+            case OWNER:
+                Owner owner = (Owner) user.getPerson();
+                return personMapper.owner(owner);
+            case EMPLOYEE:
+                Employee employee = (Employee) user.getPerson();
+                return personMapper.employee(employee);
+            case TRAINER:
+                Trainer trainer = (Trainer) user.getPerson();
+                return personMapper.trainer(trainer);
+            case MEMBER:
+                Member member = (Member) user.getPerson();
+                return personMapper.member(member);
+            default: throw new InvalidStateException("No such ROLE available");
+        }
     }
 
     public Member memberById(Long id) {

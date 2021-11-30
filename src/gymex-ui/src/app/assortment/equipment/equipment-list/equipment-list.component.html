@@ -13,5 +13,5 @@
     </div>
   </div>
 </div>
-<div>Ostatnia aktualizacja inwentarza: {{ assortment?.updateDate }}</div>
+<div>Ostatnia aktualizacja inwentarza: {{ assortment?.updateDate | date: 'dd/MM/yyyy'}}</div>
 <a class="btn btn-success" routerLink="/assortment/equipment/{{ gymId }}/create">Dodaj</a>

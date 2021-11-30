@@ -1,0 +1,120 @@
+<div class="container">
+  <h4>Dodawanie użytkownika</h4>
+  <form (ngSubmit)="saveTechnicalUser()" #addUserForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="username">Nazwa użytkownika</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          [(ngModel)]="userCommand.username"
+          name="username" #username="ngModel"
+          required
+          maxlength="50"
+        />
+        <p [hidden]="(username.untouched) || (username.touched && username.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="password">Hasło</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="userCommand.password"
+          name="password" #password="ngModel"
+          required
+        />
+        <p [hidden]="(password.untouched) || (password.touched && password.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="email">Adres email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [(ngModel)]="userCommand.email"
+          name="email" #email="ngModel"
+          required
+        />
+        <p [hidden]="(email.untouched) || (email.touched && email.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="role">Rola</label>
+        <select class="form-control"
+                id="role"
+                [(ngModel)]="userCommand.role"
+                name="role"
+                #role="ngModel"
+                required
+        >
+          <option *ngFor="let role of roles" [value]="role.value">{{ role.value | rolePipe }}</option>
+        </select>
+        <p [hidden]="(role.untouched) || (role.touched && role.valid)" class="alert alert-danger">Błąd danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="firstName">Imię</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          [(ngModel)]="userCommand.firstName"
+          name="firstName" #firstName="ngModel"
+          required
+        />
+        <p [hidden]="(firstName.untouched) || (firstName.touched && firstName.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="lastName">Nazwisko</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          [(ngModel)]="userCommand.lastName"
+          name="lastName" #lastName="ngModel"
+          required
+        />
+        <p [hidden]="(lastName.untouched) || (lastName.touched && lastName.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="pesel">Pesel</label>
+        <input
+          type="text"
+          class="form-control"
+          id="pesel"
+          [(ngModel)]="userCommand.pesel"
+          name="pesel" #pesel="ngModel"
+          required
+        />
+        <p [hidden]="(pesel.untouched) || (pesel.touched && pesel.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="birthDate">Data urodzenia</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birthDate"
+          [(ngModel)]="userCommand.birthDate"
+          name="birthDate" #birthDate="ngModel"
+          required
+        />
+        <p [hidden]="(birthDate.untouched) || (birthDate.touched && birthDate.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!addUserForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!addUserForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

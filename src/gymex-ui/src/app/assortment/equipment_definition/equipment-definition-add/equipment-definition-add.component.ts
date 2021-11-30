@@ -32,16 +32,7 @@ export class EquipmentDefinitionAddComponent implements OnInit {
   }
 
   saveDefinition(): void {
-    const data: CreateEquipmentDefinition = {
-      name: this.definitionCommand.name,
-      description: this.definitionCommand.description,
-      purpose: this.definitionCommand.purpose,
-      type: this.definitionCommand.type,
-      weight: this.definitionCommand.weight,
-      aimedBodyParts: this.definitionCommand.aimedBodyParts,
-    };
-
-    this.equipmentDefinitionService.createEquipmentDefinition(data)
+    this.equipmentDefinitionService.createEquipmentDefinition(this.definitionCommand)
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Definicja poprawnie dodana`)

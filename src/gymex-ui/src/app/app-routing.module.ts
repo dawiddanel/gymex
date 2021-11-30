@@ -14,10 +14,13 @@ import {AuthGuard} from "./security/auth.guard";
 import {RegisterComponent} from "./security/register/register.component";
 import {LoginComponent} from "./security/login/login.component";
 import {MainComponent} from "./default/main/main.component";
-import {EquipmentComponent} from "./assortment/equipment/equipment/equipment.component";
 import {EquipmentAddComponent} from "./assortment/equipment/equipment-add/equipment-add.component";
 import {EquipmentEditComponent} from "./assortment/equipment/equipment-edit/equipment-edit.component";
 import {EquipmentListComponent} from "./assortment/equipment/equipment-list/equipment-list.component";
+import {ProfileComponent} from "./person/profile/profile.component";
+import {TechnicalUserAddComponent} from "./person/technical-user-add/technical-user-add.component";
+import {PersonListComponent} from "./person/person-list/person-list.component";
+import {Role} from "./default/models/security.model";
 
 const routes: Routes = [
   {
@@ -37,6 +40,12 @@ const routes: Routes = [
       {path: 'timetable/activityDefinitions', component: ActivityDefinitionListComponent},
       {path: 'timetable/activityDefinitions/create', component: ActivityDefinitionAddComponent},
       {path: 'timetable/activityDefinitions/:id', component: ActivityDefinitionEditComponent},
+      {path: 'profile', component: ProfileComponent},
+      {path: 'technical/user/add', component: TechnicalUserAddComponent},
+      {path: 'people/owners', component: PersonListComponent, data: {role: Role.OWNER}},
+      {path: 'people/members', component: PersonListComponent, data: {role: Role.MEMBER}},
+      {path: 'people/employees', component: PersonListComponent, data: {role: Role.EMPLOYEE}},
+      {path: 'people/trainers', component: PersonListComponent, data: {role: Role.TRAINER}},
       {path: 'contact', component: ContactComponent}
     ]
   },

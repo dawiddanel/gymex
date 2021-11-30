@@ -11,7 +11,6 @@ import {GymAddComponent} from "./gyms/gym-add/gym-add.component";
 import {ContactComponent} from './default/contact/contact.component';
 import {GymComponent} from './gyms/gym/gym.component';
 import {CountryPipe} from "./default/pipes/country.pipe";
-import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EquipmentDefinitionAddComponent} from './assortment/equipment_definition/equipment-definition-add/equipment-definition-add.component';
 import {EquipmentDefinitionComponent} from './assortment/equipment_definition/equipment-definition/equipment-definition.component';
@@ -35,6 +34,11 @@ import { EquipmentComponent } from './assortment/equipment/equipment/equipment.c
 import { EquipmentAddComponent } from './assortment/equipment/equipment-add/equipment-add.component';
 import { EquipmentEditComponent } from './assortment/equipment/equipment-edit/equipment-edit.component';
 import { EquipmentListComponent } from './assortment/equipment/equipment-list/equipment-list.component';
+import { PersonComponent } from './person/person/person.component';
+import { UserComponent } from './person/user/user.component';
+import { ProfileComponent } from './person/profile/profile.component';
+import { TechnicalUserAddComponent } from './person/technical-user-add/technical-user-add.component';
+import { PersonListComponent } from './person/person-list/person-list.component';
 
 @NgModule({
   declarations: [
@@ -65,15 +69,19 @@ import { EquipmentListComponent } from './assortment/equipment/equipment-list/eq
     EquipmentComponent,
     EquipmentAddComponent,
     EquipmentEditComponent,
-    EquipmentListComponent
+    EquipmentListComponent,
+    PersonComponent,
+    UserComponent,
+    ProfileComponent,
+    TechnicalUserAddComponent,
+    PersonListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    BrowserAnimationsModule
   ],
   providers: [
     {

@@ -68,7 +68,7 @@ public class User {
                 this.person = Person.createEmployee(this, command.getPerson());
                 break;
             case MEMBER:
-                throw new InvalidArgumentException("Cannot create technical account for MEMBER");
+                this.person = Person.createMember(this, command.getPerson());
             case TRAINER:
                 this.person = Person.createTrainer(this, command.getPerson());
                 break;

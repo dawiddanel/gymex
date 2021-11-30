@@ -12,15 +12,33 @@
         <a routerLink="gyms" class="nav-link">Siłownie</a>
       </li>
       <li class="nav-item">
-        <a routerLink="timetable/activityDefinitions" class="nav-link">Definicje aktywności</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="assortment/equipmentDefinitions" class="nav-link">Definicje sprzętu</a>
+        <a routerLink="people/trainers" class="nav-link">Trenerzy osobiści</a>
       </li>
     </ul>
     <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown" *ngIf="userService.isOwnerOrEmployee()">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownEmployee" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Opcje pracownika
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownEmployee">
+          <li><a routerLink="timetable/activityDefinitions" class="dropdown-item">Definicje aktywności</a></li>
+          <li><a routerLink="assortment/equipmentDefinitions" class="dropdown-item">Definicje wyposażenia</a></li>
+          <li><a routerLink="people/members" class="dropdown-item">Klienci</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown" *ngIf="userService.isOwner()">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownOwner" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Opcje właściciela
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownOwner">
+          <li><a routerLink="technical/user/add" class="dropdown-item">Dodaj użytkownika</a></li>
+          <li><a routerLink="people/owners" class="dropdown-item">Właściciele</a></li>
+          <li><a routerLink="people/members" class="dropdown-item">Klienci</a></li>
+          <li><a routerLink="people/employees" class="dropdown-item">Pracownicy</a></li>
+        </ul>
+      </li>
       <li class="nav-item">
-        <a routerLink="contact" class="nav-link">Profil</a>
+        <a routerLink="profile" class="nav-link">Profil</a>
       </li>
       <li class="nav-item">
         <a routerLink="contact" class="nav-link">Kontakt</a>

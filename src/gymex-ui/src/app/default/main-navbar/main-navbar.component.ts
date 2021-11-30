@@ -13,7 +13,7 @@ import {User} from "../models/security.model";
 export class MainNavbarComponent implements OnInit {
 
   constructor(private securityService: SecurityService,
-              private userService: UserService,
+              readonly userService: UserService,
               private toasts: ToastsService,
               private router: Router) { }
 
