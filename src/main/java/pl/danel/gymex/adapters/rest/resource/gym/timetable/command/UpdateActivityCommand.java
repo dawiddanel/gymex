@@ -11,6 +11,6 @@ public class UpdateActivityCommand {
     private Long definitionId;
     private Long trainerId;
     private LocalDateTime startTime;
-    private Integer duration;
+    private LocalDateTime endTime;
     private Integer capacity;
 }

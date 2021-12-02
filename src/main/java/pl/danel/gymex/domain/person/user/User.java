@@ -69,6 +69,7 @@ public class User {
                 break;
             case MEMBER:
                 this.person = Person.createMember(this, command.getPerson());
+                break;
             case TRAINER:
                 this.person = Person.createTrainer(this, command.getPerson());
                 break;

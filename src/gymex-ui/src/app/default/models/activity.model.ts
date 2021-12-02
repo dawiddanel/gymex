@@ -7,7 +7,7 @@ export interface Activity {
   participants: Member[],
   attendance: Attendance[],
   startTime: Date,
-  duration: number,
+  endTime: Date,
   capacity: number
 }
 
@@ -18,7 +18,7 @@ export const emptyActivity = (): Activity => ({
   participants: [],
   attendance: [],
   startTime: null,
-  duration: null,
+  endTime: null,
   capacity: null
 })
 

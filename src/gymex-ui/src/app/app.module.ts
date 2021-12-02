@@ -33,12 +33,20 @@ import { MainComponent } from './default/main/main.component';
 import { EquipmentComponent } from './assortment/equipment/equipment/equipment.component';
 import { EquipmentAddComponent } from './assortment/equipment/equipment-add/equipment-add.component';
 import { EquipmentEditComponent } from './assortment/equipment/equipment-edit/equipment-edit.component';
-import { EquipmentListComponent } from './assortment/equipment/equipment-list/equipment-list.component';
+import { AsssortmentComponent } from './assortment/assortment/asssortment.component';
 import { PersonComponent } from './person/person/person.component';
 import { UserComponent } from './person/user/user.component';
 import { ProfileComponent } from './person/profile/profile.component';
 import { TechnicalUserAddComponent } from './person/technical-user-add/technical-user-add.component';
 import { PersonListComponent } from './person/person-list/person-list.component';
+import { ActivityComponent } from './timetable/activity/activity/activity.component';
+import { ActivityAddComponent } from './timetable/activity/activity-add/activity-add.component';
+import { ActivityEditComponent } from './timetable/activity/activity-edit/activity-edit.component';
+import { TimetableComponent } from './timetable/timetable/timetable.component';
+import { EquipmentListComponent } from './assortment/equipment/equipment-list/equipment-list.component';
+import { ActivityListComponent } from './timetable/activity/activity-list/activity-list.component';
+import { AttendanceComponent } from './timetable/attendance/attendance.component';
+import { AttendanceListComponent } from './timetable/attendance-list/attendance-list.component';
 
 @NgModule({
   declarations: [
@@ -69,12 +77,20 @@ import { PersonListComponent } from './person/person-list/person-list.component'
     EquipmentComponent,
     EquipmentAddComponent,
     EquipmentEditComponent,
-    EquipmentListComponent,
+    AsssortmentComponent,
     PersonComponent,
     UserComponent,
     ProfileComponent,
     TechnicalUserAddComponent,
-    PersonListComponent
+    PersonListComponent,
+    ActivityComponent,
+    ActivityAddComponent,
+    ActivityEditComponent,
+    TimetableComponent,
+    EquipmentListComponent,
+    ActivityListComponent,
+    AttendanceComponent,
+    AttendanceListComponent
   ],
   imports: [
     BrowserModule,

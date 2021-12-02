@@ -22,7 +22,7 @@ public class TimetableCommandMapper {
                 .activityDefinition(definition)
                 .trainer(trainer)
                 .startTime(command.getStartTime())
-                .duration(command.getDuration())
+                .endTime(command.getEndTime())
                 .capacity(command.getCapacity())
                 .build();
     }
@@ -32,7 +32,7 @@ public class TimetableCommandMapper {
                 .activityDefinition(definition)
                 .trainer(trainer)
                 .startTime(command.getStartTime())
-                .duration(command.getDuration())
+                .endTime(command.getEndTime())
                 .capacity(command.getCapacity())
                 .build();
     }

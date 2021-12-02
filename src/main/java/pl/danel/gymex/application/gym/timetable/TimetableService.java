@@ -45,6 +45,14 @@ public class TimetableService {
         return timetableMapper.timetable(timetable);
     }
 
+    public ActivityDto getActivity(Long timetableId, Long activityId) {
+        Timetable timetable = actualGymTimetable(timetableId);
+
+        Activity activity = timetable.activityById(activityId);
+
+        return timetableMapper.activity(activity);
+    }
+
     @Transactional
     public TimetableDto createActivity(Long gymId, CreateActivityCommand command) {
         Timetable timetable = actualGymTimetable(gymId);

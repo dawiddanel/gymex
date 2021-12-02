@@ -13,6 +13,6 @@ public class UpdateActivity {
     private ActivityDefinition activityDefinition;
     private Trainer trainer;
     private LocalDateTime startTime;
-    private Integer duration;
+    private LocalDateTime endTime;
     private Integer capacity;
 }

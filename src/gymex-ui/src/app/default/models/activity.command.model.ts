@@ -4,7 +4,7 @@ export interface CreateActivity {
   definitionId: number,
   trainerId: number,
   startTime: Date,
-  duration: number,
+  endTime: Date,
   capacity: number
 }
 
@@ -12,7 +12,7 @@ export const emptyCreateActivity = (): CreateActivity => ({
   definitionId: null,
   trainerId: null,
   startTime: null,
-  duration: null,
+  endTime: null,
   capacity: null
 })
 
@@ -20,7 +20,7 @@ export interface UpdateActivity {
   definitionId: number,
   trainerId: number,
   startTime: Date,
-  duration: number,
+  endTime: Date,
   capacity: number
 }
 
@@ -28,7 +28,7 @@ export const emptyUpdateActivity = (): UpdateActivity => ({
   definitionId: null,
   trainerId: null,
   startTime: null,
-  duration: null,
+  endTime: null,
   capacity: null
 })
 

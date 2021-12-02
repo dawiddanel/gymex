@@ -16,11 +16,15 @@ import {LoginComponent} from "./security/login/login.component";
 import {MainComponent} from "./default/main/main.component";
 import {EquipmentAddComponent} from "./assortment/equipment/equipment-add/equipment-add.component";
 import {EquipmentEditComponent} from "./assortment/equipment/equipment-edit/equipment-edit.component";
-import {EquipmentListComponent} from "./assortment/equipment/equipment-list/equipment-list.component";
+import {AsssortmentComponent} from "./assortment/assortment/asssortment.component";
 import {ProfileComponent} from "./person/profile/profile.component";
 import {TechnicalUserAddComponent} from "./person/technical-user-add/technical-user-add.component";
 import {PersonListComponent} from "./person/person-list/person-list.component";
 import {Role} from "./default/models/security.model";
+import {TimetableComponent} from "./timetable/timetable/timetable.component";
+import {ActivityAddComponent} from "./timetable/activity/activity-add/activity-add.component";
+import {ActivityEditComponent} from "./timetable/activity/activity-edit/activity-edit.component";
+import {AttendanceListComponent} from "./timetable/attendance-list/attendance-list.component";
 
 const routes: Routes = [
   {
@@ -34,12 +38,16 @@ const routes: Routes = [
       {path: 'assortment/equipmentDefinitions', component: EquipmentDefinitionListComponent},
       {path: 'assortment/equipmentDefinitions/create', component: EquipmentDefinitionAddComponent},
       {path: 'assortment/equipmentDefinitions/:id', component: EquipmentDefinitionEditComponent},
-      {path: 'assortment/equipment/:gymId', component: EquipmentListComponent},
+      {path: 'assortment/equipment/:gymId', component: AsssortmentComponent},
       {path: 'assortment/equipment/:gymId/create', component: EquipmentAddComponent},
       {path: 'assortment/equipment/:gymId/:id', component: EquipmentEditComponent},
       {path: 'timetable/activityDefinitions', component: ActivityDefinitionListComponent},
       {path: 'timetable/activityDefinitions/create', component: ActivityDefinitionAddComponent},
       {path: 'timetable/activityDefinitions/:id', component: ActivityDefinitionEditComponent},
+      {path: 'timetable/activity/:gymId/:id/attendance', component: AttendanceListComponent},
+      {path: 'timetable/activity/:gymId', component: TimetableComponent},
+      {path: 'timetable/activity/:gymId/create', component: ActivityAddComponent},
+      {path: 'timetable/activity/:gymId/:id', component: ActivityEditComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'technical/user/add', component: TechnicalUserAddComponent},
       {path: 'people/owners', component: PersonListComponent, data: {role: Role.OWNER}},

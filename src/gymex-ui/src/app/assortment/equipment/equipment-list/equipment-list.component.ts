@@ -1,8 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AssortmentService} from "../../assortment.service";
-import {ToastsService} from "../../../default/toasts.service";
-import {ActivatedRoute} from "@angular/router";
-import {Assortment} from "../../../default/models/assortment.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {Equipment} from "../../../default/models/equipment.model";
 
 @Component({
   selector: 'app-equipment-list',
@@ -11,30 +8,12 @@ import {Assortment} from "../../../default/models/assortment.model";
 })
 export class EquipmentListComponent implements OnInit {
 
-  assortment?: Assortment
-  gymId: number
+  @Input() equipmentList: Equipment[]
+  @Input() gymId: number
 
-  constructor(private assortmentService: AssortmentService,
-              private toasts: ToastsService,
-              private route: ActivatedRoute) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.gymId = this.route.snapshot.params['gymId']
-    this.retrieveAssortment()
-
-  }
-
-  retrieveAssortment(): void {
-    this.assortmentService.getAssortment(this.gymId)
-      .subscribe({
-        next: value => {
-          this.assortment = value
-        },
-        error: err => {
-          this.toasts.showErrorToast(`Błąd przy pobieraniu inwentarza`)
-        }
-      })
   }
 
 }

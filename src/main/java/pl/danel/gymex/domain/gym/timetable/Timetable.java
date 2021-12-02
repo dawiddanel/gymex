@@ -61,7 +61,6 @@ public class Timetable {
     public void addActivity(Activity activity) {
         activities.add(activity);
         activity.setTimetable(this);
-        activity.getTrainer().addActivity(activity);
     }
 
     public void removeActivity(Activity activity) {

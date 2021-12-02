@@ -1,0 +1,10 @@
+<div class="text-center">
+  <h4 class="bd-highlight">Aktualny grafik</h4>
+  <div>Obowiązuje od: {{ timetable?.startDate | date: 'dd.MM.yyyy'}}
+    do {{ timetable?.endDate | date: 'dd.MM.yyyy' }}</div>
+</div>
+<app-activity-list [activities]="timetable?.activities"
+                   [gymId]="this.gymId">
+</app-activity-list>
+<div>Ostatnia aktualizacja grafiku: {{ timetable?.updateDate | date: 'dd.MM.yyyy'}}</div>
+<a class="btn btn-success" routerLink="/timetable/activity/{{ gymId }}/create">Dodaj</a>

@@ -1,0 +1,94 @@
+<div class="container">
+  <h4>Edycja aktywności</h4>
+  <form (ngSubmit)="updateActivity()" #activityEditForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="definition">Definicja</label>
+        <select class="form-control"
+                id="definition"
+                [(ngModel)]="activity.definition"
+                name="definition"
+                #definition="ngModel"
+                required
+                disabled
+        >
+          <option *ngFor="let definition of definitions" [value]="definition">{{ definition.name }}</option>
+        </select>
+        <p [hidden]="(definition.untouched) || (definition.touched && definition.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="trainer">Trener</label>
+        <select class="form-control"
+                id="trainer"
+                [(ngModel)]="activity.trainer"
+                name="trainer"
+                #trainer="ngModel"
+                required
+        >
+          <option *ngFor="let trainer of trainers"
+                  [value]="trainer">{{ trainer.firstName }} {{ trainer.lastName }}</option>
+        </select>
+        <p [hidden]="(trainer.untouched) || (trainer.touched && trainer.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="startTime">Czas rozpoczęcia zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="startTime"
+          [(ngModel)]="activity.startTime"
+          name="startTime" #startTime="ngModel"
+          required
+        />
+        <p [hidden]="(startTime.untouched) || (startTime.touched && startTime.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+      <div class="col">
+        <label for="endTime">Czas końca zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="endTime"
+          [(ngModel)]="activity.endTime"
+          name="endTime" #endTime="ngModel"
+          required
+        />
+        <p [hidden]="(endTime.untouched) || (endTime.touched && endTime.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="capacity">Ilość ćwiczących</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          [(ngModel)]="activity.capacity"
+          name="capacity" #capacity="ngModel"
+          required
+          min="1"
+        />
+        <p [hidden]="(capacity.untouched) || (capacity.touched && capacity.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!activityEditForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!activityEditForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+  <button class="btn btn-danger" (click)="delete()">Usuń</button>
+  <a class="btn btn-primary" routerLink="/timetable/activity/{{ gymId }}">Wróć do listy</a>
+</div>

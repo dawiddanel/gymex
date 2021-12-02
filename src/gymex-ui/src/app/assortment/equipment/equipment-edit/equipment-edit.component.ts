@@ -13,8 +13,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 export class EquipmentEditComponent implements OnInit {
 
   gymId: number
-  equipmentId: number
-
   equipment: Equipment = emptyEquipment()
 
   constructor(private assortmentService: AssortmentService,

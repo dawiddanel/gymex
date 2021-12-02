@@ -17,6 +17,6 @@ public class ActivityDto {
     private List<MemberDto> participants;
     private List<AttendanceDto> attendance;
     private LocalDateTime startTime;
-    private Integer duration;
+    private LocalDateTime endTime;
     private Integer capacity;
 }

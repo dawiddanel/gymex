@@ -29,6 +29,8 @@ public class TimetableMapper {
                 .id(timetable.getId())
                 .activities(activities(timetable.getActivities()))
                 .updateDate(timetable.getUpdateDate())
+                .startDate(timetable.getStartDate())
+                .endDate(timetable.getEndDate())
                 .build();
     }
 
@@ -49,7 +51,7 @@ public class TimetableMapper {
                 .participants(personMapper.members(activity.getParticipants()))
                 .attendance(attendances(activity.getAttendance()))
                 .startTime(activity.getStartTime())
-                .duration(activity.getDuration())
+                .endTime(activity.getEndTime())
                 .capacity(activity.getCapacity())
                 .build();
     }

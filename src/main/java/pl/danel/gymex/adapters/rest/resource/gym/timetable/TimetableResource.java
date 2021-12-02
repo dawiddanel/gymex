@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.danel.gymex.adapters.rest.resource.gym.timetable.command.CreateActivityCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.timetable.command.UpdateActivityCommand;
+import pl.danel.gymex.application.gym.assortment.dto.EquipmentDto;
 import pl.danel.gymex.application.gym.timetable.TimetableService;
 import pl.danel.gymex.application.gym.timetable.dto.ActivityDto;
 import pl.danel.gymex.application.gym.timetable.dto.TimetableDto;
@@ -46,14 +47,19 @@ public class TimetableResource {
         return timetableService.confirmAttendance(gymId, activityId, userId);
     }
 
-    @PostMapping("/{gymId}/activity/{activityId}/resign/{userId}")
-    public ActivityDto resignFromActivity(@PathVariable Long gymId, @PathVariable Long activityId, @PathVariable Long userId) {
+    @PostMapping("/{gymId}/activity/{activityId}/unconfirm/{userId}")
+    public ActivityDto resignAttendance(@PathVariable Long gymId, @PathVariable Long activityId, @PathVariable Long userId) {
         return timetableService.resignAttendance(gymId, activityId, userId);
     }
 
     @GetMapping("/{gymId}")
     public TimetableDto getTimetable(@PathVariable Long gymId) {
         return timetableService.getTimetable(gymId);
+    }
+
+    @GetMapping("/{gymId}/activity/{activityId}")
+    public ActivityDto getActivity(@PathVariable Long gymId, @PathVariable Long activityId) {
+        return timetableService.getActivity(gymId, activityId);
     }
 
 }

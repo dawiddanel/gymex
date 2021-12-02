@@ -4,12 +4,14 @@
       <h4 class="bd-highlight">Dostępne siłownie</h4>
     </div>
   </div>
-  <ul class="list-unstyled">
-    <li
-      *ngFor="let gym of gyms; let i = index"
-    >
-      <app-gym [gym]="gym"></app-gym>
-    </li>
-  </ul>
+  <div class="app flex-row align-items-center">
+    <div class="card-deck row">
+      <div class="card col-md-12 border-0" *ngFor="let gym of gyms; let i = index">
+        <div class="card-block">
+          <app-gym [gym]="gym"></app-gym>
+        </div>
+      </div>
+    </div>
+  </div>
   <a class="btn btn-success" routerLink="/gyms/create">Dodaj</a>
 </div>

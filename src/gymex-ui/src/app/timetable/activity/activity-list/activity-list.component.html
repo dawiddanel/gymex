@@ -1,0 +1,12 @@
+<div class="app flex-row align-items-center">
+  <div class="card-deck row">
+    <div class="card col-md-12 border-0" *ngFor="let activity of activities; let i = index">
+      <div class="card-block">
+        <app-activity
+          [activity]="activity"
+          [gymId]="this.gymId"
+        ></app-activity>
+      </div>
+    </div>
+  </div>
+</div>

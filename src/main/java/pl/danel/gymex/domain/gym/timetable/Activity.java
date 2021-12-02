@@ -57,7 +57,7 @@ public class Activity {
 
     private LocalDateTime startTime;
 
-    private Integer duration;
+    private LocalDateTime endTime;
 
     private Integer capacity;
 
@@ -65,7 +65,7 @@ public class Activity {
         this.definition = command.getActivityDefinition();
         this.trainer = command.getTrainer();
         this.startTime = command.getStartTime();
-        this.duration = command.getDuration();
+        this.endTime = command.getEndTime();
         this.capacity = command.getCapacity();
     }
 
@@ -77,7 +77,7 @@ public class Activity {
         this.definition = command.getActivityDefinition();
         this.trainer = command.getTrainer();
         this.startTime = command.getStartTime();
-        this.duration = command.getDuration();
+        this.endTime = command.getEndTime();
         this.capacity = command.getCapacity();
     }
 
@@ -96,7 +96,7 @@ public class Activity {
     public void removeParticipant(RemoveParticipant command) {
         DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
         DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
-        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
+        DomainAsserts.assertState(startTime.isAfter(LocalDateTime.now()), "activity already happened, cannot change parameters");
 
         Attendance attendance = attendanceByMember(command.getMember());
         this.participants.remove(command.getMember());
@@ -108,7 +108,6 @@ public class Activity {
     public void confirmAttendance(ConfirmAttendance command) {
         DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
         DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
-        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
 
         Attendance attendance = attendanceByMember(command.getMember());
         attendance.confirmAttendance();
@@ -117,7 +116,6 @@ public class Activity {
     public void resignAttendance(ResignAttendance command) {
         DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
         DomainAsserts.assertArgumentNotNull(command.getMember(), "member cannot be null");
-        DomainAsserts.assertState(startTime.isBefore(LocalDateTime.now()), "activity already happened, cannot change parameters");
 
         Attendance attendance = attendanceByMember(command.getMember());
         attendance.resignAttendance();

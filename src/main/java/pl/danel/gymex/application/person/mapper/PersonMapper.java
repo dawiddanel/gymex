@@ -10,6 +10,7 @@ import pl.danel.gymex.domain.person.Person;
 import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,7 @@ public class PersonMapper {
 
     public List<MemberDto> members(List<Member> members) {
         if (CollectionUtils.isEmpty(members)) {
-            return null;
+            return Collections.emptyList();
         }
         return members.stream()
                 .map(this::member)

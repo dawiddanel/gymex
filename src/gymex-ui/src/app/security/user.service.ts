@@ -45,6 +45,10 @@ export class UserService {
     return this.getUser().role === Role.EMPLOYEE
   }
 
+  public isMember(): boolean {
+    return this.getUser().role === Role.MEMBER
+  }
+
   public isOwnerOrEmployee(): boolean {
     return this.isEmployee() || this.isOwner()
   }

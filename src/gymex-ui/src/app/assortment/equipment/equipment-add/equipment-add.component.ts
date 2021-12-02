@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EquipmentDefinitionService} from "../../equipment_definition/equipment.definition.service";
 import {ToastsService} from "../../../default/toasts.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AssortmentService} from "../../assortment.service";
-import {
-  CreateEquipment,
-  CreateEquipmentDefinition,
-  emptyCreateEquipment,
-  EquipmentDefinition
-} from "../../../default/models/equipment.model";
+import {CreateEquipment, emptyCreateEquipment, EquipmentDefinition} from "../../../default/models/equipment.model";
 
 @Component({
   selector: 'app-equipment-add',
@@ -26,7 +21,8 @@ export class EquipmentAddComponent implements OnInit {
               private equipmentDefinitionService: EquipmentDefinitionService,
               private toasts: ToastsService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.gymId = this.route.snapshot.params['gymId']
@@ -37,7 +33,6 @@ export class EquipmentAddComponent implements OnInit {
     this.equipmentDefinitionService.getAllEquipmentDefinition()
       .subscribe({
         next: value => {
-          console.log("pobralem wartosci")
           this.definitions = value
         },
         error: err => {

@@ -1,0 +1,91 @@
+<div class="container">
+  <h4>Dodawanie aktywności</h4>
+  <form (ngSubmit)="saveActivity()" #activityAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="definition">Definicja</label>
+        <select class="form-control"
+                id="definition"
+                [(ngModel)]="activityCommand.definitionId"
+                name="definition"
+                #definition="ngModel"
+                required
+        >
+          <option *ngFor="let definition of definitions" [value]="definition.id">{{ definition.name }}</option>
+        </select>
+        <p [hidden]="(definition.untouched) || (definition.touched && definition.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="trainer">Trener</label>
+        <select class="form-control"
+                id="trainer"
+                [(ngModel)]="activityCommand.trainerId"
+                name="trainer"
+                #trainer="ngModel"
+                required
+        >
+          <option *ngFor="let trainer of trainers"
+                  [value]="trainer.id">{{ trainer.firstName }} {{ trainer.lastName }}</option>
+        </select>
+        <p [hidden]="(trainer.untouched) || (trainer.touched && trainer.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="startTime">Czas rozpoczęcia zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="startTime"
+          [(ngModel)]="activityCommand.startTime"
+          name="startTime" #startTime="ngModel"
+          required
+        />
+        <p [hidden]="(startTime.untouched) || (startTime.touched && startTime.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+      <div class="col">
+        <label for="endTime">Czas końca zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="endTime"
+          [(ngModel)]="activityCommand.endTime"
+          name="endTime" #endTime="ngModel"
+          required
+        />
+        <p [hidden]="(endTime.untouched) || (endTime.touched && endTime.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="capacity">Ilość ćwiczących</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          [(ngModel)]="activityCommand.capacity"
+          name="capacity" #capacity="ngModel"
+          required
+          min="1"
+        />
+        <p [hidden]="(capacity.untouched) || (capacity.touched && capacity.valid)" class="alert alert-danger">Błąd
+          danych</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!activityAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!activityAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

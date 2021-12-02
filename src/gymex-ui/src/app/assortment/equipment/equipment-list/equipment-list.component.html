@@ -1,9 +1,6 @@
-<div class="text-center">
-  <h4 class="bd-highlight">Wyposażenie siłowni</h4>
-</div>
 <div class="app flex-row align-items-center">
   <div class="card-deck row">
-    <div class="card col-md-4 border-0" *ngFor="let equipment of assortment?.equipment; let i = index">
+    <div class="card col-md-4 border-0" *ngFor="let equipment of equipmentList; let i = index">
       <div class="card-block">
         <app-equipment
           [equipment]="equipment"
@@ -13,5 +10,3 @@
     </div>
   </div>
 </div>
-<div>Ostatnia aktualizacja inwentarza: {{ assortment?.updateDate | date: 'dd/MM/yyyy'}}</div>
-<a class="btn btn-success" routerLink="/assortment/equipment/{{ gymId }}/create">Dodaj</a>
