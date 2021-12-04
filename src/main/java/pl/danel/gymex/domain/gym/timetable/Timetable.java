@@ -72,10 +72,8 @@ public class Timetable {
         activity.setTimetable(this);
     }
 
-    public void removeActivity(Activity activity) {
-        activities.remove(activity);
-        activity.setTimetable(null);
-        activity.getTrainer().removeActivity(activity);
+    public void cancelActivity(Activity activity) {
+        activity.cancel();
     }
 
     public Activity activityById(Long id) {

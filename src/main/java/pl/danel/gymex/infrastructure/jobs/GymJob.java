@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class TimetableJob {
+public class GymJob {
 
     private final GymService gymService;
 

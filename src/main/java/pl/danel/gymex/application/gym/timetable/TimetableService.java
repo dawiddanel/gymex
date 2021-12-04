@@ -11,9 +11,11 @@ import pl.danel.gymex.application.gym.timetable.mapper.TimetableCommandMapper;
 import pl.danel.gymex.application.gym.timetable.mapper.TimetableMapper;
 import pl.danel.gymex.application.person.PersonService;
 import pl.danel.gymex.domain.asserts.NotFoundException;
+import pl.danel.gymex.domain.common.ActivityStatus;
 import pl.danel.gymex.domain.gym.Gym;
 import pl.danel.gymex.domain.gym.GymRepository;
 import pl.danel.gymex.domain.gym.timetable.Activity;
+import pl.danel.gymex.domain.gym.timetable.ActivityRepository;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
 import pl.danel.gymex.domain.gym.timetable.TimetableRepository;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
@@ -24,6 +26,7 @@ import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -36,6 +39,7 @@ public class TimetableService {
     private final TimetableRepository timetableRepository;
     private final ActivityDefinitionRepository activityDefinitionRepository;
     private final TrainerRepository trainerRepository;
+    private final ActivityRepository activityRepository;
 
     private final TimetableMapper timetableMapper;
     private final TimetableCommandMapper timetableCommandMapper;
@@ -95,11 +99,11 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto deleteActivity(Long gymId, Long timetableId, Long activityId) {
+    public TimetableDto cancelActivity(Long gymId, Long timetableId, Long activityId) {
         Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
-        timetable.removeActivity(activity);
+        timetable.cancelActivity(activity);
 
         timetable = timetableRepository.save(timetable);
         return timetableMapper.timetable(timetable);
@@ -177,6 +181,24 @@ public class TimetableService {
                 .orElseThrow(() -> new NotFoundException("No such GYM found"));
 
         return gym.timetableById(timetableId);
+    }
+
+    public List<Activity> activitiesForStatus(ActivityStatus status) {
+        return activityRepository.findAllByStatus(status);
+    }
+
+    @Transactional
+    public void startActivity(Long activityId) {
+        Activity activity = activityRepository.getById(activityId);
+        activity.start();
+        activityRepository.save(activity);
+    }
+
+    @Transactional
+    public void finishActivity(Long activityId) {
+        Activity activity = activityRepository.getById(activityId);
+        activity.finish();
+        activityRepository.save(activity);
     }
 
 }

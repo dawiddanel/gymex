@@ -4,8 +4,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 import pl.danel.gymex.domain.asserts.DomainAsserts;
 import pl.danel.gymex.domain.asserts.NotFoundException;
+import pl.danel.gymex.domain.common.ActivityStatus;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
 import pl.danel.gymex.domain.gym.timetable.command.*;
@@ -61,12 +63,16 @@ public class Activity {
 
     private Integer capacity;
 
+    @Enumerated(EnumType.STRING)
+    private ActivityStatus status;
+
     private Activity(CreateActivity command) {
         this.definition = command.getActivityDefinition();
         this.trainer = command.getTrainer();
         this.startTime = command.getStartTime();
         this.endTime = command.getEndTime();
         this.capacity = command.getCapacity();
+        this.status = ActivityStatus.CREATED;
     }
 
     public static Activity create(CreateActivity command) {
@@ -141,6 +147,26 @@ public class Activity {
         return attendance.stream()
                 .filter(attendance -> attendance.getMember().equals(member))
                 .findAny().orElseThrow(() -> new NotFoundException("no such ATTENDANCE present in ACTIVITY"));
+    }
+
+    public boolean shouldStart() {
+        return this.startTime.isBefore(LocalDateTime.now()) || this.startTime.equals(LocalDateTime.now());
+    }
+
+    public boolean shouldFinish() {
+        return this.endTime.isBefore(LocalDateTime.now())|| this.endTime.equals(LocalDateTime.now());
+    }
+
+    public void start() {
+        this.status = ActivityStatus.IN_PROGRESS;
+    }
+
+    public void cancel() {
+        this.status = ActivityStatus.CANCELLED;
+    }
+
+    public void finish() {
+        this.status = ActivityStatus.FINISHED;
     }
 
 }

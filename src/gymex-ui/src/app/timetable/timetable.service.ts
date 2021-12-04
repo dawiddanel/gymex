@@ -33,8 +33,8 @@ export class TimetableService {
     return this.api.put(`timetable/${gymId}/${timetableId}/activity/${activityId}`, data)
   }
 
-  deleteActivity(gymId: any, timetableId: any, activityId: any): Observable<any> {
-    return this.api.delete(`timetable/${gymId}/${timetableId}/activity/${activityId}`)
+  cancelActivity(gymId: any, timetableId: any, activityId: any): Observable<any> {
+    return this.api.put(`timetable/${gymId}/${timetableId}/activity/${activityId}/cancel`)
   }
 
   joinActivity(gymId: any, timetableId: any, activityId: any): Observable<Activity> {

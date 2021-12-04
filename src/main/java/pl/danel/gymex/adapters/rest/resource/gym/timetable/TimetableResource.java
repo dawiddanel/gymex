@@ -27,9 +27,9 @@ public class TimetableResource {
         return timetableService.updateActivity(gymId, timetableId, activityId, command);
     }
 
-    @DeleteMapping("/{gymId}/{timetableId}/activity/{activityId}")
-    public TimetableDto deleteActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
-        return timetableService.deleteActivity(gymId, timetableId, activityId);
+    @PutMapping("/{gymId}/{timetableId}/activity/{activityId}/cancel")
+    public TimetableDto cancelActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
+        return timetableService.cancelActivity(gymId, timetableId, activityId);
     }
 
     @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/join")

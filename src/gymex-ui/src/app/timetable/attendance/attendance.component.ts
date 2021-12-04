@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Activity, Attendance} from "../../default/models/activity.model";
+import {Activity, ActivityStatus, Attendance} from "../../default/models/activity.model";
 import {ToastsService} from "../../default/toasts.service";
 import {TimetableService} from "../timetable.service";
 
@@ -14,6 +14,8 @@ export class AttendanceComponent implements OnInit {
   @Input() activity: Activity
   @Input() gymId: number
   @Input() timetableId: number
+
+  status = ActivityStatus
 
   constructor(private timetableService: TimetableService,
               private toasts: ToastsService) { }

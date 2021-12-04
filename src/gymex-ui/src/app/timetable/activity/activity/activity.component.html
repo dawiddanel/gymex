@@ -1,4 +1,4 @@
-<div class="card mb-3" [style]="alreadyHappened ? 'background-color: lightgrey;' : ''">
+<div class="card mb-3" [style]="'background-color: ' + color + ';'">
   <div class="row g-0">
     <div class="col-md-8">
       <div class="card-body">
@@ -9,7 +9,7 @@
         <span><strong>Poziom trudności</strong>: {{ activity.definition.level | levelPipe}}</span><br/>
         <span><strong>Trener</strong>: {{ activity.trainer.firstName + ' ' + activity.trainer.lastName}}</span><br/>
         <span><strong>Wolne miejsca</strong>: {{ activity.capacity - activity.participants.length }}</span><br/><br/>
-        <div class="container" *ngIf="userService.isOwnerOrEmployee()">
+        <div class="container" *ngIf="userService.isOwnerOrEmployee() && this.activity.status === status.CREATED">
           <h6 class="card-title">Panel sterowania</h6>
           <a class="btn btn-primary" routerLink="/timetable/activity/{{ gymId }}/{{ timetableId }}/{{ activity.id }}">Edytuj</a>
         </div>
@@ -18,7 +18,7 @@
     <div class="col-md-4">
       <div class="card-body">
         <h5 class="card-title">Dostępne akcje</h5>
-        <div class="container" *ngIf="!alreadyHappened">
+        <div class="container" *ngIf="this.activity.status === status.CREATED">
           <div *ngIf="canPersonJoinActivity()">
             <button class="btn btn-success"
                     (click)="joinActivity()">Zapisz się
@@ -36,6 +36,11 @@
       </div>
     </div>
   </div>
-  <div *ngIf="alreadyHappened" class="text-center">Zajęcia już się odbyły</div>
+  <div [ngSwitch]="activity.status" class="text-center">
+    <div *ngSwitchCase="status.CREATED">Zajęcia zaplanowane</div>
+    <div *ngSwitchCase="status.IN_PROGRESS">Zajęcia w trakcie</div>
+    <div *ngSwitchCase="status.FINISHED">Zajęcia zakończone</div>
+    <div *ngSwitchCase="status.CANCELLED">Zajęcia anulowane</div>
+  </div>
   <div *ngIf="canPersonResignFromActivity()" class="text-center">Jesteś zapisany na te zajęcia!</div>
 </div>

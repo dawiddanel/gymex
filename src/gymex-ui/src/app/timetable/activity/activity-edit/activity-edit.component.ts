@@ -95,32 +95,32 @@ export class ActivityEditComponent implements OnInit {
       })
   }
 
-  delete() {
+  cancel() {
     Swal.fire({
-      title: "Usuwanie aktywności",
-      text: "Czy napewno chcesz usunąć aktywność?",
+      title: "Anulowanie aktywności",
+      text: "Czy napewno chcesz anulować aktywność?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Tak',
       cancelButtonText: 'Nie'
     }).then((result) => {
       if (result.value) {
-        this.deleteActivity()
+        this.cancelActivity()
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.toasts.showCancelledToast("Zrezygnowano z usuwania")
+        this.toasts.showCancelledToast("Zrezygnowano z anulowania")
       }
     })
   }
 
-  deleteActivity(): void {
-    this.timetableService.deleteActivity(this.gymId, this.timetableId, this.activity.id)
+  cancelActivity(): void {
+    this.timetableService.cancelActivity(this.gymId, this.timetableId, this.activity.id)
       .subscribe({
         next: value => {
-          this.toasts.showSuccessToast("Pomyślnie usunięto aktywność")
+          this.toasts.showSuccessToast("Pomyślnie anulowano aktywność")
           this.router.navigate([`/timetable/activity/${this.gymId}/${this.timetableId}`]);
         },
         error: err => {
-          this.toasts.showErrorToast(`Błąd przy usuwaniu aktywności`)
+          this.toasts.showErrorToast(`Błąd przy anulowaniu aktywności`)
         }
       })
   }

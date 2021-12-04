@@ -8,7 +8,8 @@ export interface Activity {
   attendance: Attendance[],
   startTime: Date,
   endTime: Date,
-  capacity: number
+  capacity: number,
+  status: ActivityStatus
 }
 
 export const emptyActivity = (): Activity => ({
@@ -19,7 +20,8 @@ export const emptyActivity = (): Activity => ({
   attendance: [],
   startTime: null,
   endTime: null,
-  capacity: null
+  capacity: null,
+  status: null
 })
 
 export interface Attendance {
@@ -50,4 +52,11 @@ export enum Level {
   BEGINNER = "BEGINNER",
   INTERMEDIATE = "INTERMEDIATE",
   ADVANCED = "ADVANCED"
+}
+
+export enum ActivityStatus {
+  CREATED = "CREATED",
+  IN_PROGRESS = "IN_PROGRESS",
+  CANCELLED = "CANCELLED",
+  FINISHED = "FINISHED"
 }

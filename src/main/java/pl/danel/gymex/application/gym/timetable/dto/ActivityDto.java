@@ -19,4 +19,5 @@ public class ActivityDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Integer capacity;
+    private String status;
 }

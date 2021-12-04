@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../../security/user.service";
-import {Activity} from "../../../default/models/activity.model";
+import {Activity, ActivityStatus} from "../../../default/models/activity.model";
 import {PersonService} from "../../../person/person.service";
 import {Person} from "../../../default/models/person.model";
 import {ToastsService} from "../../../default/toasts.service";
@@ -18,7 +18,8 @@ export class ActivityComponent implements OnInit {
   @Input() timetableId: number
 
   person?: Person
-  alreadyHappened: boolean
+  status = ActivityStatus
+  color: string
 
   constructor(readonly userService: UserService,
               private personService: PersonService,
@@ -28,7 +29,20 @@ export class ActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPerson()
-    this.alreadyHappened = this.activity.startTime < new Date()
+    switch (this.activity.status) {
+      case ActivityStatus.CREATED:
+        this.color = 'white'
+        break;
+      case ActivityStatus.IN_PROGRESS:
+        this.color = 'cornflowerblue'
+        break;
+      case ActivityStatus.CANCELLED:
+        this.color = 'sienna'
+        break;
+      case ActivityStatus.FINISHED:
+        this.color = 'lightgrey'
+        break;
+    }
   }
 
   getPerson(): void {

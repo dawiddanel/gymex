@@ -8,6 +8,7 @@ import pl.danel.gymex.application.gym.timetable.dto.ActivityDto;
 import pl.danel.gymex.application.gym.timetable.dto.AttendanceDto;
 import pl.danel.gymex.application.gym.timetable.dto.TimetableDto;
 import pl.danel.gymex.application.person.mapper.PersonMapper;
+import pl.danel.gymex.domain.common.ActivityStatus;
 import pl.danel.gymex.domain.common.Level;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
 import pl.danel.gymex.domain.gym.timetable.Activity;
@@ -54,6 +55,7 @@ public class TimetableMapper {
                 .startTime(activity.getStartTime())
                 .endTime(activity.getEndTime())
                 .capacity(activity.getCapacity())
+                .status(mapStatus(activity.getStatus()))
                 .build();
     }
 
@@ -87,5 +89,12 @@ public class TimetableMapper {
             return null;
         }
         return level.name();
+    }
+
+    private String mapStatus(ActivityStatus status) {
+        if (status == null) {
+            return null;
+        }
+        return status.name();
     }
 }
