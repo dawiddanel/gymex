@@ -15,4 +15,5 @@ public class TimetableDto {
     private LocalDateTime updateDate;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Integer orderNumber;
 }

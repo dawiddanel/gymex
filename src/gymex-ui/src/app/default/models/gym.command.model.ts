@@ -2,7 +2,8 @@ export interface CreateGym {
   name: string,
   capacity: number,
   address: CreateAddress,
-  timetableStartDate: Date
+  timetableStartDate: Date,
+  timetableEndDate: Date
 }
 
 export interface UpdateGym {
@@ -21,7 +22,8 @@ export const emptyCreateGym = (): CreateGym => ({
   name: null,
   capacity: null,
   address: emptyCreateAddress(),
-  timetableStartDate: null
+  timetableStartDate: null,
+  timetableEndDate: null
 })
 
 export interface CreateAddress {

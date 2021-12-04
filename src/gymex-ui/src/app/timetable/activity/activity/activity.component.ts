@@ -15,6 +15,7 @@ export class ActivityComponent implements OnInit {
 
   @Input() activity: Activity
   @Input() gymId: number
+  @Input() timetableId: number
 
   person?: Person
   alreadyHappened: boolean
@@ -43,7 +44,7 @@ export class ActivityComponent implements OnInit {
   }
 
   joinActivity(): void {
-    this.timetableService.joinActivity(this.gymId, this.activity.id)
+    this.timetableService.joinActivity(this.gymId, this.timetableId, this.activity.id)
       .subscribe({
         next: value => {
           this.activity = value
@@ -57,7 +58,7 @@ export class ActivityComponent implements OnInit {
   }
 
   resignFromActivity(): void {
-    this.timetableService.resignFromActivity(this.gymId, this.activity.id)
+    this.timetableService.resignFromActivity(this.gymId, this.timetableId, this.activity.id)
       .subscribe({
           next: value => {
             this.activity = value

@@ -11,7 +11,7 @@
         <span><strong>Wolne miejsca</strong>: {{ activity.capacity - activity.participants.length }}</span><br/><br/>
         <div class="container" *ngIf="userService.isOwnerOrEmployee()">
           <h6 class="card-title">Panel sterowania</h6>
-          <a class="btn btn-primary" routerLink="/timetable/activity/{{ gymId }}/{{ activity.id }}">Edytuj</a>
+          <a class="btn btn-primary" routerLink="/timetable/activity/{{ gymId }}/{{ timetableId }}/{{ activity.id }}">Edytuj</a>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="container" *ngIf="userService.isOwnerOrEmployee()">
-          <div><a class="btn btn-primary" routerLink="/timetable/activity/{{this.gymId}}/{{this.activity.id}}/attendance">Panel potwierdzania obecności</a></div>
+          <div><a class="btn btn-primary" routerLink="/timetable/activity/{{this.gymId}}/{{ this.timetableId }}/{{this.activity.id}}/attendance">Panel potwierdzania obecności</a></div>
         </div>
       </div>
     </div>

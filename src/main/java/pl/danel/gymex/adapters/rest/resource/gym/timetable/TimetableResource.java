@@ -17,49 +17,54 @@ public class TimetableResource {
 
     private final TimetableService timetableService;
 
-    @PostMapping("/{gymId}/activity")
-    public TimetableDto createActivity(@PathVariable Long gymId, @RequestBody CreateActivityCommand command) {
-        return timetableService.createActivity(gymId, command);
+    @PostMapping("/{gymId}/{timetableId}/activity")
+    public TimetableDto createActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @RequestBody CreateActivityCommand command) {
+        return timetableService.createActivity(gymId, timetableId, command);
     }
 
-    @PutMapping("/{gymId}/activity/{activityId}")
-    public TimetableDto updateActivity(@PathVariable Long gymId, @PathVariable Long activityId, @RequestBody UpdateActivityCommand command) {
-        return timetableService.updateActivity(gymId, activityId, command);
+    @PutMapping("/{gymId}/{timetableId}/activity/{activityId}")
+    public TimetableDto updateActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId, @RequestBody UpdateActivityCommand command) {
+        return timetableService.updateActivity(gymId, timetableId, activityId, command);
     }
 
-    @DeleteMapping("/{gymId}/activity/{activityId}")
-    public TimetableDto deleteActivity(@PathVariable Long gymId, @PathVariable Long activityId) {
-        return timetableService.deleteActivity(gymId, activityId);
+    @DeleteMapping("/{gymId}/{timetableId}/activity/{activityId}")
+    public TimetableDto deleteActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
+        return timetableService.deleteActivity(gymId, timetableId, activityId);
     }
 
-    @PostMapping("/{gymId}/activity/{activityId}/join")
-    public ActivityDto joinActivity(@PathVariable Long gymId, @PathVariable Long activityId) {
-        return timetableService.joinActivity(gymId, activityId);
+    @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/join")
+    public ActivityDto joinActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
+        return timetableService.joinActivity(gymId, timetableId, activityId);
     }
 
-    @PostMapping("/{gymId}/activity/{activityId}/resign")
-    public ActivityDto resignFromActivity(@PathVariable Long gymId, @PathVariable Long activityId) {
-        return timetableService.resignFromActivity(gymId, activityId);
+    @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/resign")
+    public ActivityDto resignFromActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
+        return timetableService.resignFromActivity(gymId, timetableId, activityId);
     }
 
-    @PostMapping("/{gymId}/activity/{activityId}/confirm/{userId}")
-    public ActivityDto confirmAttendance(@PathVariable Long gymId, @PathVariable Long activityId, @PathVariable Long userId) {
-        return timetableService.confirmAttendance(gymId, activityId, userId);
+    @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/confirm/{userId}")
+    public ActivityDto confirmAttendance(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId, @PathVariable Long userId) {
+        return timetableService.confirmAttendance(gymId, timetableId, activityId, userId);
     }
 
-    @PostMapping("/{gymId}/activity/{activityId}/unconfirm/{userId}")
-    public ActivityDto resignAttendance(@PathVariable Long gymId, @PathVariable Long activityId, @PathVariable Long userId) {
-        return timetableService.resignAttendance(gymId, activityId, userId);
+    @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/unconfirm/{userId}")
+    public ActivityDto resignAttendance(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId, @PathVariable Long userId) {
+        return timetableService.resignAttendance(gymId, timetableId, activityId, userId);
     }
 
     @GetMapping("/{gymId}")
-    public TimetableDto getTimetable(@PathVariable Long gymId) {
-        return timetableService.getTimetable(gymId);
+    public TimetableDto getActualTimetable(@PathVariable Long gymId) {
+        return timetableService.getActualTimetable(gymId);
     }
 
-    @GetMapping("/{gymId}/activity/{activityId}")
-    public ActivityDto getActivity(@PathVariable Long gymId, @PathVariable Long activityId) {
-        return timetableService.getActivity(gymId, activityId);
+    @GetMapping("/{gymId}/{timetableId}")
+    public TimetableDto getActualTimetable(@PathVariable Long gymId, @PathVariable Long timetableId) {
+        return timetableService.getTimetable(gymId, timetableId);
+    }
+
+    @GetMapping("/{gymId}/{timetableId}/activity/{activityId}")
+    public ActivityDto getActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
+        return timetableService.getActivity(gymId, timetableId, activityId);
     }
 
 }

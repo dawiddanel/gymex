@@ -39,7 +39,7 @@ public class GymResource {
 
     @GetMapping("/all")
     public List<GymDto> allGyms() {
-        return gymService.allGyms();
+        return gymService.allGymsDto();
     }
 
 }

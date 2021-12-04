@@ -56,7 +56,7 @@ public class Gym extends AbstractAggregateRoot<Gym> {
         this.name = command.getName();
         this.capacity = command.getCapacity();
         this.assortment = Assortment.emptyAssortment(this);
-        this.timetables = new ArrayList<>(List.of(Timetable.emptyTimetable(this, command.getCreateTimetable().getStartDate())));
+        this.timetables = new ArrayList<>(List.of(Timetable.emptyTimetable(this, command.getCreateTimetable().getStartDate(), command.getCreateTimetable().getEndDate())));
         this.address = Address.create(command.getAddress());
     }
 
@@ -72,9 +72,13 @@ public class Gym extends AbstractAggregateRoot<Gym> {
 
     public void addEmptyTimetable() {
         Timetable actualTimetable = actualTimetable();
-        Timetable newTimetable = Timetable.emptyTimetable(this, actualTimetable.getEndDate().plusDays(1));
+        Timetable newTimetable = Timetable.emptyTimetable(this, actualTimetable.getEndDate().plusDays(1), actualTimetable.getOrderNumber());
         timetables.add(newTimetable);
-        actualTimetable.markInactive();
+    }
+
+    public Timetable timetableById(Long id) {
+        return timetables.stream().filter(timetable -> timetable.getId().equals(id)).findAny()
+                .orElseThrow(() -> new InvalidStateException("no TIMETABLE with ID present"));
     }
 
     public Timetable actualTimetable() {

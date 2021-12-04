@@ -13,39 +13,43 @@ export class TimetableService {
   constructor(private api: ApiService) {
   }
 
-  getTimetable(gymId: any): Observable<Timetable> {
+  getActualTimetable(gymId: any): Observable<Timetable> {
     return this.api.get(`timetable/${gymId}`)
   }
 
-  getActivity(gymId: any, activityId: any): Observable<Activity> {
-    return this.api.get(`timetable/${gymId}/activity/${activityId}`)
+  getTimetable(gymId: any, timetableId: any): Observable<Timetable> {
+    return this.api.get(`timetable/${gymId}/${timetableId}`)
   }
 
-  createActivity(gymId: any, data: CreateActivity): Observable<Activity> {
-    return this.api.post(`timetable/${gymId}/activity`, data)
+  getActivity(gymId: any, timetableId: any, activityId: any): Observable<Activity> {
+    return this.api.get(`timetable/${gymId}/${timetableId}/activity/${activityId}`)
   }
 
-  updateActivity(gymId: any, id: any, data: UpdateActivity): Observable<Activity> {
-    return this.api.put(`timetable/${gymId}/activity/${id}`, data)
+  createActivity(gymId: any, timetableId: any, data: CreateActivity): Observable<Activity> {
+    return this.api.post(`timetable/${gymId}/${timetableId}/activity`, data)
   }
 
-  deleteActivity(gymId: any, id: any): Observable<any> {
-    return this.api.delete(`timetable/${gymId}/activity/${id}`)
+  updateActivity(gymId: any, timetableId: any, activityId: any, data: UpdateActivity): Observable<Activity> {
+    return this.api.put(`timetable/${gymId}/${timetableId}/activity/${activityId}`, data)
   }
 
-  joinActivity(gymId: any, activityId: any): Observable<Activity> {
-    return this.api.post(`timetable/${gymId}/activity/${activityId}/join`)
+  deleteActivity(gymId: any, timetableId: any, activityId: any): Observable<any> {
+    return this.api.delete(`timetable/${gymId}/${timetableId}/activity/${activityId}`)
   }
 
-  resignFromActivity(gymId: any, activityId: any): Observable<Activity> {
-    return this.api.post(`timetable/${gymId}/activity/${activityId}/resign`)
+  joinActivity(gymId: any, timetableId: any, activityId: any): Observable<Activity> {
+    return this.api.post(`timetable/${gymId}/${timetableId}/activity/${activityId}/join`)
   }
 
-  confirmAttendance(gymId: any, activityId: any, userId: any): Observable<Activity> {
-    return this.api.post(`timetable/${gymId}/activity/${activityId}/confirm/${userId}`)
+  resignFromActivity(gymId: any, timetableId: any, activityId: any): Observable<Activity> {
+    return this.api.post(`timetable/${gymId}/${timetableId}/activity/${activityId}/resign`)
   }
 
-  resignAttendance(gymId: any, activityId: any, userId: any): Observable<Activity> {
-    return this.api.post(`timetable/${gymId}/activity/${activityId}/unconfirm/${userId}`)
+  confirmAttendance(gymId: any, timetableId: any, activityId: any, userId: any): Observable<Activity> {
+    return this.api.post(`timetable/${gymId}/${timetableId}/activity/${activityId}/confirm/${userId}`)
+  }
+
+  resignAttendance(gymId: any, timetableId: any, activityId: any, userId: any): Observable<Activity> {
+    return this.api.post(`timetable/${gymId}/${timetableId}/activity/${activityId}/unconfirm/${userId}`)
   }
 }

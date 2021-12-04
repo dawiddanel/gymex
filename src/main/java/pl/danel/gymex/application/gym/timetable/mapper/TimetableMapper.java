@@ -31,6 +31,7 @@ public class TimetableMapper {
                 .updateDate(timetable.getUpdateDate())
                 .startDate(timetable.getStartDate())
                 .endDate(timetable.getEndDate())
+                .orderNumber(timetable.getOrderNumber())
                 .build();
     }
 

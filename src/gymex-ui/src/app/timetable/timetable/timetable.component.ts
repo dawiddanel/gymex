@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ToastsService} from "../../default/toasts.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 import {TimetableService} from "../timetable.service";
 import {Timetable} from "../../default/models/timetable.model";
 
@@ -13,25 +13,45 @@ export class TimetableComponent implements OnInit {
 
   timetable?: Timetable
   gymId: number
+  timetableId: number
+
+  isOldTimetable: boolean
 
   constructor(private timetableService: TimetableService,
               private toasts: ToastsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.gymId = this.route.snapshot.params['gymId']
+    this.timetableId = this.route.snapshot.params['timetableId']
     this.retrieveTimetable()
   }
 
   retrieveTimetable(): void {
-    this.timetableService.getTimetable(this.gymId)
+    if (this.timetableId) {
+      this.timetableService.getTimetable(this.gymId, this.timetableId)
+        .subscribe({
+          next: value => {
+            this.timetable = value
+            this.isOldTimetable = value.endDate > new Date()
+          },
+          error: err => {
+            this.toasts.showErrorToast(`Błąd przy pobieraniu grafiku`)
+          }
+        })
+    }
+    this.timetableService.getActualTimetable(this.gymId)
       .subscribe({
         next: value => {
           this.timetable = value
+          this.isOldTimetable = value.endDate > new Date()
         },
         error: err => {
-          this.toasts.showErrorToast(`Błąd przy pobieraniu grafiku`)
+          this.toasts.showErrorToast(`Błąd przy pobieraniu aktualnego grafiku`)
+          this.router.navigate(['/assortment/equipmentDefinitions']);
+
         }
       })
   }

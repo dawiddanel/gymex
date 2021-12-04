@@ -8,10 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import pl.danel.gymex.domain.asserts.DomainAsserts;
 import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.Gym;
-import pl.danel.gymex.domain.gym.command.CreateTimetable;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,20 +40,31 @@ public class Timetable {
 
     private LocalDate endDate;
 
-    private boolean active;
+    private Integer orderNumber;
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    private Timetable(Gym gym, LocalDate startDate) {
+    private Timetable(Gym gym, LocalDate startDate, Integer orderNumber) {
         this.gym = gym;
         this.startDate = startDate;
         this.endDate = startDate.plusDays(14);
-        this.active = true;
+        this.orderNumber = orderNumber;
     }
 
-    public static Timetable emptyTimetable(Gym gym, LocalDate startDate) {
-        return new Timetable(gym, startDate);
+    private Timetable(Gym gym, LocalDate startDate, LocalDate endDate) {
+        this.gym = gym;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.orderNumber = 1;
+    }
+
+    public static Timetable emptyTimetable(Gym gym, LocalDate startDate, LocalDate endDate) {
+        return new Timetable(gym, startDate, endDate);
+    }
+
+    public static Timetable emptyTimetable(Gym gym, LocalDate startDate, Integer order) {
+        return new Timetable(gym, startDate, order);
     }
 
     public void addActivity(Activity activity) {
@@ -80,10 +89,6 @@ public class Timetable {
         LocalDate now = LocalDate.now();
         return (now.isAfter(this.startDate) || now.isEqual(now))
                 && (this.endDate.isAfter(now) || this.endDate.isEqual(now));
-    }
-
-    public void markInactive() {
-        this.active = false;
     }
 
 }

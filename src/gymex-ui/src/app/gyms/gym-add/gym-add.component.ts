@@ -26,6 +26,7 @@ export class GymAddComponent implements OnInit {
       name: this.gymCommand.name,
       capacity: this.gymCommand.capacity,
       timetableStartDate: this.gymCommand.timetableStartDate,
+      timetableEndDate: this.gymCommand.timetableEndDate,
       address: this.gymCommand.address
     };
 

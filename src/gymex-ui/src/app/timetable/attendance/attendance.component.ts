@@ -13,6 +13,7 @@ export class AttendanceComponent implements OnInit {
   @Input() attendance: Attendance
   @Input() activity: Activity
   @Input() gymId: number
+  @Input() timetableId: number
 
   constructor(private timetableService: TimetableService,
               private toasts: ToastsService) { }
@@ -21,7 +22,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   confirmAttendance(): void {
-    this.timetableService.confirmAttendance(this.gymId, this.activity.id, this.attendance.member.id)
+    this.timetableService.confirmAttendance(this.gymId, this.timetableId, this.activity.id, this.attendance.member.id)
       .subscribe({
           next: value => {
             this.activity = value
@@ -36,7 +37,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   resignAttendance(): void {
-    this.timetableService.resignAttendance(this.gymId, this.activity.id, this.attendance.member.id)
+    this.timetableService.resignAttendance(this.gymId, this.timetableId, this.activity.id, this.attendance.member.id)
       .subscribe({
           next: value => {
             this.activity = value

@@ -17,6 +17,7 @@ import {ActivityDefinitionService} from "../../activity_definition/activity-defi
 export class ActivityEditComponent implements OnInit {
 
   gymId: number
+  timetableId: number
 
   definitions?: ActivityDefinition[];
   trainers?: Trainer[];
@@ -32,13 +33,14 @@ export class ActivityEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.gymId = this.route.snapshot.params['gymId']
+    this.timetableId = this.route.snapshot.params['timetableId']
     this.getActivity(this.route.snapshot.params['id'])
     this.retrieveDefinitions()
     this.retrieveTrainers()
   }
 
   getActivity(id: string): void {
-    this.timetableService.getActivity(this.gymId, id)
+    this.timetableService.getActivity(this.gymId, this.timetableId, id)
       .subscribe({
         next: value => {
           this.activity = value
@@ -82,7 +84,7 @@ export class ActivityEditComponent implements OnInit {
       trainerId: this.activity.trainer.id
     };
 
-    this.timetableService.updateActivity(this.gymId, this.activity.id, data)
+    this.timetableService.updateActivity(this.gymId, this.timetableId, this.activity.id, data)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast(`Zaktualizowano aktywność`)
@@ -111,11 +113,11 @@ export class ActivityEditComponent implements OnInit {
   }
 
   deleteActivity(): void {
-    this.timetableService.deleteActivity(this.gymId, this.activity.id)
+    this.timetableService.deleteActivity(this.gymId, this.timetableId, this.activity.id)
       .subscribe({
         next: value => {
           this.toasts.showSuccessToast("Pomyślnie usunięto aktywność")
-          this.router.navigate([`/timetable/activity/${this.gymId}`]);
+          this.router.navigate([`/timetable/activity/${this.gymId}/${this.timetableId}`]);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy usuwaniu aktywności`)

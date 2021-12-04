@@ -10,6 +10,7 @@ export class ActivityListComponent implements OnInit {
 
   @Input() activities: Activity[]
   @Input() gymId: number
+  @Input() timetableId: number
 
   constructor() { }
 

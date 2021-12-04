@@ -40,13 +40,18 @@ public class TimetableService {
     private final TimetableMapper timetableMapper;
     private final TimetableCommandMapper timetableCommandMapper;
 
-    public TimetableDto getTimetable(Long gymId) {
+    public TimetableDto getActualTimetable(Long gymId) {
         Timetable timetable = actualGymTimetable(gymId);
         return timetableMapper.timetable(timetable);
     }
 
-    public ActivityDto getActivity(Long timetableId, Long activityId) {
-        Timetable timetable = actualGymTimetable(timetableId);
+    public TimetableDto getTimetable(Long gymId, Long timetableId) {
+        Timetable timetable = getTimetableById(gymId, timetableId);
+        return timetableMapper.timetable(timetable);
+    }
+
+    public ActivityDto getActivity(Long gymId, Long timetableId, Long activityId) {
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -54,8 +59,8 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto createActivity(Long gymId, CreateActivityCommand command) {
-        Timetable timetable = actualGymTimetable(gymId);
+    public TimetableDto createActivity(Long gymId, Long timetableId, CreateActivityCommand command) {
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         ActivityDefinition definition = activityDefinitionRepository.findById(command.getDefinitionId())
                 .orElseThrow(() -> new NotFoundException("No such ACTIVITY_DEFINITION found"));
@@ -72,8 +77,8 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto updateActivity(Long gymId, Long activityId, UpdateActivityCommand command) {
-        Timetable timetable = actualGymTimetable(gymId);
+    public TimetableDto updateActivity(Long gymId, Long timetableId, Long activityId, UpdateActivityCommand command) {
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         ActivityDefinition definition = activityDefinitionRepository.findById(command.getDefinitionId())
                 .orElseThrow(() -> new NotFoundException("No such ACTIVITY_DEFINITION found"));
@@ -90,8 +95,8 @@ public class TimetableService {
     }
 
     @Transactional
-    public TimetableDto deleteActivity(Long gymId, Long activityId) {
-        Timetable timetable = actualGymTimetable(gymId);
+    public TimetableDto deleteActivity(Long gymId, Long timetableId, Long activityId) {
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
         timetable.removeActivity(activity);
@@ -101,10 +106,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto joinActivity(Long gymId, Long activityId) {
+    public ActivityDto joinActivity(Long gymId, Long timetableId, Long activityId) {
         Member member = personService.currentlyLoggedMember();
 
-        Timetable timetable = actualGymTimetable(gymId);
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -116,10 +121,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto resignFromActivity(Long gymId, Long activityId) {
+    public ActivityDto resignFromActivity(Long gymId, Long timetableId, Long activityId) {
         Member member = personService.currentlyLoggedMember();
 
-        Timetable timetable = actualGymTimetable(gymId);
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -131,10 +136,10 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto confirmAttendance(Long gymId, Long activityId, Long userId) {
+    public ActivityDto confirmAttendance(Long gymId, Long timetableId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 
-        Timetable timetable = actualGymTimetable(gymId);
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -146,7 +151,7 @@ public class TimetableService {
     }
 
     @Transactional
-    public ActivityDto resignAttendance(Long gymId, Long activityId, Long userId) {
+    public ActivityDto resignAttendance(Long gymId, Long timetableId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 
         Timetable timetable = actualGymTimetable(gymId);
@@ -165,6 +170,13 @@ public class TimetableService {
                 .orElseThrow(() -> new NotFoundException("No such GYM found"));
 
         return gym.actualTimetable();
+    }
+
+    public Timetable getTimetableById(Long gymId, Long timetableId) {
+        Gym gym = gymRepository.findById(gymId)
+                .orElseThrow(() -> new NotFoundException("No such GYM found"));
+
+        return gym.timetableById(timetableId);
     }
 
 }

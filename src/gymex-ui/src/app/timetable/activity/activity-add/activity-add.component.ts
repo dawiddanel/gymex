@@ -16,6 +16,7 @@ import {PersonService} from "../../../person/person.service";
 export class ActivityAddComponent implements OnInit {
 
   gymId: number
+  timetableId: number
 
   definitions?: ActivityDefinition[];
   trainers?: Trainer[];
@@ -31,6 +32,7 @@ export class ActivityAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.gymId = this.route.snapshot.params['gymId']
+    this.timetableId = this.route.snapshot.params['timetableId']
     this.retrieveDefinitions()
     this.retrieveTrainers()
   }
@@ -60,11 +62,11 @@ export class ActivityAddComponent implements OnInit {
   }
 
   saveActivity(): void {
-    this.timetableService.createActivity(this.gymId, this.activityCommand)
+    this.timetableService.createActivity(this.gymId, this.timetableId, this.activityCommand)
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Poprawnie dodano aktywność`)
-          this.router.navigate([`/timetable/activity/${this.gymId}`]);
+          this.router.navigate([`/timetable/activity/${this.gymId}/${this.timetableId}`]);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy dodawaniu aktywności`)

@@ -9,4 +9,5 @@ import java.time.LocalDate;
 @Getter
 public class CreateTimetable {
     private LocalDate startDate;
+    private LocalDate endDate;
 }

@@ -6,4 +6,5 @@ export interface Timetable {
   updateDate: Date
   startDate: Date
   endDate: Date
+  orderNumber: number
 }

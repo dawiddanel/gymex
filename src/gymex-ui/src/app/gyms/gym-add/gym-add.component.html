@@ -31,7 +31,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <label for="timetableStartDate">Data startu grafiku zajęć</label>
+        <label for="timetableStartDate">Data startu pierwszego grafiku zajęć</label>
         <input
           type="date"
           class="form-control"
@@ -41,6 +41,18 @@
           required
         />
         <p [hidden]="(timetableStartDate.untouched) || (timetableStartDate.touched && timetableStartDate.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="timetableEndDate">Data końca pierwszego grafiku zajęć</label>
+        <input
+          type="date"
+          class="form-control"
+          id="timetableEndDate"
+          [(ngModel)]="gymCommand.timetableEndDate"
+          name="timetableEndDate" #timetableEndDate="ngModel"
+          required
+        />
+        <p [hidden]="(timetableEndDate.untouched) || (timetableEndDate.touched && timetableEndDate.valid)" class="alert alert-danger">Pole wymagane</p>
       </div>
     </div>
     <br/>

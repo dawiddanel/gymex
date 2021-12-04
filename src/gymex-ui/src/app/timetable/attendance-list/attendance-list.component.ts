@@ -14,6 +14,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AttendanceListComponent implements OnInit {
 
   gymId: number
+  timetableId: number
   activity: Activity;
 
   constructor(private timetableService: TimetableService,
@@ -25,11 +26,12 @@ export class AttendanceListComponent implements OnInit {
 
   ngOnInit(): void {
     this.gymId = this.route.snapshot.params['gymId']
+    this.timetableId = this.route.snapshot.params['timetableId']
     this.getActivity(this.route.snapshot.params['id'])
   }
 
   getActivity(id: string): void {
-    this.timetableService.getActivity(this.gymId, id)
+    this.timetableService.getActivity(this.gymId, this.timetableId, id)
       .subscribe({
         next: value => {
           this.activity = value

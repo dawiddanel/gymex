@@ -19,7 +19,7 @@ public class GymCommandMapper {
                 .name(command.getName())
                 .capacity(command.getCapacity())
                 .address(createAddress(command.getAddress()))
-                .createTimetable(createTimetable(command.getTimetableStartDate()))
+                .createTimetable(createTimetable(command.getTimetableStartDate(), command.getTimetableEndDate()))
                 .build();
     }
 
@@ -41,9 +41,10 @@ public class GymCommandMapper {
                 .build();
     }
 
-    public CreateTimetable createTimetable(LocalDate timetableStartDate) {
+    public CreateTimetable createTimetable(LocalDate timetableStartDate, LocalDate timetableEndDate) {
         return CreateTimetable.builder()
                 .startDate(timetableStartDate)
+                .endDate(timetableEndDate)
                 .build();
     }
 

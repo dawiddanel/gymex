@@ -12,4 +12,5 @@ public class CreateGymCommand {
     private Integer capacity;
     private CreateAddressCommand address;
     private LocalDate timetableStartDate;
+    private LocalDate timetableEndDate;
 }
