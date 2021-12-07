@@ -9,12 +9,17 @@ import pl.danel.gymex.domain.asserts.InvalidStateException;
 import pl.danel.gymex.domain.gym.address.Address;
 import pl.danel.gymex.domain.gym.assortment.Assortment;
 import pl.danel.gymex.domain.gym.command.CreateGym;
+import pl.danel.gymex.domain.gym.command.CreatePresence;
 import pl.danel.gymex.domain.gym.command.UpdateGym;
+import pl.danel.gymex.domain.gym.presence.Presence;
 import pl.danel.gymex.domain.gym.timetable.Timetable;
+import pl.danel.gymex.domain.person.member.Member;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "GYM")
@@ -37,6 +42,13 @@ public class Gym extends AbstractAggregateRoot<Gym> {
             orphanRemoval = true
     )
     private List<Timetable> timetables;
+
+    @OneToMany(
+            mappedBy = "gym",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Presence> presences;
 
     private String name;
 
@@ -88,6 +100,24 @@ public class Gym extends AbstractAggregateRoot<Gym> {
 
     public boolean timetableOverdue() {
         return this.timetables.stream().noneMatch(Timetable::actual);
+    }
+
+    public void addPresence(CreatePresence command) {
+        List<Presence> userPresences = presenceByMember(command.getMember());
+        if (userPresences.stream().anyMatch(Predicate.not(Presence::finished))) {
+            throw new InvalidStateException("User already present on Gym");
+        }
+        Presence presence = Presence.create(this, command.getMember());
+        command.getMember().addPresence(presence);
+    }
+
+    public Presence presenceById(Long id) {
+        return presences.stream().filter(presence -> presence.getId().equals(id)).findAny()
+                .orElseThrow(() -> new InvalidStateException("no PRESENCE with ID present"));
+    }
+
+    public List<Presence> presenceByMember(Member member) {
+        return presences.stream().filter(presence -> presence.getMember().equals(member)).collect(Collectors.toList());
     }
 
 }

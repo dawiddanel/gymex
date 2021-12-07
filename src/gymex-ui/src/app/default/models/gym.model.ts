@@ -27,3 +27,29 @@ export const emptyAddress = (): Address => ({
   street: null,
   buildingNumber: null
 })
+
+export interface Presence {
+  id: number,
+  member: PresenceMember,
+  startTime: Date,
+  endTime: Date,
+}
+
+export const emptyPresence = (): Presence => ({
+  id: null,
+  member: null,
+  startTime: null,
+  endTime: null,
+})
+
+export interface PresenceMember {
+  id: number,
+  firstName: string,
+  lastName: string
+}
+
+export const emptyPresenceMember = (): PresenceMember => ({
+  id: null,
+  firstName: null,
+  lastName: null
+})

@@ -27,4 +27,10 @@ export class ToastsService {
     )
   }
 
+  showInfoToast(message: string) {
+    Swal.fire(
+      'Informacja', message, 'info'
+    )
+  }
+
 }

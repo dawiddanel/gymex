@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.danel.gymex.domain.gym.command.CreatePass;
 import pl.danel.gymex.domain.gym.pass.Pass;
+import pl.danel.gymex.domain.gym.presence.Presence;
 import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.person.Person;
 import pl.danel.gymex.domain.person.user.User;
@@ -36,6 +37,13 @@ public class Member extends Person {
     )
     private List<Attendance> attendances;
 
+    @OneToMany(
+            mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Presence> presences;
+
     public Member(User user, CreatePerson person) {
         super(user, person);
     }
@@ -48,6 +56,10 @@ public class Member extends Person {
     public void removeAttendance(Attendance attendance) {
         attendances.remove(attendance);
         attendance.setMember(null);
+    }
+
+    public void addPresence(Presence presence) {
+        presences.add(presence);
     }
 
     public Optional<Pass> actualPass() {

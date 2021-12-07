@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Gym} from "../default/models/gym.model";
-import {CreateGym, UpdateGym} from "../default/models/gym.command.model";
+import {Gym, Presence} from "../default/models/gym.model";
+import {CreateGym, CreatePresence, UpdateGym} from "../default/models/gym.command.model";
 import {ApiService} from "../default/api.service";
 
 @Injectable({
@@ -30,5 +30,17 @@ export class GymService {
 
   delete(id: any): Observable<any> {
     return this.api.delete(`gym/${id}`)
+  }
+
+  allGymCurrentPresences(id: any): Observable<Presence[]> {
+    return this.api.get(`gym/${id}/presence/current`)
+  }
+
+  createPresence(id: any, data: CreatePresence): Observable<void> {
+    return this.api.post(`gym/${id}/presence`, data)
+  }
+
+  finishPresence(id: any, presenceId: any): Observable<void> {
+    return this.api.put(`gym/${id}/presence/${presenceId}/finish`)
   }
 }

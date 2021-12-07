@@ -23,7 +23,6 @@ export class PersonListComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.route.snapshot.data['role']
-    console.log(this.role)
     switch (this.role) {
       case Role.OWNER:
         this.retrieveOwners()

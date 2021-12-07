@@ -17,7 +17,6 @@ import {MainComponent} from "./default/main/main.component";
 import {EquipmentAddComponent} from "./assortment/equipment/equipment-add/equipment-add.component";
 import {EquipmentEditComponent} from "./assortment/equipment/equipment-edit/equipment-edit.component";
 import {AsssortmentComponent} from "./assortment/assortment/asssortment.component";
-import {ProfileComponent} from "./person/profiles/profile/profile.component";
 import {TechnicalUserAddComponent} from "./person/technical-user-add/technical-user-add.component";
 import {PersonListComponent} from "./person/person-list/person-list.component";
 import {Role} from "./default/models/security.model";
@@ -30,6 +29,8 @@ import {TrainerProfileComponent} from "./person/profiles/trainer-profile/trainer
 import {EmployeeProfileComponent} from "./person/profiles/employee-profile/employee-profile.component";
 import {OwnerProfileComponent} from "./person/profiles/owner-profile/owner-profile.component";
 import {PassAddComponent} from "./person/pass/pass-add/pass-add.component";
+import {PresenceListComponent} from "./presence/presence-list/presence-list.component";
+import {PresenceAddComponent} from "./presence/presence-add/presence-add.component";
 
 const routes: Routes = [
   {
@@ -64,6 +65,8 @@ const routes: Routes = [
       {path: 'people/members', component: PersonListComponent, data: {role: Role.MEMBER}},
       {path: 'people/employees', component: PersonListComponent, data: {role: Role.EMPLOYEE}},
       {path: 'people/trainers', component: PersonListComponent, data: {role: Role.TRAINER}},
+      {path: 'presence/:gymId', component: PresenceListComponent},
+      {path: 'presence/:gymId/create', component: PresenceAddComponent},
       {path: 'contact', component: ContactComponent}
     ]
   },

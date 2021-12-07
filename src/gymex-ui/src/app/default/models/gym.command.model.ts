@@ -41,3 +41,11 @@ export const emptyCreateAddress = (): CreateAddress => ({
   street: null,
   buildingNumber: null
 })
+
+export interface CreatePresence {
+  memberId: number
+}
+
+export const emptyCreatePresence = (): CreatePresence => ({
+  memberId: null
+})

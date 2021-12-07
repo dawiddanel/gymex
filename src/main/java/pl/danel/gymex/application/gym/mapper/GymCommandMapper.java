@@ -4,10 +4,9 @@ import org.springframework.stereotype.Component;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateAddressCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
-import pl.danel.gymex.domain.gym.command.CreateAddress;
-import pl.danel.gymex.domain.gym.command.CreateGym;
-import pl.danel.gymex.domain.gym.command.CreateTimetable;
-import pl.danel.gymex.domain.gym.command.UpdateGym;
+import pl.danel.gymex.domain.gym.Gym;
+import pl.danel.gymex.domain.gym.command.*;
+import pl.danel.gymex.domain.person.member.Member;
 
 import java.time.LocalDate;
 
@@ -45,6 +44,12 @@ public class GymCommandMapper {
         return CreateTimetable.builder()
                 .startDate(timetableStartDate)
                 .endDate(timetableEndDate)
+                .build();
+    }
+
+    public CreatePresence createPresence(Member member) {
+        return CreatePresence.builder()
+                .member(member)
                 .build();
     }
 

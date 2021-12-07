@@ -53,6 +53,9 @@ import { MemberProfileComponent } from './person/profiles/member-profile/member-
 import { OwnerProfileComponent } from './person/profiles/owner-profile/owner-profile.component';
 import { TrainerProfileComponent } from './person/profiles/trainer-profile/trainer-profile.component';
 import { EmployeeProfileComponent } from './person/profiles/employee-profile/employee-profile.component';
+import { PresenceListComponent } from './presence/presence-list/presence-list.component';
+import { PresenceComponent } from './presence/presence/presence.component';
+import { PresenceAddComponent } from './presence/presence-add/presence-add.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +105,10 @@ import { EmployeeProfileComponent } from './person/profiles/employee-profile/emp
     MemberProfileComponent,
     OwnerProfileComponent,
     TrainerProfileComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    PresenceListComponent,
+    PresenceComponent,
+    PresenceAddComponent
   ],
   imports: [
     BrowserModule,

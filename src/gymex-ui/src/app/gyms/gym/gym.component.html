@@ -23,7 +23,8 @@
         <div>Przeglądaj wszystkie potrzebne informacje</div>
         <div><a class="btn btn-primary" routerLink="/timetable/activity/{{ gym.id }}">Grafik zajęć</a></div>
         <div><a class="btn btn-primary" routerLink="/assortment/equipment/{{ gym.id }}">Wyposażenie</a></div>
-        <div><a class="btn btn-primary">Sprawdź aktualne obłożenie siłowni</a></div>
+        <div><a class="btn btn-primary" *ngIf="userService.isOwnerOrEmployee()" routerLink="/presence/{{ gym.id }}">Zapis obecności</a></div>
+        <div><a class="btn btn-primary" (click)="countActualPresence() ">Aktualna liczba ćwiczących</a></div>
       </div>
     </div>
   </div>
