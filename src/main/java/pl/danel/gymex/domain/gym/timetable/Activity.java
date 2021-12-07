@@ -161,6 +161,12 @@ public class Activity {
         this.status = ActivityStatus.IN_PROGRESS;
     }
 
+    public void markAllAttendanceFalse() {
+        this.attendance.stream()
+                .filter(Attendance::getAttended)
+                .forEach(Attendance::resignAttendance);
+    }
+
     public void cancel() {
         this.status = ActivityStatus.CANCELLED;
     }

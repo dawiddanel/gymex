@@ -201,4 +201,11 @@ public class TimetableService {
         activityRepository.save(activity);
     }
 
+    @Transactional
+    public void markAllAsAttendedFalse(Long activityId) {
+        Activity activity = activityRepository.getById(activityId);
+        activity.markAllAttendanceFalse();
+        activityRepository.save(activity);
+    }
+
 }

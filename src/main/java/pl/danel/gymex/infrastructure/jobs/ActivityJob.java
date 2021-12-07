@@ -35,4 +35,11 @@ public class ActivityJob {
             }
         });
     }
+
+    @Scheduled(cron = "0 0/10 * * * ?")
+    public void changeActivityAttendancesStatus() {
+        List<Activity> activities = timetableService.activitiesForStatus(ActivityStatus.FINISHED);
+
+        activities.forEach(activity -> timetableService.markAllAsAttendedFalse(activity.getId()));
+    }
 }
