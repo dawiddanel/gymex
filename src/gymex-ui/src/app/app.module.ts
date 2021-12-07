@@ -36,7 +36,7 @@ import { EquipmentEditComponent } from './assortment/equipment/equipment-edit/eq
 import { AsssortmentComponent } from './assortment/assortment/asssortment.component';
 import { PersonComponent } from './person/person/person.component';
 import { UserComponent } from './person/user/user.component';
-import { ProfileComponent } from './person/profile/profile.component';
+import { ProfileComponent } from './person/profiles/profile/profile.component';
 import { TechnicalUserAddComponent } from './person/technical-user-add/technical-user-add.component';
 import { PersonListComponent } from './person/person-list/person-list.component';
 import { ActivityComponent } from './timetable/activity/activity/activity.component';
@@ -47,6 +47,12 @@ import { EquipmentListComponent } from './assortment/equipment/equipment-list/eq
 import { ActivityListComponent } from './timetable/activity/activity-list/activity-list.component';
 import { AttendanceComponent } from './timetable/attendance/attendance.component';
 import { AttendanceListComponent } from './timetable/attendance-list/attendance-list.component';
+import { PassComponent } from './person/pass/pass/pass.component';
+import { PassAddComponent } from './person/pass/pass-add/pass-add.component';
+import { MemberProfileComponent } from './person/profiles/member-profile/member-profile.component';
+import { OwnerProfileComponent } from './person/profiles/owner-profile/owner-profile.component';
+import { TrainerProfileComponent } from './person/profiles/trainer-profile/trainer-profile.component';
+import { EmployeeProfileComponent } from './person/profiles/employee-profile/employee-profile.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +96,13 @@ import { AttendanceListComponent } from './timetable/attendance-list/attendance-
     EquipmentListComponent,
     ActivityListComponent,
     AttendanceComponent,
-    AttendanceListComponent
+    AttendanceListComponent,
+    PassComponent,
+    PassAddComponent,
+    MemberProfileComponent,
+    OwnerProfileComponent,
+    TrainerProfileComponent,
+    EmployeeProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -13,5 +13,5 @@
       </div>
     </div>
   </div>
-  <a class="btn btn-success" routerLink="/gyms/create">Dodaj</a>
+  <a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/gyms/create">Dodaj</a>
 </div>

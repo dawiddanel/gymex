@@ -3,7 +3,7 @@ import {JwtService} from "./jwt.service";
 import {Observable} from "rxjs";
 import {ApiService} from "../default/api.service";
 import {Authentication, Register, SignIn, User} from "../default/models/security.model";
-import {UserService} from "./user.service";
+import {SecurityUserService} from "./security-user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SecurityService {
   constructor(
     private readonly api: ApiService,
     private readonly jwtService: JwtService,
-    private readonly userService: UserService
+    private readonly userService: SecurityUserService
   ) {
   }
 

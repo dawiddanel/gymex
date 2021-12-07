@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {emptyGym, Gym} from "../../default/models/gym.model";
 import {GymService} from "../gym.service";
 import {ToastsService} from "../../default/toasts.service";
+import {SecurityUserService} from "../../security/security-user.service";
 
 @Component({
   selector: 'app-gym-list',
@@ -14,6 +15,7 @@ export class GymListComponent implements OnInit {
 
   constructor(
     private gymService: GymService,
+    readonly userService: SecurityUserService,
     private toasts: ToastsService
   ) {
   }

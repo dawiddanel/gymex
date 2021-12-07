@@ -1,0 +1,40 @@
+<div class="container">
+  <h4>Zakup karnetu</h4>
+  <form (ngSubmit)="buyPass()" #buyPassForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="startDate">Początek obowiązywania</label>
+        <input
+          type="date"
+          class="form-control"
+          id="startDate"
+          [(ngModel)]="passCommand.startDate"
+          name="startDate" #startDate="ngModel"
+          required
+        />
+        <p [hidden]="(startDate.untouched) || (startDate.touched && startDate.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+      <div class="col">
+        <label for="endDate">Koniec obowiązywania</label>
+        <input
+          type="date"
+          class="form-control"
+          id="endDate"
+          [(ngModel)]="passCommand.endDate"
+          name="endDate" #endDate="ngModel"
+          required
+        />
+        <p [hidden]="(endDate.untouched) || (endDate.touched && endDate.valid)" class="alert alert-danger">Pole wymagane</p>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!buyPassForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!buyPassForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

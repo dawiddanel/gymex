@@ -1,0 +1,10 @@
+<div class="container">
+  <app-profile [person]="member"></app-profile>
+  <div *ngIf="!!member.pass; else elseBlock">
+    <app-pass [pass]="member?.pass"></app-pass>
+  </div>
+  <ng-template #elseBlock>
+    <div class="alert-info">Nie posiadasz aktualnego karnetu, zakup go by móc uczestniczyć w zajęciach</div>
+    <button class="btn btn-primary" routerLink="/profile/member/{{ member.id }}/pass">Zakup karnetu</button>
+  </ng-template>
+</div>

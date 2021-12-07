@@ -16,13 +16,11 @@ export const emptyPerson = (): Person => ({
 
 export interface Pass {
   startDate: Date,
-  activeStartDate: Date,
   endDate: Date
 }
 
 export const emptyPass = (): Pass => ({
   startDate: null,
-  activeStartDate: null,
   endDate: null
 })
 
@@ -43,8 +41,33 @@ export interface Trainer extends Person {
   description: string
 }
 
+export const emptyTrainer = (): Trainer => ({
+  id: null,
+  firstName: null,
+  lastName: null,
+  pesel: null,
+  birthDate: null,
+  description: null
+})
+
 export interface Employee extends Person {
 }
 
+export const emptyEmployee = (): Employee => ({
+  id: null,
+  firstName: null,
+  lastName: null,
+  pesel: null,
+  birthDate: null
+})
+
 export interface Owner extends Person {
 }
+
+export const emptyOwner = (): Owner => ({
+  id: null,
+  firstName: null,
+  lastName: null,
+  pesel: null,
+  birthDate: null
+})

@@ -37,8 +37,17 @@
           <li><a routerLink="people/employees" class="dropdown-item">Pracownicy</a></li>
         </ul>
       </li>
-      <li class="nav-item">
-        <a routerLink="profile" class="nav-link">Profil</a>
+      <li class="nav-item" *ngIf="userService.isMember()">
+        <a routerLink="profile/member" class="nav-link">Profil</a>
+      </li>
+      <li class="nav-item" *ngIf="userService.isTrainer()">
+        <a routerLink="profile/trainer" class="nav-link">Profil</a>
+      </li>
+      <li class="nav-item" *ngIf="userService.isOwner()">
+        <a routerLink="profile/owner" class="nav-link">Profil</a>
+      </li>
+      <li class="nav-item" *ngIf="userService.isEmployee()">
+        <a routerLink="profile/employee" class="nav-link">Profil</a>
       </li>
       <li class="nav-item">
         <a routerLink="contact" class="nav-link">Kontakt</a>

@@ -11,12 +11,16 @@ import pl.danel.gymex.domain.asserts.InvalidArgumentException;
 import pl.danel.gymex.domain.asserts.InvalidStateException;
 import pl.danel.gymex.domain.asserts.NotFoundException;
 import pl.danel.gymex.domain.gym.command.CreatePass;
+import pl.danel.gymex.domain.gym.pass.Pass;
+import pl.danel.gymex.domain.gym.pass.PassRepository;
 import pl.danel.gymex.domain.person.*;
 import pl.danel.gymex.domain.person.member.Member;
 import pl.danel.gymex.domain.person.trainer.Trainer;
 import pl.danel.gymex.domain.person.user.Role;
 import pl.danel.gymex.domain.person.user.User;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,6 +36,7 @@ public class PersonService {
     private final OwnerRepository ownerRepository;
     private final EmployeeRepository employeeRepository;
     private final TrainerRepository trainerRepository;
+    private final PassRepository passRepository;
 
     public List<MemberDto> allMembers() {
         return personMapper.members(memberRepository.findAll());
@@ -89,6 +94,17 @@ public class PersonService {
         member.addPass(createPass);
         member = memberRepository.save(member);
         return personMapper.pass(member.actualPass().orElse(null));
+    }
+
+    public List<Pass> overduePasses() {
+        return passRepository.findAllByEndDateBefore(LocalDate.now());
+    }
+
+    @Transactional
+    public void overduePass(Long id) {
+        Pass pass = passRepository.getById(id);
+        pass.markInactive();
+        passRepository.save(pass);
     }
 
 

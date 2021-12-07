@@ -5,7 +5,7 @@ import {Role, User} from "../default/models/security.model";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class SecurityUserService {
   public constructor(
     private readonly localStorageService: LocalStorageService
   ) {

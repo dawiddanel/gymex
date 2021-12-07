@@ -1,7 +1,9 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "../default/api.service";
 import {Observable} from "rxjs";
-import {Employee, Member, Owner, Person, Trainer} from "../default/models/person.model";
+import {Employee, Member, Owner, Pass, Person, Trainer} from "../default/models/person.model";
+import {CreatePass, CreateTechnicalUser} from "../default/models/person.command.model";
+import {User} from "../default/models/security.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,22 @@ export class PersonService {
   }
 
   getCurrentPerson(): Observable<Person> {
+    return this.api.get(`person`)
+  }
+
+  getCurrentMember(): Observable<Member> {
+    return this.api.get(`person`)
+  }
+
+  getCurrentTrainer(): Observable<Trainer> {
+    return this.api.get(`person`)
+  }
+
+  getCurrentOwner(): Observable<Owner> {
+    return this.api.get(`person`)
+  }
+
+  getCurrentEmployee(): Observable<Employee> {
     return this.api.get(`person`)
   }
 
@@ -29,6 +47,10 @@ export class PersonService {
 
   getAllTrainer(): Observable<Trainer[]> {
     return this.api.get(`person/trainer/all`)
+  }
+
+  buyPass(data: CreatePass): Observable<Pass> {
+    return this.api.post(`person/member/pass`, data)
   }
 
 }

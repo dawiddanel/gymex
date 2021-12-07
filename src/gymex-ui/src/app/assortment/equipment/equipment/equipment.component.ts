@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Equipment} from "../../../default/models/equipment.model";
-import {UserService} from "../../../security/user.service";
+import {SecurityUserService} from "../../../security/security-user.service";
 
 @Component({
   selector: 'app-equipment',
@@ -12,7 +12,7 @@ export class EquipmentComponent implements OnInit {
   @Input() equipment: Equipment
   @Input() gymId: number
 
-  constructor(readonly userService: UserService) {
+  constructor(readonly userService: SecurityUserService) {
   }
 
   ngOnInit(): void {

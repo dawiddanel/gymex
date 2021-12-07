@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "../../../security/user.service";
+import {SecurityUserService} from "../../../security/security-user.service";
 import {Activity, ActivityStatus} from "../../../default/models/activity.model";
-import {PersonService} from "../../../person/person.service";
-import {Person} from "../../../default/models/person.model";
+import {Member} from "../../../default/models/person.model";
 import {ToastsService} from "../../../default/toasts.service";
 import {TimetableService} from "../../timetable.service";
 
@@ -14,21 +13,19 @@ import {TimetableService} from "../../timetable.service";
 export class ActivityComponent implements OnInit {
 
   @Input() activity: Activity
+  @Input() member: Member
   @Input() gymId: number
   @Input() timetableId: number
 
-  person?: Person
   status = ActivityStatus
   color: string
 
-  constructor(readonly userService: UserService,
-              private personService: PersonService,
+  constructor(readonly userService: SecurityUserService,
               private timetableService: TimetableService,
               private toasts: ToastsService) {
   }
 
   ngOnInit(): void {
-    this.getPerson()
     switch (this.activity.status) {
       case ActivityStatus.CREATED:
         this.color = 'white'
@@ -45,30 +42,18 @@ export class ActivityComponent implements OnInit {
     }
   }
 
-  getPerson(): void {
-    this.personService.getCurrentPerson()
-      .subscribe({
-        next: value => {
-          this.person = value
-        },
-        error: err => {
-          this.toasts.showErrorToast(`Błąd przy pobieraniu danych osobowych`)
-        }
-      })
-  }
-
   joinActivity(): void {
     this.timetableService.joinActivity(this.gymId, this.timetableId, this.activity.id)
       .subscribe({
-        next: value => {
-          this.activity = value
-          this.toasts.showSuccessToast("Zapisano!")
-        },
-        error: err => {
-          this.toasts.showErrorToast(`Nie udało się dołączyć`)
+          next: value => {
+            this.activity = value
+            this.toasts.showSuccessToast("Zapisano!")
+          },
+          error: err => {
+            this.toasts.showErrorToast(`Nie udało się dołączyć`)
+          }
         }
-      }
-    )
+      )
   }
 
   resignFromActivity(): void {
@@ -86,15 +71,15 @@ export class ActivityComponent implements OnInit {
   }
 
   canPersonResignFromActivity(): boolean {
-    if (this.userService.isMember()) {
-      return this.activity.participants.some(member => member.id === this.person.id);
+    if (this.member && this.member.pass) {
+      return this.activity.participants.some(participant => participant.id === this.member.id);
     } else {
       return false;
     }
   }
 
   canPersonJoinActivity(): boolean {
-    if (this.userService.isMember()) {
+    if (this.member && this.member.pass) {
       return !this.canPersonResignFromActivity();
     } else {
       return false;

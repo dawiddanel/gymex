@@ -17,7 +17,7 @@ import {MainComponent} from "./default/main/main.component";
 import {EquipmentAddComponent} from "./assortment/equipment/equipment-add/equipment-add.component";
 import {EquipmentEditComponent} from "./assortment/equipment/equipment-edit/equipment-edit.component";
 import {AsssortmentComponent} from "./assortment/assortment/asssortment.component";
-import {ProfileComponent} from "./person/profile/profile.component";
+import {ProfileComponent} from "./person/profiles/profile/profile.component";
 import {TechnicalUserAddComponent} from "./person/technical-user-add/technical-user-add.component";
 import {PersonListComponent} from "./person/person-list/person-list.component";
 import {Role} from "./default/models/security.model";
@@ -25,6 +25,11 @@ import {TimetableComponent} from "./timetable/timetable/timetable.component";
 import {ActivityAddComponent} from "./timetable/activity/activity-add/activity-add.component";
 import {ActivityEditComponent} from "./timetable/activity/activity-edit/activity-edit.component";
 import {AttendanceListComponent} from "./timetable/attendance-list/attendance-list.component";
+import {MemberProfileComponent} from "./person/profiles/member-profile/member-profile.component";
+import {TrainerProfileComponent} from "./person/profiles/trainer-profile/trainer-profile.component";
+import {EmployeeProfileComponent} from "./person/profiles/employee-profile/employee-profile.component";
+import {OwnerProfileComponent} from "./person/profiles/owner-profile/owner-profile.component";
+import {PassAddComponent} from "./person/pass/pass-add/pass-add.component";
 
 const routes: Routes = [
   {
@@ -49,7 +54,11 @@ const routes: Routes = [
       {path: 'timetable/activity/:gymId/:timetableId', component: TimetableComponent},
       {path: 'timetable/activity/:gymId/:timetableId/create', component: ActivityAddComponent},
       {path: 'timetable/activity/:gymId/:timetableId/:id', component: ActivityEditComponent},
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/member/:id/pass', component: PassAddComponent},
+      {path: 'profile/member', component: MemberProfileComponent},
+      {path: 'profile/owner', component: OwnerProfileComponent},
+      {path: 'profile/employee', component: EmployeeProfileComponent},
+      {path: 'profile/trainer', component: TrainerProfileComponent},
       {path: 'technical/user/add', component: TechnicalUserAddComponent},
       {path: 'people/owners', component: PersonListComponent, data: {role: Role.OWNER}},
       {path: 'people/members', component: PersonListComponent, data: {role: Role.MEMBER}},

@@ -9,6 +9,5 @@ import java.time.LocalDate;
 @Builder
 public class PassDto {
     private LocalDate startDate;
-    private LocalDate activeStartDate;
     private LocalDate endDate;
 }

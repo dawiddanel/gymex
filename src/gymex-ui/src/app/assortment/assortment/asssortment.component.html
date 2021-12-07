@@ -5,4 +5,4 @@
                     [gymId]="gymId">
 </app-equipment-list>
 <div>Ostatnia aktualizacja inwentarza: {{ assortment?.updateDate | date: 'dd.MM.yyyy'}}</div>
-<a class="btn btn-success" routerLink="/assortment/equipment/{{ gymId }}/create">Dodaj</a>
+<a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/assortment/equipment/{{ gymId }}/create">Dodaj</a>

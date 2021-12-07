@@ -3,6 +3,7 @@ import {AssortmentService} from "../assortment.service";
 import {ToastsService} from "../../default/toasts.service";
 import {ActivatedRoute} from "@angular/router";
 import {Assortment} from "../../default/models/assortment.model";
+import {SecurityUserService} from "../../security/security-user.service";
 
 @Component({
   selector: 'app-assortment',
@@ -15,6 +16,7 @@ export class AsssortmentComponent implements OnInit {
   gymId: number
 
   constructor(private assortmentService: AssortmentService,
+              readonly userService: SecurityUserService,
               private toasts: ToastsService,
               private route: ActivatedRoute) {
   }

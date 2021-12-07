@@ -14,8 +14,9 @@
   </div>
 </div>
 <app-activity-list [activities]="timetable?.activities"
+                   [member]="member"
                    [gymId]="this.gymId"
                    [timetableId]="timetable?.id">
 </app-activity-list>
 <div>Ostatnia aktualizacja grafiku: {{ timetable?.updateDate | date: 'dd.MM.yyyy'}}</div>
-<a class="btn btn-success" routerLink="/timetable/activity/{{ gymId }}/{{ timetable?.id }}/create">Dodaj</a>
+<a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/timetable/activity/{{ gymId }}/{{ timetable?.id }}/create">Dodaj</a>

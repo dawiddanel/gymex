@@ -3,6 +3,9 @@ import {ToastsService} from "../../default/toasts.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {TimetableService} from "../timetable.service";
 import {Timetable} from "../../default/models/timetable.model";
+import {PersonService} from "../../person/person.service";
+import {Member, Pass, Person} from "../../default/models/person.model";
+import {SecurityUserService} from "../../security/security-user.service";
 
 @Component({
   selector: 'app-timetable',
@@ -12,12 +15,15 @@ import {Timetable} from "../../default/models/timetable.model";
 export class TimetableComponent implements OnInit {
 
   timetable?: Timetable
+  member?: Member
   gymId: number
   timetableId: number
 
   isOldTimetable: boolean
 
   constructor(private timetableService: TimetableService,
+              private personService: PersonService,
+              readonly userService: SecurityUserService,
               private toasts: ToastsService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -27,6 +33,9 @@ export class TimetableComponent implements OnInit {
     this.gymId = this.route.snapshot.params['gymId']
     this.timetableId = this.route.snapshot.params['timetableId']
     this.retrieveTimetable()
+    if (this.userService.isMember()) {
+      this.getMember()
+    }
   }
 
   retrieveTimetable(): void {
@@ -52,6 +61,18 @@ export class TimetableComponent implements OnInit {
           this.toasts.showErrorToast(`Błąd przy pobieraniu aktualnego grafiku`)
           this.router.navigate(['/assortment/equipmentDefinitions']);
 
+        }
+      })
+  }
+
+  getMember(): void {
+    this.personService.getCurrentMember()
+      .subscribe({
+        next: value => {
+          this.member = value
+        },
+        error: err => {
+          this.toasts.showErrorToast(`Błąd przy pobieraniu danych klienta`)
         }
       })
   }

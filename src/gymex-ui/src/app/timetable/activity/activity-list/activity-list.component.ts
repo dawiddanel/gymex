@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Activity} from "../../../default/models/activity.model";
+import {Member, Person} from "../../../default/models/person.model";
 
 @Component({
   selector: 'app-activity-list',
@@ -9,6 +10,7 @@ import {Activity} from "../../../default/models/activity.model";
 export class ActivityListComponent implements OnInit {
 
   @Input() activities: Activity[]
+  @Input() member: Member
   @Input() gymId: number
   @Input() timetableId: number
 

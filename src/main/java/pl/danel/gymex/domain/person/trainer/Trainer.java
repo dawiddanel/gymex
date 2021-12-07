@@ -31,13 +31,4 @@ public class Trainer extends Person {
         super(user, person);
     }
 
-    public void addActivity(Activity activity) {
-        activities.add(activity);
-        activity.setTrainer(this);
-    }
-
-    public void removeActivity(Activity activity) {
-        activities.remove(activity);
-        activity.setTrainer(null);
-    }
 }

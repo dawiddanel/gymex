@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SecurityService} from "../../security/security.service";
 import {ToastsService} from "../toasts.service";
 import {Router} from "@angular/router";
-import {UserService} from "../../security/user.service";
+import {SecurityUserService} from "../../security/security-user.service";
 import {User} from "../models/security.model";
 
 @Component({
@@ -13,7 +13,7 @@ import {User} from "../models/security.model";
 export class MainNavbarComponent implements OnInit {
 
   constructor(private securityService: SecurityService,
-              readonly userService: UserService,
+              readonly userService: SecurityUserService,
               private toasts: ToastsService,
               private router: Router) { }
 
