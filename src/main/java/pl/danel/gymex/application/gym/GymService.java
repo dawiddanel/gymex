@@ -123,4 +123,9 @@ public class GymService {
         gymRepository.save(gym);
     }
 
+    public List<PresenceDto> findAllMemberPresences() {
+        Member member = personService.currentlyLoggedMember();
+        return gymMapper.presences(presenceRepository.findAllByMember(member));
+    }
+
 }

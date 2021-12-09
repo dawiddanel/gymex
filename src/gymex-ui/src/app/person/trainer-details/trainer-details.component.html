@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h4 class="bd-highlight">{{ trainer.firstName }} {{ trainer.lastName }}</h4>
+</div>
+<div class="container flex-row">
+  <app-person [person]="trainer"></app-person>
+  <div class="text-center">
+    <h4 class="bd-highlight">Opis</h4>
+  </div>
+  <div class="card col-md-12 border-0">
+    {{ trainer.description }}
+  </div>  <div class="text-center">
+    <h4 class="bd-highlight">Prowadzone typy zajęć</h4>
+  </div>
+  <div class="card col-md-12 border-0" *ngFor="let activity of activities; let i = index">
+    {{ activity }}
+  </div>
+</div>

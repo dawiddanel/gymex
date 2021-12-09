@@ -43,7 +43,7 @@ public class Presence {
     }
 
     public void finish() {
-        DomainAsserts.assertState(endTime != null, "Presence already ended!");
+        DomainAsserts.assertState(endTime == null, "Presence already ended!");
         this.endTime = LocalDateTime.now();
     }
 

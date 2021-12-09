@@ -163,7 +163,7 @@ public class Activity {
 
     public void markAllAttendanceFalse() {
         this.attendance.stream()
-                .filter(Attendance::getAttended)
+                .filter(attendance1 -> attendance1.getAttended() == null)
                 .forEach(Attendance::resignAttendance);
     }
 

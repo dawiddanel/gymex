@@ -3,6 +3,7 @@ import {Presence} from "../../default/models/gym.model";
 import {GymService} from "../../gyms/gym.service";
 import {ToastsService} from "../../default/toasts.service";
 import {Router} from "@angular/router";
+import {SecurityUserService} from "../../security/security-user.service";
 
 @Component({
   selector: 'app-presence',
@@ -15,6 +16,7 @@ export class PresenceComponent implements OnInit {
   @Input() gymId: number
 
   constructor(private gymService: GymService,
+              readonly securityUserService: SecurityUserService,
               private toasts: ToastsService,
               private router: Router) {
   }

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ToastsService} from "../../default/toasts.service";
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TimetableService} from "../timetable.service";
 import {Timetable} from "../../default/models/timetable.model";
 import {PersonService} from "../../person/person.service";
-import {Member, Pass, Person} from "../../default/models/person.model";
+import {Member} from "../../default/models/person.model";
 import {SecurityUserService} from "../../security/security-user.service";
 
 @Component({

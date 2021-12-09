@@ -10,6 +10,8 @@ import pl.danel.gymex.application.gym.timetable.TimetableService;
 import pl.danel.gymex.application.gym.timetable.dto.ActivityDto;
 import pl.danel.gymex.application.gym.timetable.dto.TimetableDto;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "timetable", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -65,6 +67,21 @@ public class TimetableResource {
     @GetMapping("/{gymId}/{timetableId}/activity/{activityId}")
     public ActivityDto getActivity(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId) {
         return timetableService.getActivity(gymId, timetableId, activityId);
+    }
+
+    @GetMapping("/activity/trainer/all")
+    public List<ActivityDto> getAllTrainerActivities() {
+        return timetableService.findAllTrainerActivities();
+    }
+
+    @GetMapping("/activity/trainer/{id}/all")
+    public List<ActivityDto> getAllSpecificTrainerActivities(@PathVariable Long id) {
+        return timetableService.findAllSpecificTrainerActivities(id);
+    }
+
+    @GetMapping("/activity/member/all")
+    public List<ActivityDto> getAllMemberActivities() {
+        return timetableService.findAllMemberActivities();
     }
 
 }

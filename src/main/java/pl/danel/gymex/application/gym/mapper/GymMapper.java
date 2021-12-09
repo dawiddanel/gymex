@@ -1,6 +1,7 @@
 package pl.danel.gymex.application.gym.mapper;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import pl.danel.gymex.application.gym.dto.AddressDto;
 import pl.danel.gymex.application.gym.dto.GymDto;
 import pl.danel.gymex.application.gym.presence.PresenceDto;
@@ -9,6 +10,10 @@ import pl.danel.gymex.domain.gym.Gym;
 import pl.danel.gymex.domain.gym.address.Address;
 import pl.danel.gymex.domain.gym.presence.Presence;
 import pl.danel.gymex.domain.person.member.Member;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class GymMapper {
@@ -33,6 +38,15 @@ public class GymMapper {
                 .street(address.getStreet())
                 .buildingNumber(address.getBuildingNumber())
                 .build();
+    }
+
+    public List<PresenceDto> presences(List<Presence> presence) {
+        if (CollectionUtils.isEmpty(presence)) {
+            return Collections.emptyList();
+        }
+        return presence.stream()
+                .map(this::presence)
+                .collect(Collectors.toList());
     }
 
     public PresenceDto presence(Presence presence) {

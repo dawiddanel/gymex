@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {GymListComponent} from "./gyms/gym-list/gym-list.component";
 import {GymAddComponent} from "./gyms/gym-add/gym-add.component";
 import {GymEditComponent} from "./gyms/gym-edit/gym-edit.component";
-import {ContactComponent} from "./default/contact/contact.component";
 import {EquipmentDefinitionListComponent} from "./assortment/equipment_definition/equipment-definition-list/equipment-definition-list.component";
 import {EquipmentDefinitionAddComponent} from "./assortment/equipment_definition/equipment-definition-add/equipment-definition-add.component";
 import {EquipmentDefinitionEditComponent} from "./assortment/equipment_definition/equipment-definition-edit/equipment-definition-edit.component";
@@ -29,8 +28,15 @@ import {TrainerProfileComponent} from "./person/profiles/trainer-profile/trainer
 import {EmployeeProfileComponent} from "./person/profiles/employee-profile/employee-profile.component";
 import {OwnerProfileComponent} from "./person/profiles/owner-profile/owner-profile.component";
 import {PassAddComponent} from "./person/pass/pass-add/pass-add.component";
-import {PresenceListComponent} from "./presence/presence-list/presence-list.component";
 import {PresenceAddComponent} from "./presence/presence-add/presence-add.component";
+import {PresencesComponent} from "./presence/presences/presences.component";
+import {TrainerListComponent} from "./person/trainer-list/trainer-list.component";
+import {OwnerEmployeeRoleGuard} from "./security/owner-employee-role.guard";
+import {MemberRoleGuard} from "./security/member-role.guard";
+import {TrainerRoleGuard} from "./security/trainer-role.guard";
+import {OwnerRoleGuard} from "./security/owner-role.guard";
+import {EmployeeRoleGuard} from "./security/employee-role.guard";
+import {QuoteComponent} from "./default/quote/quote.component";
 
 const routes: Routes = [
   {
@@ -38,36 +44,36 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [AuthGuard],
     children: [
+      {path: '', component: QuoteComponent},
       {path: 'gyms', component: GymListComponent},
-      {path: 'gyms/create', component: GymAddComponent},
-      {path: 'gyms/:id', component: GymEditComponent},
+      {path: 'gyms/create', component: GymAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'gyms/:id', component: GymEditComponent, canActivate: [OwnerEmployeeRoleGuard]},
       {path: 'assortment/equipmentDefinitions', component: EquipmentDefinitionListComponent},
-      {path: 'assortment/equipmentDefinitions/create', component: EquipmentDefinitionAddComponent},
-      {path: 'assortment/equipmentDefinitions/:id', component: EquipmentDefinitionEditComponent},
+      {path: 'assortment/equipmentDefinitions/create', component: EquipmentDefinitionAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'assortment/equipmentDefinitions/:id', component: EquipmentDefinitionEditComponent, canActivate: [OwnerEmployeeRoleGuard]},
       {path: 'assortment/equipment/:gymId', component: AsssortmentComponent},
-      {path: 'assortment/equipment/:gymId/create', component: EquipmentAddComponent},
-      {path: 'assortment/equipment/:gymId/:id', component: EquipmentEditComponent},
+      {path: 'assortment/equipment/:gymId/create', component: EquipmentAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'assortment/equipment/:gymId/:id', component: EquipmentEditComponent, canActivate: [OwnerEmployeeRoleGuard]},
       {path: 'timetable/activityDefinitions', component: ActivityDefinitionListComponent},
-      {path: 'timetable/activityDefinitions/create', component: ActivityDefinitionAddComponent},
-      {path: 'timetable/activityDefinitions/:id', component: ActivityDefinitionEditComponent},
-      {path: 'timetable/activity/:gymId/:timetableId/:id/attendance', component: AttendanceListComponent},
+      {path: 'timetable/activityDefinitions/create', component: ActivityDefinitionAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'timetable/activityDefinitions/:id', component: ActivityDefinitionEditComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'timetable/activity/:gymId/:timetableId/:id/attendance', component: AttendanceListComponent, canActivate: [OwnerEmployeeRoleGuard]},
       {path: 'timetable/activity/:gymId', component: TimetableComponent},
       {path: 'timetable/activity/:gymId/:timetableId', component: TimetableComponent},
-      {path: 'timetable/activity/:gymId/:timetableId/create', component: ActivityAddComponent},
-      {path: 'timetable/activity/:gymId/:timetableId/:id', component: ActivityEditComponent},
-      {path: 'profile/member/:id/pass', component: PassAddComponent},
-      {path: 'profile/member', component: MemberProfileComponent},
-      {path: 'profile/owner', component: OwnerProfileComponent},
-      {path: 'profile/employee', component: EmployeeProfileComponent},
-      {path: 'profile/trainer', component: TrainerProfileComponent},
-      {path: 'technical/user/add', component: TechnicalUserAddComponent},
-      {path: 'people/owners', component: PersonListComponent, data: {role: Role.OWNER}},
-      {path: 'people/members', component: PersonListComponent, data: {role: Role.MEMBER}},
-      {path: 'people/employees', component: PersonListComponent, data: {role: Role.EMPLOYEE}},
-      {path: 'people/trainers', component: PersonListComponent, data: {role: Role.TRAINER}},
-      {path: 'presence/:gymId', component: PresenceListComponent},
-      {path: 'presence/:gymId/create', component: PresenceAddComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'timetable/activity/:gymId/:timetableId/create', component: ActivityAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'timetable/activity/:gymId/:timetableId/:id', component: ActivityEditComponent, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'profile/member/:id/pass', component: PassAddComponent, canActivate: [MemberRoleGuard]},
+      {path: 'profile/member', component: MemberProfileComponent, canActivate: [MemberRoleGuard]},
+      {path: 'profile/owner', component: OwnerProfileComponent, canActivate: [OwnerRoleGuard]},
+      {path: 'profile/employee', component: EmployeeProfileComponent, canActivate: [EmployeeRoleGuard]},
+      {path: 'profile/trainer', component: TrainerProfileComponent, canActivate: [TrainerRoleGuard]},
+      {path: 'technical/user/add', component: TechnicalUserAddComponent, canActivate: [OwnerRoleGuard]},
+      {path: 'people/owners', component: PersonListComponent, data: {role: Role.OWNER}, canActivate: [OwnerRoleGuard]},
+      {path: 'people/members', component: PersonListComponent, data: {role: Role.MEMBER}, canActivate: [OwnerEmployeeRoleGuard]},
+      {path: 'people/employees', component: PersonListComponent, data: {role: Role.EMPLOYEE}, canActivate: [OwnerRoleGuard]},
+      {path: 'people/trainers', component: TrainerListComponent},
+      {path: 'presence/:gymId', component: PresencesComponent},
+      {path: 'presence/:gymId/create', component: PresenceAddComponent, canActivate: [OwnerEmployeeRoleGuard]},
     ]
   },
 

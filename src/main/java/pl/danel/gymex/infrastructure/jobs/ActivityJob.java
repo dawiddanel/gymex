@@ -38,8 +38,12 @@ public class ActivityJob {
 
     @Scheduled(cron = "0 0/10 * * * ?")
     public void changeActivityAttendancesStatus() {
-        List<Activity> activities = timetableService.activitiesForStatus(ActivityStatus.FINISHED);
+        List<Activity> finishedActivities = timetableService.activitiesForStatus(ActivityStatus.FINISHED);
 
-        activities.forEach(activity -> timetableService.markAllAsAttendedFalse(activity.getId()));
+        finishedActivities.forEach(activity -> timetableService.markAllAsAttendedFalse(activity.getId()));
+
+        List<Activity> cancelledActivities = timetableService.activitiesForStatus(ActivityStatus.CANCELLED);
+
+        cancelledActivities.forEach(activity -> timetableService.markAllAsAttendedFalse(activity.getId()));
     }
 }

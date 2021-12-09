@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
               }
             })
           this.toasts.showSuccessToast(`Zalogowano`)
-          this.router.navigate(['/gyms']);
+          this.router.navigate(['/']);
         },
         error: err => {
           this.toasts.showErrorToast(`Błąd przy logowaniu`)

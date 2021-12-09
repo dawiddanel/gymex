@@ -78,12 +78,25 @@ public class PersonService {
                 .orElseThrow(() -> new NotFoundException("no such MEMBER present"));
     }
 
+    public Trainer trainerById(Long id) {
+        return trainerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("no such TRAINER present"));
+    }
+
     public Member currentlyLoggedMember() {
         User user = userService.getCurrentUser();
         if (Role.MEMBER.equals(user.getRole())) {
             return (Member) user.getPerson();
         }
         throw new InvalidArgumentException("currently logged person is not a MEMBER");
+    }
+
+    public Trainer currentlyLoggedTrainer() {
+        User user = userService.getCurrentUser();
+        if (Role.TRAINER.equals(user.getRole())) {
+            return (Trainer) user.getPerson();
+        }
+        throw new InvalidArgumentException("currently logged person is not a TRAINER");
     }
 
     public PassDto createPass(CreatePassCommand command) {

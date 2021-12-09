@@ -1,6 +1,3 @@
-<div class="text-center">
-  <h4 class="bd-highlight">Aktualny obłożenie siłowni</h4>
-</div>
 <div class="app flex-row align-items-center">
   <div class="card-deck row">
     <div class="card col-md-4 border-0" *ngFor="let presence of presences; let i = index">
@@ -12,7 +9,4 @@
       </div>
     </div>
   </div>
-  <a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/presence/{{ gymId }}/create">Nowa osoba</a>
 </div>
-<a class="btn btn-primary" *ngIf="userService.isOwnerOrEmployee()" routerLink="/gyms">Wróć do listy</a>
-

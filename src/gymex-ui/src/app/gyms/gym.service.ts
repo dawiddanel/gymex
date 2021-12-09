@@ -43,4 +43,8 @@ export class GymService {
   finishPresence(id: any, presenceId: any): Observable<void> {
     return this.api.put(`gym/${id}/presence/${presenceId}/finish`)
   }
+
+  getAllMemberPresence(): Observable<Presence[]> {
+    return this.api.get(`gym/presence/member/all`)
+  }
 }

@@ -158,7 +158,7 @@ public class TimetableService {
     public ActivityDto resignAttendance(Long gymId, Long timetableId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 
-        Timetable timetable = actualGymTimetable(gymId);
+        Timetable timetable = getTimetableById(gymId, timetableId);
 
         Activity activity = timetable.activityById(activityId);
 
@@ -206,6 +206,22 @@ public class TimetableService {
         Activity activity = activityRepository.getById(activityId);
         activity.markAllAttendanceFalse();
         activityRepository.save(activity);
+    }
+
+    public List<ActivityDto> findAllTrainerActivities() {
+        Trainer trainer = personService.currentlyLoggedTrainer();
+
+        return timetableMapper.activities(activityRepository.findAllByTrainer(trainer));
+    }
+
+    public List<ActivityDto> findAllSpecificTrainerActivities(Long trainerId) {
+        Trainer trainer = personService.trainerById(trainerId);
+        return timetableMapper.activities(activityRepository.findAllByTrainer(trainer));
+    }
+
+    public List<ActivityDto> findAllMemberActivities() {
+        Member member = personService.currentlyLoggedMember();
+        return timetableMapper.activities(activityRepository.findAllByParticipantsContains(member));
     }
 
 }

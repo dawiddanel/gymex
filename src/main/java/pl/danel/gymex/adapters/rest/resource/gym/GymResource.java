@@ -9,6 +9,7 @@ import pl.danel.gymex.adapters.rest.resource.gym.presence.CreatePresenceCommand;
 import pl.danel.gymex.application.gym.GymService;
 import pl.danel.gymex.application.gym.dto.GymDto;
 import pl.danel.gymex.application.gym.presence.PresenceDto;
+import pl.danel.gymex.application.gym.timetable.dto.ActivityDto;
 import pl.danel.gymex.domain.gym.presence.Presence;
 
 import java.util.List;
@@ -58,6 +59,11 @@ public class GymResource {
     @PutMapping("/{id}/presence/{presenceId}/finish")
     public void finishPresence(@PathVariable Long id, @PathVariable Long presenceId) {
         gymService.finishMemberPresence(id, presenceId);
+    }
+
+    @GetMapping("/presence/member/all")
+    public List<PresenceDto> getAllMemberPresences() {
+        return gymService.findAllMemberPresences();
     }
 
 }

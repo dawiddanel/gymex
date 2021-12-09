@@ -52,4 +52,16 @@ export class TimetableService {
   resignAttendance(gymId: any, timetableId: any, activityId: any, userId: any): Observable<Activity> {
     return this.api.post(`timetable/${gymId}/${timetableId}/activity/${activityId}/unconfirm/${userId}`)
   }
+
+  getAllTrainerActivities(): Observable<Activity[]> {
+    return this.api.get(`timetable/activity/trainer/all`)
+  }
+
+  getAllSpecificTrainerActivities(id: any): Observable<Activity[]> {
+    return this.api.get(`timetable/activity/trainer/${id}/all`)
+  }
+
+  getAllMemberActivities(): Observable<Activity[]> {
+    return this.api.get(`timetable/activity/member/all`)
+  }
 }

@@ -2,10 +2,10 @@
   <div class="col-md-8">
     <div class="card-body">
       <h5 class="card-title">{{ presence.member.firstName }} {{ presence.member.lastName }}</h5>
-      <span><strong>Od: </strong>: {{ presence.startTime | date: 'dd.MM.yyyy HH:mm'}}</span><br/>
-      <span *ngIf="presence.endTime; else elseBlock"><strong>Do: </strong>: {{ presence.endTime | date: 'dd.MM.yyyy HH:mm'}}</span><br/>
+      <span><strong>Od</strong>: {{ presence.startTime | date: 'dd.MM.yyyy HH:mm'}}</span><br/>
+      <span *ngIf="presence.endTime; else elseBlock"><strong>Do</strong>: {{ presence.endTime | date: 'dd.MM.yyyy HH:mm'}}</span><br/>
       <ng-template #elseBlock><span><strong>Trening trwa</strong></span><br/></ng-template>
     </div>
-    <button class="btn btn-primary" *ngIf="!presence.endTime" (click)="finishPresence()">Zakończ sesję</button>
+    <button class="btn btn-primary" *ngIf="securityUserService.isOwnerOrEmployee() && !presence.endTime" (click)="finishPresence()">Zakończ sesję</button>
   </div>
 </div>
