@@ -12,7 +12,7 @@
           name="startDate" #startDate="ngModel"
           required
         />
-        <p [hidden]="(startDate.untouched) || (startDate.touched && startDate.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(startDate.untouched) || (startDate.touched && startDate.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="endDate">Koniec obowiązywania</label>
@@ -24,7 +24,7 @@
           name="endDate" #endDate="ngModel"
           required
         />
-        <p [hidden]="(endDate.untouched) || (endDate.touched && endDate.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(endDate.untouched) || (endDate.touched && endDate.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>

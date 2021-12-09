@@ -12,8 +12,13 @@
           name="name" #name="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (name.touched || name.dirty) && !name.valid }"
         />
-        <p [hidden]="(name.untouched) || (name.touched && name.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="name.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="capacity">Maksymalna liczba ćwiczących</label>
@@ -25,8 +30,16 @@
           name="capacity" #capacity="ngModel"
           required
           min="1"
+          [ngClass]="{'is-invalid': (capacity.touched || capacity.dirty) && !capacity.valid }"
         />
-        <p [hidden]="(capacity.untouched) || (capacity.touched && capacity.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="capacity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="capacity.hasError('min')" class="alert alert-danger">
+                Wartość nie może być mniejsza niż 1
+        </span>
+        </span>
       </div>
     </div>
     <br/>
@@ -42,8 +55,13 @@
           name="country" #country="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (country.touched || country.dirty) && !country.valid }"
         />
-        <p [hidden]="(country.untouched) || (country.touched && country.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="country.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="city">Miasto</label>
@@ -55,8 +73,13 @@
           name="city" #city="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (city.touched || city.dirty) && !city.valid }"
         />
-        <p [hidden]="(city.untouched) || (city.touched && city.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="city.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="postalCode">Kod pocztowy</label>
@@ -68,8 +91,17 @@
           name="postalCode" #postalCode="ngModel"
           required
           maxlength="50"
+          postalCode
+          [ngClass]="{'is-invalid': (postalCode.touched || postalCode.dirty) && !postalCode.valid }"
         />
-        <p [hidden]="(postalCode.untouched) || (postalCode.touched && postalCode.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="postalCode.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+          <span *ngIf="postalCode.hasError('postalCode')" class="alert alert-danger">
+                Błędny format kodu pocztowego
+        </span>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -83,8 +115,13 @@
           name="street" #street="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (street.touched || street.dirty) && !street.valid }"
         />
-        <p [hidden]="(street.untouched) || (street.touched && street.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="street.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="buildingNumber">Numer budynku</label>
@@ -96,8 +133,13 @@
           name="buildingNumber" #buildingNumber="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (buildingNumber.touched || buildingNumber.dirty) && !buildingNumber.valid }"
         />
-        <p [hidden]="(buildingNumber.untouched) || (buildingNumber.touched && buildingNumber.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="buildingNumber.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <br/>

@@ -13,7 +13,7 @@
           required
           maxlength="50"
         />
-        <p [hidden]="(username.untouched) || (username.touched && username.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(username.untouched) || (username.touched && username.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="password">Hasło</label>
@@ -25,7 +25,7 @@
           name="password" #password="ngModel"
           required
         />
-        <p [hidden]="(password.untouched) || (password.touched && password.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(password.untouched) || (password.touched && password.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="email">Adres email</label>
@@ -37,7 +37,7 @@
           name="email" #email="ngModel"
           required
         />
-        <p [hidden]="(email.untouched) || (email.touched && email.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(email.untouched) || (email.touched && email.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -51,7 +51,7 @@
           name="firstName" #firstName="ngModel"
           required
         />
-        <p [hidden]="(firstName.untouched) || (firstName.touched && firstName.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(firstName.untouched) || (firstName.touched && firstName.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="lastName">Nazwisko</label>
@@ -63,7 +63,7 @@
           name="lastName" #lastName="ngModel"
           required
         />
-        <p [hidden]="(lastName.untouched) || (lastName.touched && lastName.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(lastName.untouched) || (lastName.touched && lastName.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <div class="row">
@@ -77,7 +77,7 @@
           name="pesel" #pesel="ngModel"
           required
         />
-        <p [hidden]="(pesel.untouched) || (pesel.touched && pesel.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(pesel.untouched) || (pesel.touched && pesel.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
       <div class="col">
         <label for="birthDate">Data urodzenia</label>
@@ -89,7 +89,7 @@
           name="birthDate" #birthDate="ngModel"
           required
         />
-        <p [hidden]="(birthDate.untouched) || (birthDate.touched && birthDate.valid)" class="alert alert-danger">Pole wymagane</p>
+        <p [hidden]="(birthDate.untouched) || (birthDate.touched && birthDate.valid)" class="alert alert-danger">Błąd danych</p>
       </div>
     </div>
     <br/>

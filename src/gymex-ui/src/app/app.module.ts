@@ -59,6 +59,10 @@ import {PresencesComponent} from './presence/presences/presences.component';
 import {TrainerListComponent} from './person/trainer-list/trainer-list.component';
 import {TrainerDetailsComponent} from './person/trainer-details/trainer-details.component';
 import { QuoteComponent } from './default/quote/quote.component';
+import {DateFromFutureValidator} from "./default/directives/DateFromFutureValidator";
+import {DateBiggerThanValidator} from "./default/directives/DateBiggerThanValidator";
+import {PostalCodeValidator} from "./default/directives/PostalCodeValidator";
+import {EmailValidator} from "./default/directives/EmailValidator";
 
 @NgModule({
   declarations: [
@@ -114,7 +118,11 @@ import { QuoteComponent } from './default/quote/quote.component';
     PresencesComponent,
     TrainerListComponent,
     TrainerDetailsComponent,
-    QuoteComponent
+    QuoteComponent,
+    DateFromFutureValidator,
+    DateBiggerThanValidator,
+    PostalCodeValidator,
+    EmailValidator
   ],
   imports: [
     BrowserModule,
