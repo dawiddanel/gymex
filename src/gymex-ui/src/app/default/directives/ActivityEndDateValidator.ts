@@ -34,7 +34,6 @@ export class ActivityEndDateValidator implements Validator {
     }
     let activityStartDate = new Date(c.value)
     activityStartDate.setMinutes(activityStartDate.getMinutes() - 30)
-    console.log(activityStartDate)
     const activityEndDate = ActivityStartDate ? new Date(ActivityStartDate.value) : null;
 
     return ActivityStartDate && (activityStartDate < activityEndDate) ? {activityEnd: true} : null;
