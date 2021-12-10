@@ -10,10 +10,15 @@
                 name="member"
                 #member="ngModel"
                 required
+                [ngClass]="{'is-invalid': member.touched && !member.valid }"
         >
           <option *ngFor="let member of members" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
         </select>
-        <p [hidden]="(member.untouched) || (member.touched && member.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="member.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <br/>

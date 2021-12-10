@@ -35,9 +35,6 @@ export class DateBiggerThanValidator implements Validator {
     const dateValue = new Date(c.value)
     const otherDate = OtherDate ? new Date(OtherDate.value) : null;
 
-    console.log("date sprawdzajace: "+dateValue)
-    console.log("otherDate: " + otherDate)
-
     return OtherDate && (dateValue < otherDate || sameDay(dateValue, otherDate)) ? { dateEarlier: true } : null;
   }
 

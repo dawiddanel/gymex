@@ -1,5 +1,5 @@
 <div class="container">
-  <h4>{{ gym.name }}</h4>
+  <h4>Edycja siłowni</h4>
   <form (ngSubmit)="updateGym()" #gymEditForm="ngForm">
     <div class="row">
       <div class="col">
@@ -152,6 +152,6 @@
       Aktualizuj
     </button>
   </form>
-  <button class="btn btn-danger" (click)="delete()">Usuń</button>
+  <button class="btn btn-danger" (click)="delete()" disabled>Usuń</button>
   <a class="btn btn-primary" routerLink="/gyms">Wróć do listy</a>
 </div>

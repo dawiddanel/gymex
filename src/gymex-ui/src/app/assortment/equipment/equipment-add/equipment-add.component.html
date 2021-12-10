@@ -10,10 +10,15 @@
                 name="definition"
                 #definition="ngModel"
                 required
+                [ngClass]="{'is-invalid': definition.touched && !definition.valid }"
         >
           <option *ngFor="let definition of definitions" [value]="definition.id">{{ definition.name }}</option>
         </select>
-        <p [hidden]="(definition.untouched) || (definition.touched && definition.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="definition.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -27,8 +32,16 @@
           name="quantity" #quantity="ngModel"
           required
           min="1"
+          [ngClass]="{'is-invalid': (quantity.touched || quantity.dirty) && !quantity.valid }"
         />
-        <p [hidden]="(quantity.untouched) || (quantity.touched && quantity.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="quantity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="quantity.hasError('min')" class="alert alert-danger">
+                Minimalna wartość to 1
+        </span>
+        </span>
       </div>
     </div>
     <br/>

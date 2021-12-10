@@ -11,9 +11,14 @@
           [(ngModel)]="registerCommand.username"
           name="username" #username="ngModel"
           required
-          maxlength="50"
+          maxlength="25"
+          [ngClass]="{'is-invalid': (username.touched || username.dirty) && !username.valid }"
         />
-        <p [hidden]="(username.untouched) || (username.touched && username.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="username.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="password">Hasło</label>
@@ -24,8 +29,13 @@
           [(ngModel)]="registerCommand.password"
           name="password" #password="ngModel"
           required
+          [ngClass]="{'is-invalid': (password.touched || password.dirty) && !password.valid }"
         />
-        <p [hidden]="(password.untouched) || (password.touched && password.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="password.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="email">Adres email</label>
@@ -36,8 +46,17 @@
           [(ngModel)]="registerCommand.email"
           name="email" #email="ngModel"
           required
+          email
+          [ngClass]="{'is-invalid': (email.touched || email.dirty) && !email.valid }"
         />
-        <p [hidden]="(email.untouched) || (email.touched && email.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="email.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="email.hasError('email')" class="alert alert-danger">
+                Błędny format email
+        </span>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -50,8 +69,14 @@
           [(ngModel)]="registerCommand.firstName"
           name="firstName" #firstName="ngModel"
           required
+          maxlength="25"
+          [ngClass]="{'is-invalid': (firstName.touched || firstName.dirty) && !firstName.valid }"
         />
-        <p [hidden]="(firstName.untouched) || (firstName.touched && firstName.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="firstName.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="lastName">Nazwisko</label>
@@ -62,8 +87,14 @@
           [(ngModel)]="registerCommand.lastName"
           name="lastName" #lastName="ngModel"
           required
+          maxlength="25"
+          [ngClass]="{'is-invalid': (lastName.touched || lastName.dirty) && !lastName.valid }"
         />
-        <p [hidden]="(lastName.untouched) || (lastName.touched && lastName.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="lastName.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -76,8 +107,17 @@
           [(ngModel)]="registerCommand.pesel"
           name="pesel" #pesel="ngModel"
           required
+          pesel
+          [ngClass]="{'is-invalid': (pesel.touched || pesel.dirty) && !pesel.valid }"
         />
-        <p [hidden]="(pesel.untouched) || (pesel.touched && pesel.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="pesel.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="pesel.hasError('pesel')" class="alert alert-danger">
+                Błędny pesel
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="birthDate">Data urodzenia</label>
@@ -88,8 +128,17 @@
           [(ngModel)]="registerCommand.birthDate"
           name="birthDate" #birthDate="ngModel"
           required
+          pastDate
+          [ngClass]="{'is-invalid': (birthDate.touched || birthDate.dirty) && !birthDate.valid }"
         />
-        <p [hidden]="(birthDate.untouched) || (birthDate.touched && birthDate.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="birthDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+          <span *ngIf="birthDate.hasError('pastDate')" class="alert alert-danger">
+                Data musi być z przeszłości
+        </span>
+        </span>
       </div>
     </div>
     <br/>

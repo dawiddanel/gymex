@@ -12,8 +12,13 @@
           name="name" #name="ngModel"
           required
           maxlength="50"
+          [ngClass]="{'is-invalid': (name.touched || name.dirty) && !name.valid }"
         />
-        <p [hidden]="(name.untouched) || (name.touched && name.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="name.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="description">Opis</label>
@@ -24,9 +29,14 @@
           [(ngModel)]="definitionCommand.description"
           name="description" #description="ngModel"
           required
-          min="1"
+          maxlength="100"
+          [ngClass]="{'is-invalid': (description.touched || description.dirty) && !description.valid }"
         />
-        <div [hidden]="(description.untouched) || (description.touched && description.valid)" class="alert alert-danger">Błąd danych</div>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="description.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <div class="row">
@@ -38,10 +48,15 @@
                 name="level"
                 #level="ngModel"
                 required
+                [ngClass]="{'is-invalid': level.touched && !level.valid }"
         >
           <option *ngFor="let level of levels" [value]="level.value">{{ level.value | levelPipe }}</option>
         </select>
-        <p [hidden]="(level.untouched) || (level.touched && level.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="level.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <br/>

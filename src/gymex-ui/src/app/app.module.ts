@@ -63,6 +63,10 @@ import {DateFromFutureValidator} from "./default/directives/DateFromFutureValida
 import {DateBiggerThanValidator} from "./default/directives/DateBiggerThanValidator";
 import {PostalCodeValidator} from "./default/directives/PostalCodeValidator";
 import {EmailValidator} from "./default/directives/EmailValidator";
+import {PeselValidator} from "./default/directives/PeselValidator";
+import {DateFromPastValidator} from "./default/directives/DateFromPastValidator";
+import {ActivityStartDateValidator} from "./default/directives/ActivityStartDateValidator";
+import {ActivityEndDateValidator} from "./default/directives/ActivityEndDateValidator";
 
 @NgModule({
   declarations: [
@@ -122,7 +126,11 @@ import {EmailValidator} from "./default/directives/EmailValidator";
     DateFromFutureValidator,
     DateBiggerThanValidator,
     PostalCodeValidator,
-    EmailValidator
+    EmailValidator,
+    PeselValidator,
+    DateFromPastValidator,
+    ActivityStartDateValidator,
+    ActivityEndDateValidator
   ],
   imports: [
     BrowserModule,
