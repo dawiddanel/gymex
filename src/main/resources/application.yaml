@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: "gymex"
+  profiles:
+    active: integration
+server:
+  port: 8085
+  servlet:
+    context-path: "/gymex"
+jwt:
+  secret: "NoAoULCnjLkZMTuLh1n8HRbsPS07wJIk"
+---
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  datasource:
+    url: "jdbc:h2:mem:testdb"
+  jpa:
+    hibernate:
+      ddl-auto: create
+  config:
+    activate:
+      on-profile: integration
+---
+spring:
+  datasource:
+    url: "TODO"
+    username: "TODO"
+    password: "TODO"
+  config:
+    activate:
+      on-profile: runtime

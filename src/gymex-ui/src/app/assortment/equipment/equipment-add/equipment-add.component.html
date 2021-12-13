@@ -1,0 +1,57 @@
+<div class="container">
+  <h4>Dodawanie wyposażenia</h4>
+  <form (ngSubmit)="saveEquipment()" #equipmentAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="definition">Definicja</label>
+        <select class="form-control"
+                id="definition"
+                [(ngModel)]="equipmentCommand.definitionId"
+                name="definition"
+                #definition="ngModel"
+                required
+                [ngClass]="{'is-invalid': definition.touched && !definition.valid }"
+        >
+          <option *ngFor="let definition of definitions" [value]="definition.id">{{ definition.name }}</option>
+        </select>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="definition.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="quantity">Ilość</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          [(ngModel)]="equipmentCommand.quantity"
+          name="quantity" #quantity="ngModel"
+          required
+          min="1"
+          [ngClass]="{'is-invalid': (quantity.touched || quantity.dirty) && !quantity.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="quantity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="quantity.hasError('min')" class="alert alert-danger">
+                Minimalna wartość to 1
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!equipmentAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!equipmentAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

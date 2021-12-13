@@ -1,0 +1,13 @@
+<div class="text-center">
+  <h4 class="bd-highlight">Definicje aktywności</h4>
+</div>
+<div class="app flex-row align-items-center">
+  <div class="card-deck row">
+    <div class="card col-md-4 border-0" *ngFor="let definition of definitions; let i = index">
+      <div class="card-block">
+        <app-activity-definition [definition]="definition"></app-activity-definition>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-success" routerLink="/timetable/activityDefinitions/create">Dodaj</a>

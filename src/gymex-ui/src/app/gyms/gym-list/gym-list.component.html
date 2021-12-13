@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <div class="text-center">
+      <h4 class="bd-highlight">Dostępne siłownie</h4>
+    </div>
+  </div>
+  <div class="app flex-row align-items-center">
+    <div class="card-deck row">
+      <div class="card col-md-12 border-0" *ngFor="let gym of gyms; let i = index">
+        <div class="card-block">
+          <app-gym [gym]="gym"></app-gym>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/gyms/create">Dodaj</a>
+</div>

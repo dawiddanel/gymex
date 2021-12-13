@@ -1,0 +1,9 @@
+<div class="text-center">
+  <h4 class="bd-highlight">Aktualny obłożenie siłowni</h4>
+</div>
+<app-presence-list [presences]="presences"
+                   [gymId]="this.gymId">
+</app-presence-list>
+<a class="btn btn-success" *ngIf="userService.isOwnerOrEmployee()" routerLink="/presence/{{ gymId }}/create">Nowa osoba</a>
+<a class="btn btn-primary" *ngIf="userService.isOwnerOrEmployee()" routerLink="/gyms">Wróć do listy</a>
+

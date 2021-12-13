@@ -1,0 +1,200 @@
+<div class="container">
+  <h4>Dodawanie nowej siłowni</h4>
+  <form (ngSubmit)="saveGym()" #gymAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="name">Nazwa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="gymCommand.name"
+          name="name" #name="ngModel"
+          required
+          maxlength="50"
+          [ngClass]="{'is-invalid': (name.touched || name.dirty) && !name.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="name.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="capacity">Maksymalna liczba ćwiczących</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          [(ngModel)]="gymCommand.capacity"
+          name="capacity" #capacity="ngModel"
+          required
+          min="1"
+          [ngClass]="{'is-invalid': (capacity.touched || capacity.dirty) && !capacity.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="capacity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="capacity.hasError('min')" class="alert alert-danger">
+                Wartość nie może być mniejsza niż 1
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="timetableStartDate">Data startu pierwszego grafiku zajęć</label>
+        <input
+          type="date"
+          class="form-control"
+          id="timetableStartDate"
+          [(ngModel)]="gymCommand.timetableStartDate"
+          #timetableStartDate="ngModel"
+          name="timetableStartDate"
+          required
+          futureDate
+          [ngClass]="{'is-invalid': (timetableStartDate.touched || timetableStartDate.dirty) && !timetableStartDate.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="timetableStartDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="timetableStartDate.hasError('futureDate')" class="alert alert-danger">
+                Data musi być dzisiejsza lub z przyszłości
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="timetableEndDate">Data końca pierwszego grafiku zajęć</label>
+        <input
+          type="date"
+          class="form-control"
+          id="timetableEndDate"
+          [(ngModel)]="gymCommand.timetableEndDate"
+          name="timetableEndDate" #timetableEndDate="ngModel"
+          required
+          dateBiggerThan = "timetableStartDate"
+          [ngClass]="{'is-invalid': (timetableEndDate.touched || timetableEndDate.dirty) && !timetableEndDate.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="timetableEndDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="timetableEndDate.hasError('dateEarlier')" class="alert alert-danger">
+                Data musi być późniejsza od daty początku grafiku
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <h4>Adres: </h4>
+    <div class="row">
+      <div class="col">
+        <label for="country">Kraj</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          [(ngModel)]="gymCommand.address.country"
+          name="country" #country="ngModel"
+          required
+          maxlength="50"
+          [ngClass]="{'is-invalid': (country.touched || country.dirty) && !country.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="country.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="city">Miasto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          [(ngModel)]="gymCommand.address.city"
+          name="city" #city="ngModel"
+          required
+          maxlength="50"
+          [ngClass]="{'is-invalid': (city.touched || city.dirty) && !city.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="city.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="postalCode">Kod pocztowy</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postalCode"
+          [(ngModel)]="gymCommand.address.postalCode"
+          name="postalCode" #postalCode="ngModel"
+          required
+          maxlength="50"
+          postalCode
+          [ngClass]="{'is-invalid': (postalCode.touched || postalCode.dirty) && !postalCode.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="postalCode.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+          <span *ngIf="postalCode.hasError('postalCode')" class="alert alert-danger">
+                Błędny format kodu pocztowego
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="street">Ulica</label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          [(ngModel)]="gymCommand.address.street"
+          name="street" #street="ngModel"
+          required
+          maxlength="50"
+          [ngClass]="{'is-invalid': (street.touched || street.dirty) && !street.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="street.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="buildingNumber">Numer budynku</label>
+        <input
+          type="text"
+          class="form-control"
+          id="buildingNumber"
+          [(ngModel)]="gymCommand.address.buildingNumber"
+          name="buildingNumber" #buildingNumber="ngModel"
+          required
+          maxlength="50"
+          [ngClass]="{'is-invalid': (buildingNumber.touched || buildingNumber.dirty) && !buildingNumber.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="buildingNumber.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!gymAddForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!gymAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

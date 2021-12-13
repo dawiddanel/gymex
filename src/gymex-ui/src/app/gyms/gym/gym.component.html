@@ -1,0 +1,31 @@
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ gym.name }}</h5>
+        <p class="card-text">Siłownia jest w stanie przyjąć <strong>{{ gym.capacity }}</strong> klientów</p>
+        <p class="card-text">Adres: <br/>
+          <span><strong>Kraj</strong>: {{ gym.address.country | countryPipe}}</span><br/>
+          <span><strong>Miasto</strong>: {{ gym.address.city }}</span><br/>
+          <span><strong>Kod pocztowy</strong>: {{ gym.address.postalCode }}</span><br/>
+          <span><strong>Ulica</strong>: {{ gym.address.street }}</span><br/>
+          <span><strong>Numer budynku</strong>: {{ gym.address.buildingNumber }}</span>
+        </p>
+        <div class="container" *ngIf="userService.isOwnerOrEmployee()">
+        <h6 class="card-title">Panel sterowania</h6>
+        <a class="btn btn-primary" routerLink="/gyms/{{ gym.id }}">Edytuj dane</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body">
+        <h5 class="card-title">Opcje</h5>
+        <div>Przeglądaj wszystkie potrzebne informacje</div>
+        <div><a class="btn btn-primary" routerLink="/timetable/activity/{{ gym.id }}">Grafik zajęć</a></div>
+        <div><a class="btn btn-primary" routerLink="/assortment/equipment/{{ gym.id }}">Wyposażenie</a></div>
+        <div><a class="btn btn-primary" *ngIf="userService.isOwnerOrEmployee()" routerLink="/presence/{{ gym.id }}">Zapis obecności</a></div>
+        <div><a class="btn btn-primary" (click)="countActualPresence() ">Aktualna liczba ćwiczących</a></div>
+      </div>
+    </div>
+  </div>
+</div>

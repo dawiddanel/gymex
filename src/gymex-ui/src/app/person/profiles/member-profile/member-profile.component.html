@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="text-center">
+    <h4 class="bd-highlight">{{ member.firstName }} {{ member.lastName }}</h4>
+  </div>
+  <app-profile [person]="member"></app-profile>
+  <div *ngIf="!!member.pass; else elseBlock">
+    <div class="text-center">
+      <h4 class="bd-highlight">Dane karnetu</h4>
+    </div>
+    <app-pass [pass]="member?.pass"></app-pass>
+  </div>
+  <div class="text-center">
+    <h4 class="bd-highlight">Aktywności</h4>
+  </div>
+  <app-activity-list [activities]="activities" [member]="member"></app-activity-list>
+  <div class="text-center">
+    <h4 class="bd-highlight">Wizyty</h4>
+  </div>
+  <app-presence-list [presences]="presences"></app-presence-list>
+  <ng-template #elseBlock>
+    <div class="alert-info">Nie posiadasz aktualnego karnetu, zakup go by móc uczestniczyć w zajęciach</div>
+    <button class="btn btn-primary" routerLink="/profile/member/{{ member.id }}/pass">Zakup karnetu</button>
+  </ng-template>
+</div>

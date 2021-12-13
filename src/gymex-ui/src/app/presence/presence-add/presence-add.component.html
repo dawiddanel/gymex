@@ -1,0 +1,34 @@
+<div class="container">
+  <h4>Wpisz osobę</h4>
+  <form (ngSubmit)="savePresence()" #presenceAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="member">Klient</label>
+        <select class="form-control"
+                id="member"
+                [(ngModel)]="presenceCommand.memberId"
+                name="member"
+                #member="ngModel"
+                required
+                [ngClass]="{'is-invalid': member.touched && !member.valid }"
+        >
+          <option *ngFor="let member of members" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+        </select>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="member.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!presenceAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!presenceAddForm.form.valid">
+      Dodaj obecność
+    </button>
+  </form>
+</div>

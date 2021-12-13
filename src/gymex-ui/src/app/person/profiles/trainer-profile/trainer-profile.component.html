@@ -1,0 +1,13 @@
+<div class="text-center">
+  <h4 class="bd-highlight">{{ trainer.firstName }} {{ trainer.lastName }}</h4>
+</div>
+<div class="container">
+  <app-profile [person]="trainer"></app-profile>
+  <div class="text-center">
+    <h4 class="bd-highlight">Aktywności</h4>
+  </div>
+  <app-activity-list [activities]="activities"></app-activity-list>
+  <div class="text-center">
+    <h4 class="bd-highlight">Wizyty</h4>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="app flex-row align-items-center">
+  <div class="card-deck row">
+    <div class="card col-md-4 border-0" *ngFor="let equipment of equipmentList; let i = index">
+      <div class="card-block">
+        <app-equipment
+          [equipment]="equipment"
+          [gymId]="this.gymId"
+        ></app-equipment>
+      </div>
+    </div>
+  </div>
+</div>

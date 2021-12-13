@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ definition.name }}</h5>
+        <span><strong>Opis</strong>: {{ definition.description }}</span><br/>
+        <span><strong>Typ</strong>: {{ definition.type | equipmentTypePipe}}</span><br/>
+        <span><strong>Cel</strong>: {{ definition.purpose | purposePipe}}</span><br/>
+        <span *ngIf="definition.weight"><strong>Waga (kg)</strong>: {{ definition.weight }}</span><br/>
+        <div *ngIf="definition.aimedBodyParts.length">
+          <span><strong>Ma wpływ na: </strong></span>
+          <ul class="list-unstyled">
+            <li
+                *ngFor="let bodyPart of definition.aimedBodyParts; let i = index"
+            >
+              <span> {{ bodyPart | bodyPartPipe }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="container" *ngIf="!viewOnly">
+          <h6 class="card-title">Panel sterowania</h6>
+          <a class="btn btn-primary" routerLink="/assortment/equipmentDefinitions/{{ definition.id }}">Edytuj</a>
+        </div>
+      </div>
+    </div>
+</div>

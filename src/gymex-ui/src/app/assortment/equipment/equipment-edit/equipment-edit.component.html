@@ -1,0 +1,39 @@
+<div class="container">
+  <h4>Dodawanie wyposażenia</h4>
+  <form (ngSubmit)="updateEquipment()" #equipmentEditForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="quantity">Ilość</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          [(ngModel)]="equipment.quantity"
+          name="quantity" #quantity="ngModel"
+          required
+          min="1"
+          [ngClass]="{'is-invalid': (quantity.touched || quantity.dirty) && !quantity.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="quantity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="quantity.hasError('min')" class="alert alert-danger">
+                Minimalna wartość to 1, w przeciwnym razie usuń wyposażenie
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!equipmentEditForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!equipmentEditForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+  <button class="btn btn-danger" (click)="delete()">Usuń</button>
+  <a class="btn btn-primary" routerLink="/assortment/equipment/{{ gymId }}">Wróć do listy</a>
+</div>

@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h4 class="bd-highlight" *ngIf="role === roleValues.OWNER">Właściciele/Administratorzy</h4>
+  <h4 class="bd-highlight" *ngIf="role === roleValues.MEMBER">Klienci</h4>
+  <h4 class="bd-highlight" *ngIf="role === roleValues.EMPLOYEE">Pracownicy</h4>
+  <h4 class="bd-highlight" *ngIf="role === roleValues.TRAINER">Trenerzy</h4>
+</div>
+<div class="app flex-row align-items-center">
+  <div class="card-deck row">
+    <div class="card col-md-4 border-0" *ngFor="let person of people; let i = index">
+      <div class="card-block">
+        <app-person
+          [person]="person"
+        ></app-person>
+      </div>
+    </div>
+  </div>
+</div>

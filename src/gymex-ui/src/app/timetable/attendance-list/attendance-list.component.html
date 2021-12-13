@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <div class="text-center">
+      <h4 class="bd-highlight">Obecność klientów na zajęciach {{activity.definition.name}}</h4>
+      <span><strong>Data</strong></span> <br/>
+      <span>{{ activity.startTime | date: 'dd.MM.yyyy HH:mm'}} - {{ activity.endTime | date: 'HH:mm'}}</span><br/>
+    </div>
+  </div>
+  <div class="app flex-row align-items-center">
+    <div class="card-deck row">
+      <div class="card col-md-12 border-0" *ngFor="let attendance of activity?.attendance; let i = index">
+        <div class="card-block">
+          <app-attendance
+            [attendance]="attendance"
+            [activity]="activity"
+            [gymId]="gymId"
+          ></app-attendance>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-success" routerLink="/timetable/activity/{{ this.gymId }}">Wróć do listy</a>
+</div>

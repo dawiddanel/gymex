@@ -1,0 +1,12 @@
+<div class="app flex-row align-items-center">
+  <div class="card-deck row">
+    <div class="card col-md-4 border-0" *ngFor="let presence of presences; let i = index">
+      <div class="card-block">
+        <app-presence
+          [presence]="presence"
+          [gymId]="gymId"
+        ></app-presence>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ equipment.definition.name }}</h5>
+        <span><strong>Opis</strong>: {{ equipment.definition.description }}</span><br/>
+        <span><strong>Typ</strong>: {{ equipment.definition.type | equipmentTypePipe}}</span><br/>
+        <span><strong>Ilość</strong>: {{ equipment.quantity }}</span><br/>
+        <h6 class="card-title" *ngIf="userService.isOwnerOrEmployee()">Panel sterowania</h6>
+        <a class="btn btn-primary" routerLink="/assortment/equipment/{{ gymId }}/{{ equipment.id }}">Edytuj</a>
+      </div>
+    </div>
+  </div>
+</div>

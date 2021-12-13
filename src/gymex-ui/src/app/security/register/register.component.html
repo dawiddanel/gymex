@@ -1,0 +1,155 @@
+<div class="container">
+  <h4>Rejestracja</h4>
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="username">Nazwa użytkownika</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          [(ngModel)]="registerCommand.username"
+          name="username" #username="ngModel"
+          required
+          maxlength="25"
+          [ngClass]="{'is-invalid': (username.touched || username.dirty) && !username.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="username.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="password">Hasło</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="registerCommand.password"
+          name="password" #password="ngModel"
+          required
+          [ngClass]="{'is-invalid': (password.touched || password.dirty) && !password.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="password.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="email">Adres email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [(ngModel)]="registerCommand.email"
+          name="email" #email="ngModel"
+          required
+          email
+          [ngClass]="{'is-invalid': (email.touched || email.dirty) && !email.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="email.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="email.hasError('email')" class="alert alert-danger">
+                Błędny format email
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="firstName">Imię</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          [(ngModel)]="registerCommand.firstName"
+          name="firstName" #firstName="ngModel"
+          required
+          maxlength="25"
+          [ngClass]="{'is-invalid': (firstName.touched || firstName.dirty) && !firstName.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="firstName.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="lastName">Nazwisko</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          [(ngModel)]="registerCommand.lastName"
+          name="lastName" #lastName="ngModel"
+          required
+          maxlength="25"
+          [ngClass]="{'is-invalid': (lastName.touched || lastName.dirty) && !lastName.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="lastName.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="pesel">Pesel</label>
+        <input
+          type="text"
+          class="form-control"
+          id="pesel"
+          [(ngModel)]="registerCommand.pesel"
+          name="pesel" #pesel="ngModel"
+          required
+          pesel
+          [ngClass]="{'is-invalid': (pesel.touched || pesel.dirty) && !pesel.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="pesel.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="pesel.hasError('pesel')" class="alert alert-danger">
+                Błędny pesel
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="birthDate">Data urodzenia</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birthDate"
+          [(ngModel)]="registerCommand.birthDate"
+          name="birthDate" #birthDate="ngModel"
+          required
+          pastDate
+          [ngClass]="{'is-invalid': (birthDate.touched || birthDate.dirty) && !birthDate.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="birthDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+          <span *ngIf="birthDate.hasError('pastDate')" class="alert alert-danger">
+                Data musi być z przeszłości
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-info" *ngIf="!registerForm.form.valid">
+      Uzupełnij wszystkie wymagane pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!registerForm.form.valid">
+      Zapisz
+    </button>
+    <a class="btn btn-primary" routerLink="/login">Powrót</a>
+  </form>
+</div>

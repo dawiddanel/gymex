@@ -1,0 +1,122 @@
+<div class="container">
+  <h4>Dodawanie aktywności</h4>
+  <form (ngSubmit)="saveActivity()" #activityAddForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <label for="definition">Definicja</label>
+        <select class="form-control"
+                id="definition"
+                [(ngModel)]="activityCommand.definitionId"
+                name="definition"
+                #definition="ngModel"
+                required
+                [ngClass]="{'is-invalid': definition.touched && !definition.valid }"
+        >
+          <option *ngFor="let definition of definitions" [value]="definition.id">{{ definition.name }}</option>
+        </select>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="definition.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="trainer">Trener</label>
+        <select class="form-control"
+                id="trainer"
+                [(ngModel)]="activityCommand.trainerId"
+                name="trainer"
+                #trainer="ngModel"
+                required
+                [ngClass]="{'is-invalid': trainer.touched && !trainer.valid }"
+        >
+          <option *ngFor="let trainer of trainers"
+                  [value]="trainer.id">{{ trainer.firstName }} {{ trainer.lastName }}</option>
+        </select>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="trainer.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="startTime">Czas rozpoczęcia zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="startTime"
+          [(ngModel)]="activityCommand.startTime"
+          name="startTime" #startTime="ngModel"
+          required
+          activityStartDate
+          [ngClass]="{'is-invalid': (startTime.touched || startTime.dirty) && !startTime.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="startTime.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="startTime.hasError('activityStartDate')" class="alert alert-danger">
+                Zajęcia muszą rozpoczynać się za conajmniej godzinę
+        </span>
+        </span>
+      </div>
+      <div class="col">
+        <label for="endTime">Czas końca zajęć</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="endTime"
+          [(ngModel)]="activityCommand.endTime"
+          name="endTime" #endTime="ngModel"
+          required
+          activityEnd="startTime"
+          [ngClass]="{'is-invalid': (endTime.touched || endTime.dirty) && !endTime.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="endTime.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        <span *ngIf="endTime.hasError('activityEnd')" class="alert alert-danger">
+                Zajęcia muszą trwać conajmniej 30 minut
+        </span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="capacity">Ilość ćwiczących</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          [(ngModel)]="activityCommand.capacity"
+          name="capacity" #capacity="ngModel"
+          required
+          min="1"
+          [ngClass]="{'is-invalid': (capacity.touched || capacity.dirty) && !capacity.valid }"
+        />
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="capacity.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+          <span *ngIf="capacity.hasError('min')" class="alert alert-danger">
+                Minimalna liczba ćwiczących to 1
+        </span>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-danger" *ngIf="!activityAddForm.form.valid">
+      Popraw błędne pola formularza
+    </div>
+    <button class="btn btn-success"
+            type="submit"
+            [disabled]="!activityAddForm.form.valid">
+      Zapisz
+    </button>
+  </form>
+</div>

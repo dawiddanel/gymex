@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card-body">
+        <span><strong>Osoba</strong></span> <br/>
+        <span>{{ attendance.member.firstName }} {{ attendance.member.lastName }}</span><br/>
+        <span><strong>Obecność</strong></span> <br/>
+        <div *ngIf="attendance.attended">Obecność potwierdzona</div>
+        <div *ngIf="attendance.attended != null && !attendance.attended">Nieobecność potwierdzona</div>
+        <div *ngIf="attendance.attended === null">Brak informacji o obecności</div>
+        <div class="container" *ngIf="activity.status !== status.CANCELLED">
+          <button class="btn btn-success" (click)="confirmAttendance()">Potwierdź obecność</button>
+          <button class="btn btn-danger" (click)="resignAttendance()">Brak obecności</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
