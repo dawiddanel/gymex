@@ -38,7 +38,6 @@ export const emptyMember = (): Member => ({
 })
 
 export interface Trainer extends Person {
-  description: string
 }
 
 export const emptyTrainer = (): Trainer => ({
@@ -46,8 +45,7 @@ export const emptyTrainer = (): Trainer => ({
   firstName: null,
   lastName: null,
   pesel: null,
-  birthDate: null,
-  description: null
+  birthDate: null
 })
 
 export interface Employee extends Person {

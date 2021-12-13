@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "ATTENDANCE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class Attendance {
 
     @Id
@@ -33,6 +33,8 @@ public class Attendance {
     private Boolean attended;
 
     private Attendance(Member member, Activity activity) {
+        DomainAsserts.assertArgumentNotNull(member, "member cannot be null");
+        DomainAsserts.assertArgumentNotNull(activity, "activity cannot be null");
         this.activity = activity;
         this.member = member;
         this.attended = null;
@@ -48,7 +50,7 @@ public class Attendance {
     }
 
     public void resignAttendance() {
-        DomainAsserts.assertState(this.attended, "wrong attendance parameter");
+        DomainAsserts.assertState(this.attended == null || this.attended, "wrong attendance parameter");
         this.attended = false;
     }
 

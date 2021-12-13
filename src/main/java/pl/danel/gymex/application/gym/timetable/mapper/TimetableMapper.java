@@ -16,6 +16,7 @@ import pl.danel.gymex.domain.gym.timetable.activities.Attendance;
 import pl.danel.gymex.domain.gym.timetable.activities.definitions.ActivityDefinition;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,7 @@ public class TimetableMapper {
         }
         return activities.stream()
                 .map(this::activity)
+                .sorted(Comparator.comparing(ActivityDto::getStartTime, Comparator.nullsLast(Comparator.reverseOrder())))
                 .collect(Collectors.toList());
     }
 
@@ -62,8 +64,8 @@ public class TimetableMapper {
     public ActivityDefinitionDto activityDefinition(ActivityDefinition activityDefinition) {
         return ActivityDefinitionDto.builder()
                 .id(activityDefinition.getId())
-                .name(activityDefinition.getName())
-                .description(activityDefinition.getDescription())
+                .name(activityDefinition.getName() != null ? activityDefinition.getName().getValue() : null)
+                .description(activityDefinition.getDescription() != null ? activityDefinition.getDescription().getValue() : null)
                 .level(mapLevel(activityDefinition.getLevel()))
                 .build();
     }

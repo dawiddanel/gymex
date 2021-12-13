@@ -11,8 +11,14 @@
           [(ngModel)]="passCommand.startDate"
           name="startDate" #startDate="ngModel"
           required
+          futureDate
+          [ngClass]="{'is-invalid': (startDate.touched || startDate.dirty) && !startDate.valid }"
         />
-        <p [hidden]="(startDate.untouched) || (startDate.touched && startDate.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="startDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
       <div class="col">
         <label for="endDate">Koniec obowiązywania</label>
@@ -23,8 +29,14 @@
           [(ngModel)]="passCommand.endDate"
           name="endDate" #endDate="ngModel"
           required
+          dateBiggerThan="startDate"
+          [ngClass]="{'is-invalid': (endDate.touched || endDate.dirty) && !endDate.valid }"
         />
-        <p [hidden]="(endDate.untouched) || (endDate.touched && endDate.valid)" class="alert alert-danger">Błąd danych</p>
+        <span class="invalid-feedback"> <br/>
+        <span *ngIf="endDate.hasError('required')" class="alert alert-danger">
+                Pole wymagane
+        </span>
+        </span>
       </div>
     </div>
     <br/>

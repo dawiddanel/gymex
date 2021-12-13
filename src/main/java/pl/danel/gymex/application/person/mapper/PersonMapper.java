@@ -79,7 +79,6 @@ public class PersonMapper {
         }
         OwnerDto result = new OwnerDto();
         mapBasicPersonData(owner, result);
-        result.setPesel(owner.getPesel());
         return result;
     }
 
@@ -98,16 +97,15 @@ public class PersonMapper {
         }
         TrainerDto result = new TrainerDto();
         mapBasicPersonData(trainer, result);
-        result.setDescription(trainer.getDescription());
         return result;
     }
 
     private void mapBasicPersonData(Person person, PersonDto result) {
         result.setId(person.getId());
-        result.setFirstName(person.getFirstName());
-        result.setLastName(person.getLastName());
+        result.setFirstName(person.getFirstName() != null ? person.getFirstName().getValue() : null);
+        result.setLastName(person.getLastName() != null ? person.getLastName().getValue() : null);
         result.setBirthDate(person.getBirthDate());
-        result.setPesel(person.getPesel());
+        result.setPesel(person.getPesel() != null ? person.getPesel().getValue() : null);
     }
 
 

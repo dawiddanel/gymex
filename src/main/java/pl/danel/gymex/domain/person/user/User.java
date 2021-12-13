@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.danel.gymex.domain.asserts.InvalidArgumentException;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
 import pl.danel.gymex.domain.person.Person;
 import pl.danel.gymex.domain.person.user.command.CreateTechnicalUser;
 import pl.danel.gymex.domain.person.user.command.CreateUser;
@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "USER")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class User {
 
     @Id
@@ -32,13 +32,17 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    private String username;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "USERNAME"))
+    private Username username;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "PASSWORD"))
     private Password password;
 
-    private String email;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "EMAIL"))
+    private Email email;
 
     private boolean active;
 
@@ -46,10 +50,10 @@ public class User {
     private Role role;
 
     private User(String username, String email, Role role) {
-        this.username = username;
-        this.email = email;
+        DomainAsserts.assertArgumentNotNull(role, "role cannot be null");
+        this.username = Username.of(username);
+        this.email = Email.of(email);
         this.role = role;
-        //TODO Activate based on activation email
         this.active = true;
     }
 
@@ -77,10 +81,12 @@ public class User {
     }
 
     public static User createMember(CreateUser command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
         return new User(command);
     }
 
     public static User createTechnical(CreateTechnicalUser createTechnicalUser) {
+        DomainAsserts.assertArgumentNotNull(createTechnicalUser, "command cannot be null");
         return new User(createTechnicalUser);
     }
 

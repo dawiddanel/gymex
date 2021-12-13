@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Password {
 
-    public static final int PASSWORD_MAX_LENGTH = 255;
+    public static final int PASSWORD_MAX_LENGTH = 50;
 
     @Getter
     @Column
@@ -28,7 +28,7 @@ public class Password {
     }
 
     private void initValue(String value, PasswordEncoder encoder) {
-        DomainAsserts.assertArgumentNotTooLong(value, PASSWORD_MAX_LENGTH, "Username cannot be longer then " + PASSWORD_MAX_LENGTH + " characters");
+        DomainAsserts.assertArgumentNotTooLong(value, PASSWORD_MAX_LENGTH, "Password cannot be longer then " + PASSWORD_MAX_LENGTH + " characters");
         this.value = encoder.encode(value);
     }
 

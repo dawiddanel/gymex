@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
-import pl.danel.gymex.domain.common.BodyPart;
-import pl.danel.gymex.domain.common.EquipmentType;
-import pl.danel.gymex.domain.common.Purpose;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
+import pl.danel.gymex.domain.common.*;
 import pl.danel.gymex.domain.gym.assortment.command.CreateEquipmentDefinition;
 import pl.danel.gymex.domain.gym.assortment.command.UpdateEquipmentDefinition;
 import pl.danel.gymex.infrastructure.converters.BodyPartListConverter;
@@ -20,7 +19,7 @@ import java.util.List;
 @Table(name = "EQUIPMENT_DEFINITION")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class EquipmentDefinition {
 
     @Id
@@ -28,9 +27,13 @@ public class EquipmentDefinition {
     @SequenceGenerator(name = "equipment_def_sequence", sequenceName = "SEQ_EQUIPMENT_DEF", allocationSize = 1)
     private Long id;
 
-    private String name;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "NAME"))
+    private Name name;
 
-    private String description;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "DESCRIPTION"))
+    private Description description;
 
     @Enumerated(EnumType.STRING)
     private EquipmentType type;
@@ -46,8 +49,9 @@ public class EquipmentDefinition {
     private List<BodyPart> aimedBodyParts = new ArrayList<>();
 
     private EquipmentDefinition(CreateEquipmentDefinition command) {
-        this.name = command.getName();
-        this.description = command.getDescription();
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        this.name = Name.of(command.getName());
+        this.description = Description.of(command.getDescription());
         this.type = command.getType();
         this.purpose = command.getPurpose();
         this.weight = command.getWeight();
@@ -59,8 +63,9 @@ public class EquipmentDefinition {
     }
 
     public void update(UpdateEquipmentDefinition command) {
-        this.name = command.getName();
-        this.description = command.getDescription();
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        this.name = Name.of(command.getName());
+        this.description = Description.of(command.getDescription());
         this.type = command.getType();
         this.purpose = command.getPurpose();
         this.weight = command.getWeight();

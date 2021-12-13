@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "EQUIPMENT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class Equipment {
 
     @Id
@@ -28,11 +28,15 @@ public class Equipment {
     @ManyToOne
     private EquipmentDefinition definition;
 
-    private Integer quantity;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "QUANTITY"))
+    private Quantity quantity;
 
     private Equipment(CreateEquipment command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getDefinition(), "definition cannot be null");
         this.definition = command.getDefinition();
-        this.quantity = command.getQuantity();
+        this.quantity = Quantity.of(command.getQuantity());
     }
 
     public static Equipment create(CreateEquipment command) {
@@ -40,9 +44,7 @@ public class Equipment {
     }
 
     public void updateQuantity(Integer quantity) {
-        DomainAsserts.assertState(quantity != null, "quantity cannot be null");
-        DomainAsserts.assertState(quantity > 0, "quantity cannot be 0 or less");
-        this.quantity = quantity;
+        this.quantity = Quantity.of(quantity);
     }
 
 }

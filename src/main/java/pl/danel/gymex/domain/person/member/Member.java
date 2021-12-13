@@ -14,6 +14,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,21 +29,21 @@ public class Member extends Person {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Pass> passes;
+    private List<Pass> passes = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "member",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Attendance> attendances;
+    private List<Attendance> attendances = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "member",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Presence> presences;
+    private List<Presence> presences = new ArrayList<>();
 
     public Member(User user, CreatePerson person) {
         super(user, person);

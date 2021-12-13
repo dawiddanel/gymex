@@ -6,12 +6,14 @@ import pl.danel.gymex.application.gym.dto.AddressDto;
 import pl.danel.gymex.application.gym.dto.GymDto;
 import pl.danel.gymex.application.gym.presence.PresenceDto;
 import pl.danel.gymex.application.gym.presence.PresenceMemberDto;
+import pl.danel.gymex.application.gym.timetable.dto.ActivityDto;
 import pl.danel.gymex.domain.gym.Gym;
 import pl.danel.gymex.domain.gym.address.Address;
 import pl.danel.gymex.domain.gym.presence.Presence;
 import pl.danel.gymex.domain.person.member.Member;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,7 @@ public class GymMapper {
     public GymDto map(Gym gym) {
         return GymDto.builder()
                 .id(gym.getId())
-                .name(gym.getName())
+                .name(gym.getName() != null ? gym.getName().getValue() : null)
                 .capacity(gym.getCapacity())
                 .address(address(gym.getAddress()))
                 .build();
@@ -32,11 +34,11 @@ public class GymMapper {
             return null;
         }
         return AddressDto.builder()
-                .country(address.getCountry())
-                .city(address.getCity())
-                .postalCode(address.getPostalCode())
-                .street(address.getStreet())
-                .buildingNumber(address.getBuildingNumber())
+                .country(address.getCountry() != null ? address.getCountry().getValue() : null)
+                .city(address.getCity() != null ? address.getCity().getValue() : null)
+                .postalCode(address.getPostalCode() != null ? address.getPostalCode().getValue() : null)
+                .street(address.getStreet() != null ? address.getStreet().getValue() : null)
+                .buildingNumber(address.getBuildingNumber() != null ? address.getBuildingNumber().getValue() : null)
                 .build();
     }
 
@@ -46,6 +48,7 @@ public class GymMapper {
         }
         return presence.stream()
                 .map(this::presence)
+                .sorted(Comparator.comparing(PresenceDto::getStartTime, Comparator.nullsLast(Comparator.reverseOrder())))
                 .collect(Collectors.toList());
     }
 
@@ -67,8 +70,8 @@ public class GymMapper {
         }
         return PresenceMemberDto.builder()
                 .id(member.getId())
-                .firstName(member.getFirstName())
-                .lastName(member.getLastName())
+                .firstName(member.getFirstName() != null ? member.getFirstName().getValue() : null)
+                .lastName(member.getLastName() != null ? member.getLastName().getValue() : null)
                 .build();
     }
 

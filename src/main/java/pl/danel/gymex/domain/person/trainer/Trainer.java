@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,13 +20,11 @@ import java.util.List;
 @DiscriminatorValue("TRAINER")
 public class Trainer extends Person {
 
-    private String description;
-
     @OneToMany(
             mappedBy = "trainer",
             cascade = CascadeType.ALL
     )
-    private List<Activity> activities;
+    private List<Activity> activities = new ArrayList<>();
 
     public Trainer(User user, CreatePerson person) {
         super(user, person);

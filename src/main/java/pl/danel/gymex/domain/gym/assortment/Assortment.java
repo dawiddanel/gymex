@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "ASSORTMENT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class Assortment {
 
     @Id
@@ -47,11 +47,13 @@ public class Assortment {
     }
 
     public void addEquipment(Equipment equipment) {
+        DomainAsserts.assertArgumentNotNull(equipment, "equipment cannot be null");
         equipments.add(equipment);
         equipment.setAssortment(this);
     }
 
     public void removeEquipment(Equipment equipment) {
+        DomainAsserts.assertArgumentNotNull(equipment, "equipment cannot be null");
         equipments.remove(equipment);
         equipment.setAssortment(null);
     }

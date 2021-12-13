@@ -6,5 +6,4 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TrainerDto extends PersonDto {
-    private String description;
 }

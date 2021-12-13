@@ -12,13 +12,14 @@ import pl.danel.gymex.domain.gym.Gym;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "TIMETABLE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class Timetable {
 
     @Id
@@ -34,7 +35,7 @@ public class Timetable {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Activity> activities;
+    private List<Activity> activities = new ArrayList<>();
 
     private LocalDate startDate;
 
@@ -46,6 +47,7 @@ public class Timetable {
     private LocalDateTime updateDate;
 
     private Timetable(Gym gym, LocalDate startDate, Integer orderNumber) {
+        DomainAsserts.assertArgumentNotNull(gym, "gym cannot be null");
         this.gym = gym;
         this.startDate = startDate;
         this.endDate = startDate.plusDays(14);
@@ -53,6 +55,7 @@ public class Timetable {
     }
 
     private Timetable(Gym gym, LocalDate startDate, LocalDate endDate) {
+        DomainAsserts.assertArgumentNotNull(gym, "gym cannot be null");
         this.gym = gym;
         this.startDate = startDate;
         this.endDate = endDate;

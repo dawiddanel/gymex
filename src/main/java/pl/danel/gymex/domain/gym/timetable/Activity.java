@@ -23,7 +23,7 @@ import java.util.List;
 @Table(name = "ACTIVITY")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public class Activity {
 
     @Id
@@ -67,6 +67,9 @@ public class Activity {
     private ActivityStatus status;
 
     private Activity(CreateActivity command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getActivityDefinition(), "definition cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getTrainer(), "trainer cannot be null");
         this.definition = command.getActivityDefinition();
         this.trainer = command.getTrainer();
         this.startTime = command.getStartTime();
@@ -80,6 +83,9 @@ public class Activity {
     }
 
     public void update(UpdateActivity command) {
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getActivityDefinition(), "definition cannot be null");
+        DomainAsserts.assertArgumentNotNull(command.getTrainer(), "trainer cannot be null");
         this.definition = command.getActivityDefinition();
         this.trainer = command.getTrainer();
         this.startTime = command.getStartTime();
@@ -125,14 +131,6 @@ public class Activity {
 
         Attendance attendance = attendanceByMember(command.getMember());
         attendance.resignAttendance();
-    }
-
-    public void setTimetable(Timetable timetable) {
-        this.timetable = timetable;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
     }
 
     public Attendance attendanceById(Long id) {

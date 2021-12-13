@@ -10,6 +10,7 @@ import pl.danel.gymex.adapters.rest.resource.user.command.CreateTechnicalUserCom
 import pl.danel.gymex.application.user.dto.UserDto;
 import pl.danel.gymex.application.user.mapper.UserCommandMapper;
 import pl.danel.gymex.application.user.mapper.UserMapper;
+import pl.danel.gymex.domain.asserts.InvalidStateException;
 import pl.danel.gymex.domain.person.user.User;
 import pl.danel.gymex.domain.person.user.UserRepository;
 import pl.danel.gymex.domain.person.user.command.CreateTechnicalUser;
@@ -29,6 +30,9 @@ public class UserService {
 
     @Transactional
     public UserDto createUser(RegisterCommand command) {
+        if (userRepository.findByUsername(command.getUsername()).isPresent()) {
+            throw new InvalidStateException("username already taken");
+        }
         CreateUser createUser = commandMapper.createUserCommand(command);
         User user = User.createMember(createUser);
         user.createPassword(createUser.getPassword(), encoder);
@@ -38,6 +42,9 @@ public class UserService {
 
     @Transactional
     public UserDto createTechnicalUser(CreateTechnicalUserCommand command) {
+        if (userRepository.findByUsername(command.getUsername()).isPresent()) {
+            throw new InvalidStateException("username already taken");
+        }
         CreateTechnicalUser createTechnicalUser = commandMapper.createTechnicalUser(command);
         User user = User.createTechnical(createTechnicalUser);
         user.createPassword(createTechnicalUser.getPassword(), encoder);

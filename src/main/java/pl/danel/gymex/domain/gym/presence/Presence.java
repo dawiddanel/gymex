@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "PRESENCE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class Presence {
 
     @Id
@@ -33,6 +33,8 @@ public class Presence {
     private LocalDateTime endTime;
 
     private Presence(Gym gym, Member member) {
+        DomainAsserts.assertState(gym != null, "gym cannot be null");
+        DomainAsserts.assertState(member != null, "member cannot be null");
         this.gym = gym;
         this.member = member;
         this.startTime = LocalDateTime.now();

@@ -38,7 +38,7 @@ public class AssortmentMapper {
     public EquipmentDto equipment(Equipment equipment) {
         return EquipmentDto.builder()
                 .id(equipment.getId())
-                .quantity(equipment.getQuantity())
+                .quantity(equipment.getQuantity() != null ? equipment.getQuantity().getValue() : null)
                 .definition(equipmentDefinition(equipment.getDefinition()))
                 .build();
     }
@@ -46,8 +46,8 @@ public class AssortmentMapper {
     public EquipmentDefinitionDto equipmentDefinition(EquipmentDefinition equipmentDefinition) {
         return EquipmentDefinitionDto.builder()
                 .id(equipmentDefinition.getId())
-                .name(equipmentDefinition.getName())
-                .description(equipmentDefinition.getDescription())
+                .name(equipmentDefinition.getName() != null ? equipmentDefinition.getName().getValue() : null)
+                .description(equipmentDefinition.getDescription() != null ? equipmentDefinition.getDescription().getValue() : null)
                 .type(mapEquipmentType(equipmentDefinition.getType()))
                 .purpose(mapPurpose(equipmentDefinition.getPurpose()))
                 .weight(equipmentDefinition.getWeight())

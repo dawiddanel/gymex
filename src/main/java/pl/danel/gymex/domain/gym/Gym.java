@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.AbstractAggregateRoot;
+import pl.danel.gymex.domain.asserts.DomainAsserts;
 import pl.danel.gymex.domain.asserts.InvalidStateException;
+import pl.danel.gymex.domain.common.Name;
 import pl.danel.gymex.domain.gym.address.Address;
 import pl.danel.gymex.domain.gym.assortment.Assortment;
 import pl.danel.gymex.domain.gym.command.CreateGym;
@@ -23,9 +25,9 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "GYM")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class Gym extends AbstractAggregateRoot<Gym> {
 
     @Id
@@ -41,16 +43,18 @@ public class Gym extends AbstractAggregateRoot<Gym> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Timetable> timetables;
+    private List<Timetable> timetables = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "gym",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Presence> presences;
+    private List<Presence> presences = new ArrayList<>();
 
-    private String name;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "NAME"))
+    private Name name;
 
     private Integer capacity;
 
@@ -65,7 +69,8 @@ public class Gym extends AbstractAggregateRoot<Gym> {
     private Address address;
 
     private Gym(CreateGym command) {
-        this.name = command.getName();
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        this.name = Name.of(command.getName());
         this.capacity = command.getCapacity();
         this.assortment = Assortment.emptyAssortment(this);
         this.timetables = new ArrayList<>(List.of(Timetable.emptyTimetable(this, command.getCreateTimetable().getStartDate(), command.getCreateTimetable().getEndDate())));
@@ -77,14 +82,15 @@ public class Gym extends AbstractAggregateRoot<Gym> {
     }
 
     public void update(UpdateGym command) {
-        this.name = command.getName();
+        DomainAsserts.assertArgumentNotNull(command, "command cannot be null");
+        this.name = Name.of(command.getName());
         this.capacity = command.getCapacity();
         this.address = Address.create(command.getAddress());
     }
 
     public void addEmptyTimetable() {
         Timetable actualTimetable = actualTimetable();
-        Timetable newTimetable = Timetable.emptyTimetable(this, actualTimetable.getEndDate().plusDays(1), actualTimetable.getOrderNumber());
+        Timetable newTimetable = Timetable.emptyTimetable(this, actualTimetable.getEndDate().plusDays(1), actualTimetable.getOrderNumber() + 1);
         timetables.add(newTimetable);
     }
 
