@@ -20,7 +20,7 @@ public class Presence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "presence_sequence")
-    @SequenceGenerator(name = "presence_sequence", sequenceName = "SEQ_PRESENCE", allocationSize = 1)
+    @SequenceGenerator(name = "presence_sequence", sequenceName = "SEQ_PRESENCE", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

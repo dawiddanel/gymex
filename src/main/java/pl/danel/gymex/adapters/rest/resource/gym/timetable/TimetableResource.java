@@ -45,7 +45,10 @@ public class TimetableResource {
     }
 
     @PostMapping("/{gymId}/{timetableId}/activity/{activityId}/confirm/{userId}")
-    public ActivityDto confirmAttendance(@PathVariable Long gymId, @PathVariable Long timetableId, @PathVariable Long activityId, @PathVariable Long userId) {
+    public ActivityDto confirmAttendance(@PathVariable Long gymId,
+                                         @PathVariable Long timetableId,
+                                         @PathVariable Long activityId,
+                                         @PathVariable Long userId) {
         return timetableService.confirmAttendance(gymId, timetableId, activityId, userId);
     }
 

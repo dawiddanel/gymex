@@ -24,7 +24,7 @@ public class UserTest {
         User user = User.createMember(command);
 
         //then
-        assertEquals(user.getUsername().getValue(), command.getUsername());
+        assertEquals(user.getUsername(), command.getUsername());
         assertEquals(user.getEmail().getValue(), command.getEmail());
         assertEquals(user.getRole(), Role.MEMBER);
         assertTrue(user.isActive());
@@ -41,7 +41,7 @@ public class UserTest {
         User user = User.createTechnical(command);
 
         //then
-        assertEquals(user.getUsername().getValue(), command.getUsername());
+        assertEquals(user.getUsername(), command.getUsername());
         assertEquals(user.getEmail().getValue(), command.getEmail());
         assertEquals(user.getRole(), Role.MEMBER);
         assertTrue(user.getPerson() instanceof Member);
@@ -59,7 +59,7 @@ public class UserTest {
         User user = User.createTechnical(command);
 
         //then
-        assertEquals(user.getUsername().getValue(), command.getUsername());
+        assertEquals(user.getUsername(), command.getUsername());
         assertEquals(user.getEmail().getValue(), command.getEmail());
         assertEquals(user.getRole(), Role.TRAINER);
         assertTrue(user.getPerson() instanceof Trainer);
@@ -77,7 +77,7 @@ public class UserTest {
         User user = User.createTechnical(command);
 
         //then
-        assertEquals(user.getUsername().getValue(), command.getUsername());
+        assertEquals(user.getUsername(), command.getUsername());
         assertEquals(user.getEmail().getValue(), command.getEmail());
         assertEquals(user.getRole(), Role.OWNER);
         assertTrue(user.getPerson() instanceof Owner);
@@ -95,7 +95,7 @@ public class UserTest {
         User user = User.createTechnical(command);
 
         //then
-        assertEquals(user.getUsername().getValue(), command.getUsername());
+        assertEquals(user.getUsername(), command.getUsername());
         assertEquals(user.getEmail().getValue(), command.getEmail());
         assertEquals(user.getRole(), Role.EMPLOYEE);
         assertTrue(user.getPerson() instanceof Employee);
@@ -116,22 +116,6 @@ public class UserTest {
 
         //then
         assertEquals("Email is malmorfed", exception.getMessage());
-    }
-
-    @Test
-    public void testCreateTechnicalUserNullUsername() {
-        //given
-        CreateTechnicalUser command = Fixtures.createTechnicalUser()
-                .username(null)
-                .build();
-
-        //when
-        InvalidStateException exception = assertThrows(InvalidStateException.class, () -> {
-            User.createTechnical(command);
-        });
-
-        //then
-        assertEquals("Username is null", exception.getMessage());
     }
 
 }

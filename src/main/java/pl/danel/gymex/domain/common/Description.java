@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Description {
 
-    public static final int DESCRIPTION_MAX_LENGTH = 50;
+    public static final int DESCRIPTION_MAX_LENGTH = 100;
 
     @Getter
     @Column

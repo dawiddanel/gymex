@@ -32,7 +32,7 @@ public class Gym extends AbstractAggregateRoot<Gym> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gym_sequence")
-    @SequenceGenerator(name = "gym_sequence", sequenceName = "SEQ_GYM", allocationSize = 1)
+    @SequenceGenerator(name = "gym_sequence", sequenceName = "SEQ_GYM", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @OneToOne(mappedBy = "gym", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -24,7 +24,7 @@ public class Timetable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timetable_sequence")
-    @SequenceGenerator(name = "timetable_sequence", sequenceName = "SEQ_TIMETABLE", allocationSize = 1)
+    @SequenceGenerator(name = "timetable_sequence", sequenceName = "SEQ_TIMETABLE", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

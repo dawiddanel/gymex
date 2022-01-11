@@ -22,22 +22,14 @@ export class GymAddComponent implements OnInit {
   }
 
   saveGym(): void {
-    const data: CreateGym = {
-      name: this.gymCommand.name,
-      capacity: this.gymCommand.capacity,
-      timetableStartDate: this.gymCommand.timetableStartDate,
-      timetableEndDate: this.gymCommand.timetableEndDate,
-      address: this.gymCommand.address
-    };
-
-    this.gymService.create(data)
+    this.gymService.create(this.gymCommand)
       .subscribe({
         next: response => {
           this.toasts.showSuccessToast(`Siłownia poprawnie dodana`)
           this.router.navigate(['/gyms']);
         },
         error: err => {
-          this.toasts.showErrorToast(`Błąd przy pobieraniu listy`)
+          this.toasts.showErrorToast(`Błąd przy dodawaniu siłowni`)
         }
       })
   }

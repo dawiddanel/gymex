@@ -2,6 +2,7 @@ package pl.danel.gymex.application.gym;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.command.UpdateGymCommand;
@@ -40,6 +41,7 @@ public class GymService {
     private final GymCommandMapper gymCommandMapper;
 
     @Transactional
+    @PreAuthorize("hasAnyRole('ROLE_OWNER','ROLE_EMPLOYEE')")
     public GymDto createGym(CreateGymCommand createGymCommand) {
         CreateGym createGym = gymCommandMapper.createGymCommand(createGymCommand);
         Gym gym = Gym.create(createGym);

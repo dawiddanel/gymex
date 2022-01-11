@@ -1,5 +1,8 @@
 package pl.danel.gymex.fixtures;
 
+import pl.danel.gymex.adapters.rest.resource.gym.command.CreateAddressCommand;
+import pl.danel.gymex.adapters.rest.resource.gym.command.CreateGymCommand;
+import pl.danel.gymex.adapters.rest.resource.person.command.CreatePassCommand;
 import pl.danel.gymex.domain.common.BodyPart;
 import pl.danel.gymex.domain.common.EquipmentType;
 import pl.danel.gymex.domain.common.Level;
@@ -28,6 +31,13 @@ public class Fixtures {
         return CreatePass.builder()
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusDays(15));
+    }
+
+    public static CreatePassCommand createPassCommand() {
+        CreatePassCommand command = new CreatePassCommand();
+        command.setStartDate(LocalDate.now());
+        command.setEndDate(LocalDate.now().plusDays(15));
+        return command;
     }
 
     public static CreateAddress.CreateAddressBuilder createAddress() {
@@ -160,5 +170,25 @@ public class Fixtures {
                 .name("Name")
                 .capacity(15)
                 .address(createAddress().build());
+    }
+
+    public static CreateGymCommand createGymCommand() {
+        CreateGymCommand command = new CreateGymCommand();
+        command.setName("Test");
+        command.setCapacity(250);
+        command.setTimetableStartDate(LocalDate.now());
+        command.setTimetableEndDate(LocalDate.now().plusDays(15));
+        command.setAddress(createAddressCommand());
+        return command;
+    }
+
+    public static CreateAddressCommand createAddressCommand() {
+        CreateAddressCommand createAddressCommand = new CreateAddressCommand();
+        createAddressCommand.setCountry("PL");
+        createAddressCommand.setCity("Miasto");
+        createAddressCommand.setStreet("Ulica");
+        createAddressCommand.setPostalCode("43-523");
+        createAddressCommand.setBuildingNumber("12");
+        return createAddressCommand;
     }
 }

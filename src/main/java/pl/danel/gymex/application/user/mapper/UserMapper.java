@@ -10,7 +10,7 @@ public class UserMapper {
 
     public UserDto map(User user) {
         var result = new UserDto();
-        result.setUsername(user.getUsername() != null ? user.getUsername().getValue() : null);
+        result.setUsername(user.getUsername() != null ? user.getUsername() : null);
         result.setEmail(user.getEmail() != null ? user.getEmail().getValue() : null);
         result.setRole(mapRole(user.getRole()));
         result.setCreatedDate(user.getCreatedDate());

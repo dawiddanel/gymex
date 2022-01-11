@@ -20,7 +20,7 @@ public class Pass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_sequence")
-    @SequenceGenerator(name = "pass_sequence", sequenceName = "SEQ_PASS", allocationSize = 1)
+    @SequenceGenerator(name = "pass_sequence", sequenceName = "SEQ_PASS", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

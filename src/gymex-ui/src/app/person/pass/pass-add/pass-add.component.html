@@ -18,6 +18,9 @@
         <span *ngIf="startDate.hasError('required')" class="alert alert-danger">
                 Pole wymagane
         </span>
+        <span *ngIf="startDate.hasError('futureDate')" class="alert alert-danger">
+                Data musi być z przyszłości
+        </span>
         </span>
       </div>
       <div class="col">
@@ -35,6 +38,9 @@
         <span class="invalid-feedback"> <br/>
         <span *ngIf="endDate.hasError('required')" class="alert alert-danger">
                 Pole wymagane
+        </span>
+        <span *ngIf="endDate.hasError('dateEarlier')" class="alert alert-danger">
+                Data musi być późniejsza od daty początku karnetu
         </span>
         </span>
       </div>

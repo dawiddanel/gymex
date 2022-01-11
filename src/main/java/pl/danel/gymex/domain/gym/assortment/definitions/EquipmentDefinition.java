@@ -24,7 +24,7 @@ public class EquipmentDefinition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipment_def_sequence")
-    @SequenceGenerator(name = "equipment_def_sequence", sequenceName = "SEQ_EQUIPMENT_DEF", allocationSize = 1)
+    @SequenceGenerator(name = "equipment_def_sequence", sequenceName = "SEQ_EQUIPMENT_DEF", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @Embedded

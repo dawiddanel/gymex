@@ -1,9 +1,9 @@
 <div>
   <div>
     <div class="text-center">
-      <h4 class="bd-highlight">Obecność klientów na zajęciach {{activity.definition.name}}</h4>
+      <h4 class="bd-highlight">Obecność klientów na zajęciach {{activity?.definition?.name}}</h4>
       <span><strong>Data</strong></span> <br/>
-      <span>{{ activity.startTime | date: 'dd.MM.yyyy HH:mm'}} - {{ activity.endTime | date: 'HH:mm'}}</span><br/>
+      <span>{{ activity?.startTime | date: 'dd.MM.yyyy HH:mm'}} - {{ activity?.endTime | date: 'HH:mm'}}</span><br/>
     </div>
   </div>
   <div class="app flex-row align-items-center">
@@ -14,6 +14,7 @@
             [attendance]="attendance"
             [activity]="activity"
             [gymId]="gymId"
+            [timetableId]="timetableId"
           ></app-attendance>
         </div>
       </div>

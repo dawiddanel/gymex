@@ -21,7 +21,7 @@ public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attendance_sequence")
-    @SequenceGenerator(name = "attendance_sequence", sequenceName = "SEQ_ATTENDANCE", allocationSize = 1)
+    @SequenceGenerator(name = "attendance_sequence", sequenceName = "SEQ_ATTENDANCE", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

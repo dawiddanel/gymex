@@ -30,7 +30,7 @@
             </button>
           </div>
         </div>
-        <div class="container" *ngIf="userService.isOwnerOrEmployee()">
+        <div class="container" *ngIf="userService.isOwnerOrEmployee() && this.activity.status !== status.CANCELLED">
           <div><a class="btn btn-primary" routerLink="/timetable/activity/{{this.gymId}}/{{ this.timetableId }}/{{this.activity.id}}/attendance">Panel potwierdzania obecności</a></div>
         </div>
       </div>

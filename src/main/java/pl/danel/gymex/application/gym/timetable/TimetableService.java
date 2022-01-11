@@ -2,6 +2,7 @@ package pl.danel.gymex.application.gym.timetable;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import pl.danel.gymex.adapters.rest.resource.gym.timetable.command.CreateActivityCommand;
 import pl.danel.gymex.adapters.rest.resource.gym.timetable.command.UpdateActivityCommand;
@@ -140,6 +141,7 @@ public class TimetableService {
     }
 
     @Transactional
+    @PreAuthorize("hasAnyRole('ROLE_OWNER','ROLE_EMPLOYEE')")
     public ActivityDto confirmAttendance(Long gymId, Long timetableId, Long activityId, Long userId) {
         Member member = personService.memberById(userId);
 

@@ -59,14 +59,14 @@ import {PresencesComponent} from './presence/presences/presences.component';
 import {TrainerListComponent} from './person/trainer-list/trainer-list.component';
 import {TrainerDetailsComponent} from './person/trainer-details/trainer-details.component';
 import { QuoteComponent } from './default/quote/quote.component';
-import {DateFromFutureValidator} from "./default/directives/DateFromFutureValidator";
-import {DateBiggerThanValidator} from "./default/directives/DateBiggerThanValidator";
-import {PostalCodeValidator} from "./default/directives/PostalCodeValidator";
-import {EmailValidator} from "./default/directives/EmailValidator";
-import {PeselValidator} from "./default/directives/PeselValidator";
-import {DateFromPastValidator} from "./default/directives/DateFromPastValidator";
-import {ActivityStartDateValidator} from "./default/directives/ActivityStartDateValidator";
-import {ActivityEndDateValidator} from "./default/directives/ActivityEndDateValidator";
+import {DateFromFutureValidator} from "./default/validators/DateFromFutureValidator";
+import {DateBiggerThanValidator} from "./default/validators/DateBiggerThanValidator";
+import {PostalCodeValidator} from "./default/validators/PostalCodeValidator";
+import {EmailValidator} from "./default/validators/EmailValidator";
+import {PeselValidator} from "./default/validators/PeselValidator";
+import {DateFromPastValidator} from "./default/validators/DateFromPastValidator";
+import {ActivityStartDateValidator} from "./default/validators/ActivityStartDateValidator";
+import {ActivityEndDateValidator} from "./default/validators/ActivityEndDateValidator";
 
 @NgModule({
   declarations: [

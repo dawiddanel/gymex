@@ -15,7 +15,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERR")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,7 +23,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", sequenceName = "SEQ_USER", allocationSize = 1)
+    @SequenceGenerator(name = "user_sequence", sequenceName = "SEQ_USER", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,9 +32,7 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "USERNAME"))
-    private Username username;
+    private String username;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "PASSWORD"))
@@ -51,7 +49,7 @@ public class User {
 
     private User(String username, String email, Role role) {
         DomainAsserts.assertArgumentNotNull(role, "role cannot be null");
-        this.username = Username.of(username);
+        this.username = username;
         this.email = Email.of(email);
         this.role = role;
         this.active = true;

@@ -22,7 +22,7 @@ public class ActivityDefinition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "activity_def_sequence")
-    @SequenceGenerator(name = "activity_def_sequence", sequenceName = "SEQ_ACTIVITY_DEF", allocationSize = 1)
+    @SequenceGenerator(name = "activity_def_sequence", sequenceName = "SEQ_ACTIVITY_DEF", allocationSize = 1, initialValue = 100)
     private Long id;
 
     @Embedded
